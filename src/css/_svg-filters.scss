@@ -1,0 +1,14 @@
+/* Filters for changing SVG colors */
+// Insert colors here: https://codepen.io/sosuke/pen/Pjoqqp
+.filter-blue {
+  filter: invert(45%) sepia(64%) saturate(555%) hue-rotate(155deg) brightness(100%) contrast(93%);
+}
+
+
+.filter-current {
+  filter: invert(97%) sepia(87%) saturate(422%) hue-rotate(244deg) brightness(118%) contrast(72%);
+}
+
+.filter-grey {
+  filter: invert(29%) sepia(1%) saturate(2590%) hue-rotate(320deg) brightness(100%) contrast(91%);
+}

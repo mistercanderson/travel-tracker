@@ -1,0 +1,13 @@
+@mixin flex($justify: normal, $direction: row, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// @mixin centerSBFlexColumn() {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: space-between;
+// }

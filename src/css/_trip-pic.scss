@@ -1,0 +1,39 @@
+.profile-pic-wrapper {
+  display: flex;
+  width: 100%;
+  justify-self: center;
+  align-self: flex-start;
+  position: relative;
+  background-color: rgba(26, 29, 26, 0.705);
+}
+
+.profile-pic-text {
+  @include flex(space-between);
+  box-sizing: border-box;
+  width: 100%;
+  position: absolute;
+  color: white;
+  padding: 1em;
+}
+
+.profile-pic-text>button {
+  height: 5em;
+  width: 5em;
+  border-radius: 50%;
+  border: none;
+  transform: scaleX(-1)
+}
+
+.profile-pic-text>button>img {
+  transform: scale(.45);
+  width: 100%;
+}
+
+.profile-pic-wrapper>img {
+  object-fit: cover;
+  height: 10em;
+  width: 100%;
+  mix-blend-mode: overlay;
+}
+
+@import 'day-counter';
