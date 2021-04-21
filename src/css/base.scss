@@ -1,4 +1,3 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
 @import 'reset';
 @import 'variables';
 @import 'mixins';
@@ -28,10 +27,18 @@ button {
   font-size: .8em
 }
 
+.lighter {
+  color: darken($primary-font, 10%)
+}
+
+.current {
+  color: $primary-font
+}
+
 /* Styling Main/Cards section */
 main {
   @include flex(normal, column);
-  color: #5E5E5E;
+  color: $secondary-font;
   margin: 0 1em;
   padding-bottom: 5em
 }
@@ -47,15 +54,6 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
   grid-area: auto;
   grid-gap: .8em;
-}
-
-/* Non-specific coloring */
-.lighter {
-  color: #a3a3a3
-}
-
-.current {
-  color: #DBDBDB
 }
 
 @import 'media-query';
