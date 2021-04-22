@@ -7,7 +7,7 @@
 
 /* Global styling */
 body {
-  background-color: $light-background;
+  background-color: darken($light-background, 5%);
   font-family: $main-font;
 
   * {
