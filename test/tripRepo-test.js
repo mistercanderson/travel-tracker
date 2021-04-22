@@ -17,6 +17,6 @@ describe('TripRepo', () => {
   });
 
   it('should hold a list of trips', () => {
-    expect(tripRepo.list).to.equal(trips)
+    expect(tripRepo.list).to.deep.equal(trips)
   });
 })
