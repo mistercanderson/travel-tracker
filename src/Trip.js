@@ -64,6 +64,16 @@ class Trip {
     return (`${year}/${month}/${day}`);
   }
 
+  formatDate(date) {
+    const dateElements = date.split('/');
+    const year = dateElements.shift();
+    dateElements.push(year)
+    return dateElements.join('/');
+  }
+
+  returnTripDates(start = this.date, end = this.findEndDate()) {
+    return [start, end].map(date => this.formatDate(date))
+  }
 }
 
 module.exports = Trip;

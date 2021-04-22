@@ -50,10 +50,10 @@ describe('Trip', () => {
   it('should be able to add an activity', () => {
     trip.addActivity('ski');
     trip.addActivity('relax');
-    
+
     expect(trip.suggestedActivities).to.deep.equal(['ski', 'relax'])
   });
-  
+
   it('should be able to remove an activity', () => {
     trip.addActivity('eat');
     trip.removeActivity('relax');
@@ -72,6 +72,12 @@ describe('Trip', () => {
 
     expect(trip.findEndDate()).to.equal('2019/09/23');
     expect(longTrip.findEndDate()).to.equal('2020/06/07')
-  })
+  });
+
+  it('should be able to re-format & return the trip start & end date', () => {
+    expect(trip.formatDate(trip.date)).to.equal('09/16/2019');
+
+    expect(trip.returnTripDates()).to.deep.equal(['09/16/2019', '09/23/2019'])
+  });
 
 });
