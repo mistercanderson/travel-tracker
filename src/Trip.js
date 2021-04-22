@@ -57,7 +57,10 @@ class Trip {
     if (month.toString().length < 2) {
       month = '0' + month
     };
-    const day = endDate.getUTCDate();
+    let day = endDate.getUTCDate();
+    if (day.toString().length < 2) {
+      day = '0' + day
+    }
     return (`${year}/${month}/${day}`);
   }
 

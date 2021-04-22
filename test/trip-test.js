@@ -68,7 +68,10 @@ describe('Trip', () => {
   });
 
   it('should be able to find the end date of the trip', () => {
-    trip.findEndDate()
+    const longTrip = new Trip(trips[2], destinations);
+
+    expect(trip.findEndDate()).to.equal('2019/09/23');
+    expect(longTrip.findEndDate()).to.equal('2020/06/07')
   })
 
 });
