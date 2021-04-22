@@ -1,6 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
-import Traveler from '../src/Traveler'
+import Traveler from '../src/Traveler';
+import travelers from './test-data/sample-traveler-data';
 
 describe('Traveler', () => {
 
