@@ -2,13 +2,13 @@
   @include form;
 
   * {
-    height: 2em;
+    height: em;
     font-family: $main-font;
     font-weight: 300;
     margin: .5em 0;
     flex-grow: 1;
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid $dark-background;
     border-radius: 3px;
   }
 
@@ -22,8 +22,23 @@
   }
 
   button {
+    height: 3em;
     margin-top: 3em;
     background: $good-button;
     color: $light-font;
   }
+}
+
+.trip-preview {
+  @include flex(center, column, center);
+}
+
+.trip-cost {
+  margin-top: 1em;
+  text-align: center;
+  color: $dark-font;
+}
+
+.bad-button {
+  background: $bad-button!important
 }
