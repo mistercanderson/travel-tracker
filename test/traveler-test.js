@@ -10,7 +10,7 @@ describe('Traveler', () => {
 
   beforeEach(() => {
     traveler = new Traveler(travelers[0], trips)
-  })
+  });
 
   it('should be an instance of Traveler', () => {
     expect(traveler).to.be.an.instanceof(Traveler)
@@ -37,5 +37,25 @@ describe('Traveler', () => {
     const traveler2 = new Traveler(travelers[1], trips);
 
     expect(traveler2.getTrips()).to.equal('You don\'t have any trips');
-  })
+  });
+
+  it('should be able to plan a new trip', () => {
+    const myNewTrip = traveler.planTrip(1, 3, '2021/04/22', 9, ['swim']);
+    
+    expect(myNewTrip).to.deep.equal({
+      userID: 1,
+      destinationID: 1,
+      travelers: 3,
+      date: '2021/04/22',
+      duration: 9,
+      status: 'pending',
+      suggestedActivities: ['swim']
+    })
+  });
+  
+  it('should let the traveler know if they are missing info for their planned trip', () => {
+    const badTrip = traveler.planTrip('2021/04/22', 9, ['swim']);
+    
+    expect(badTrip).to.equal('Please make sure to fill out all the trip information.')
+  });
 });
