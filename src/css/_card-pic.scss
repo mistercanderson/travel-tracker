@@ -4,7 +4,14 @@
   justify-self: center;
   align-self: flex-start;
   position: relative;
-  background-color: desaturate($mid-background, 50%);
+  background-color: desaturate($mid-background, 30%);
+
+  img {
+    object-fit: cover;
+    height: 10em;
+    width: 100%;
+    mix-blend-mode: overlay;
+  }
 }
 
 .card-image-overlay {
@@ -14,26 +21,19 @@
   position: absolute;
   color: $dark-font;
   padding: 1em;
-}
 
-.card-image-overlay>button {
-  height: 5em;
-  width: 5em;
-  border-radius: 50%;
-  border: none;
-  transform: scaleX(-1)
-}
+  button {
+    height: 5em;
+    width: 5em;
+    border-radius: 50%;
+    border: none;
+    transform: scaleX(-1);
 
-.card-image-overlay>button>img {
-  transform: scale(.45);
-  width: 100%;
-}
-
-.card-image-wrapper>img {
-  object-fit: cover;
-  height: 10em;
-  width: 100%;
-  mix-blend-mode: overlay;
+    img {
+      transform: scale(.45);
+      width: 100%;
+    }
+  }
 }
 
 .day-counter-wrapper {
@@ -42,18 +42,18 @@
   width: 5em;
   border-radius: 5px;
   background: $dark-background;
-  color: $light-font
-}
+  color: $light-font;
 
-.days {
-  font-size: .7em;
-  font-weight: 300;
-  text-align: center;
-}
+  .days {
+    font-size: .7em;
+    font-weight: 300;
+    text-align: center;
+  }
 
-.day-count {
-  font-size: 2em;
-  font-weight: 300;
-  text-align: center;
-  margin-top: .1em;
+  .day-count {
+    font-size: 2em;
+    font-weight: 300;
+    text-align: center;
+    margin-top: .1em;
+  }
 }

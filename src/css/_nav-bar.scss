@@ -7,35 +7,28 @@ nav {
   height: 10em;
   background-color: $dark-background;
   color: $mid-font;
-}
 
-nav>ul {
-  @include flex(space-between);
-  align-self: flex-end;
-  width: 30%;
-  padding-top: 10em;
-  margin: 0 0 1.3em 2em;
-}
+  ul {
+    @include flex(space-between);
+    align-self: flex-end;
+    width: 30%;
+    padding-top: 10em;
+    margin: 0 0 1.3em 2em;
 
-li>img {
-  width: 1em;
-  margin: 0 1em;
-}
+    li {
+      @include flex(center);
+      white-space: nowrap;
+      margin: 0 1em;
+      cursor: pointer;
 
-li {
-  @include flex(center);
-  white-space: nowrap;
-  margin: 0 1em;
-  cursor: pointer;
-}
-
-h1 {
-  font-size: 2.7em;
-  margin: .9em 0
+      img {
+        width: 1em;
+        margin: 0 1em;
+      }
+    }
+  }
 }
 
 .current {
   color: $light-font
 }
-
-
