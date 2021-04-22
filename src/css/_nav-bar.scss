@@ -16,16 +16,16 @@ ul {
   width: 30%;
   padding-top: 10em;
   margin: 0 0 1.3em 2em;
-
 }
 
 li {
   @include flex(center);
   white-space: nowrap;
-  margin: 0 1em;
+  margin: 0 1em 0 0;
   cursor: pointer;
 
   img {
+    transform: scale(1.3);
     width: 1em;
     margin: 0 1em;
   }
