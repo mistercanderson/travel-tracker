@@ -1,7 +1,7 @@
-class TripRepo {
+import Repo from './Repo'
+
+export default class TripRepo extends Repo {
   constructor(trips) {
-    this.trips = trips;
+    super(trips);
   }
 }
-
-module.exports = TripRepo;

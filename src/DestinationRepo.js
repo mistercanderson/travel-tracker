@@ -1,7 +1,7 @@
-class DestinationRepo {
+import Repo from './Repo'
+
+export default class DestinationRepo extends Repo {
   constructor(destinations) {
-    this.destinations = destinations;
+    super(destinations)
   }
 }
-
-module.exports = DestinationRepo;
