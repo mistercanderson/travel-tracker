@@ -2,12 +2,12 @@
   @include flex(space-between, column, center);
   transform: scale(.8);
 
-  .logo {
-    font-size: 2.7em;
-    cursor: pointer;
-  }
 }
 
+.logo {
+  font-size: 2.7em;
+  cursor: pointer;
+}
 
 .admin-wrapper {
   @include flex(space-between, row, center);

@@ -8,5 +8,9 @@ $light-font: #f1faee;
 $mid-font: #a8dadc;
 $dark-font: darken($mid-font, 50%);
 
+// button-colors
+$good-button: $dark-background;
+$bad-button: rgb(218, 70, 70);
+
 // font-families
 $main-font: 'Poppins', sans-serif;

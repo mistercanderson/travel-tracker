@@ -1,9 +1,12 @@
 @import 'reset';
 @import 'variables';
 @import 'mixins';
+@import 'svg-filters';
+@import 'login';
+@import 'plan-trip';
+@import 'user-profile';
 @import 'nav-bar';
 @import 'cards';
-@import 'svg-filters';
 
 /* Global styling */
 body {
@@ -40,7 +43,7 @@ main {
   margin: 0 1em;
   padding-bottom: 5em;
 
-  .card-display {
+  .dashboard {
     width: 100%;
     height: 100%;
     align-self: center;

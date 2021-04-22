@@ -8,24 +8,26 @@ nav {
   background-color: $dark-background;
   color: $mid-font;
 
-  ul {
-    @include flex(space-between);
-    align-self: flex-end;
-    width: 30%;
-    padding-top: 10em;
-    margin: 0 0 1.3em 2em;
+}
 
-    li {
-      @include flex(center);
-      white-space: nowrap;
-      margin: 0 1em;
-      cursor: pointer;
+ul {
+  @include flex(space-between);
+  align-self: flex-end;
+  width: 30%;
+  padding-top: 10em;
+  margin: 0 0 1.3em 2em;
 
-      img {
-        width: 1em;
-        margin: 0 1em;
-      }
-    }
+}
+
+li {
+  @include flex(center);
+  white-space: nowrap;
+  margin: 0 1em;
+  cursor: pointer;
+
+  img {
+    width: 1em;
+    margin: 0 1em;
   }
 }
 

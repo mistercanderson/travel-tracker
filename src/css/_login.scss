@@ -1,0 +1,18 @@
+.login {
+  @include form;
+  
+  * {
+    font-family: $main-font;
+    font-weight: 300;
+    margin: .5em 0;
+    flex-grow: 1;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 3px;
+  }
+
+  button {
+    background: $good-button;
+    color: $light-font;
+  }
+}
