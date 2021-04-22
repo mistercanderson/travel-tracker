@@ -1,0 +1,36 @@
+.logo-wrapper {
+  @include flex(space-between, column, center);
+  transform: scale(.8);
+
+  .logo {
+    font-size: 2.7em;
+    cursor: pointer;
+  }
+}
+
+
+.admin-wrapper {
+  @include flex(space-between, row, center);
+  height: 2em;
+  color: $mid-font;
+  cursor: pointer;
+
+  p {
+    white-space: nowrap;
+  }
+}
+
+.admin-button {
+  @include flex(center, row, center);
+  height: 2.5em;
+  width: 2.5em;
+  margin: 0 1.5em 0 0;
+  background-color: transparent;
+  border: 1px solid $light-background !important;
+  border-radius: 50%;
+
+  img {
+    width: 1em;
+    transform: scale(1.2)
+  }
+}

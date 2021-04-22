@@ -1,0 +1,13 @@
+.card-wrapper {
+  @include flex(normal, column);
+  width: 100%;
+  max-width: 300px;
+  height: 28em;
+  color: darken($dark-background, 10%);
+  border-radius: 2px;
+  background-color: rgba(lighten($dark-background, 15%), .4);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.685);
+}
+
+@import 'card-pic';
+@import 'card-info';

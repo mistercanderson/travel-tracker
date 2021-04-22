@@ -1,0 +1,59 @@
+.card-image-wrapper {
+  display: flex;
+  width: 100%;
+  justify-self: center;
+  align-self: flex-start;
+  position: relative;
+  background-color: desaturate($mid-background, 30%);
+
+  img {
+    object-fit: cover;
+    height: 10em;
+    width: 100%;
+    mix-blend-mode: overlay;
+  }
+}
+
+.card-image-overlay {
+  @include flex(space-between);
+  box-sizing: border-box;
+  width: 100%;
+  position: absolute;
+  color: $dark-font;
+  padding: 1em;
+
+  button {
+    height: 5em;
+    width: 5em;
+    border-radius: 50%;
+    border: none;
+    transform: scaleX(-1);
+
+    img {
+      transform: scale(.45);
+      width: 100%;
+    }
+  }
+}
+
+.day-counter-wrapper {
+  @include flex(center, column, center);
+  padding: 3% 0;
+  width: 5em;
+  border-radius: 5px;
+  background: $dark-background;
+  color: $light-font;
+
+  .days {
+    font-size: .7em;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  .day-count {
+    font-size: 2em;
+    font-weight: 300;
+    text-align: center;
+    margin-top: .1em;
+  }
+}

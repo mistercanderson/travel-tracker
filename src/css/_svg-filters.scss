@@ -1,0 +1,12 @@
+/* Filters for changing SVG colors */
+.filter-light {
+  @include hex-to-filter($light-background, 1)
+}
+
+.filter-mid {
+  @include hex-to-filter($mid-background, 1)
+}
+
+.filter-dark {
+  @include hex-to-filter($dark-background, 1)
+}

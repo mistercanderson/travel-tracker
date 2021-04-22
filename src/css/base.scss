@@ -1,7 +1,58 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
+@import 'reset';
+@import 'variables';
+@import 'mixins';
+@import 'nav-bar';
+@import 'cards';
+@import 'svg-filters';
 
+/* Global styling */
 body {
-  background: $primary-background;
+  background-color: darken($light-background, 5%);
+  font-family: $main-font;
+
+  * {
+    box-sizing: border-box;
+  }
 }
+
+button {
+  cursor: pointer;
+}
+
+h1 {
+  color: $dark-font;
+  font-size: 2.7em;
+  margin: .9em 0
+}
+
+.caps {
+  text-transform: uppercase;
+}
+
+.smaller-font {
+  font-size: .8em
+}
+
+/* Layout for Dashboard */
+main {
+  @include flex(normal, column);
+  color: $mid-font;
+  margin: 0 1em;
+  padding-bottom: 5em;
+
+  .card-display {
+    width: 100%;
+    height: 100%;
+    align-self: center;
+    display: grid;
+    justify-items: center;
+    justify-content: space-around;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+    grid-area: auto;
+    grid-gap: .8em;
+  }
+}
+
+
+@import 'media-query';

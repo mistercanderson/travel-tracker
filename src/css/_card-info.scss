@@ -1,0 +1,45 @@
+.destination-name {
+  font-size: 1.1em;
+}
+
+.trip-dates {
+  font-size: .9em;
+  margin-top: .5em;
+}
+
+.card-info-wrapper {
+  @include flex(space-between, column, flex-start);
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.card-activities {
+  overflow-wrap: break-word;
+  font-size: .9em;
+  width: 100%;
+  padding: 1em;
+  border-radius: 2px;
+  background-color: $light-background;
+  color: $dark-font;
+}
+
+.traveler-count {
+  font-size: 2em;
+  font-weight: 300;
+  margin-top: .2em
+}
+
+.trip-status-wrapper {
+  width: 100%;
+
+  p {
+    font-size: 1.1em;
+    margin-top: .4em
+  }
+}
