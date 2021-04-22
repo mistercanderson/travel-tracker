@@ -27,12 +27,16 @@ button {
   font-size: .8em
 }
 
-.lighter {
-  color: lighten($light-font, 10%)
-}
+// .lighter {
+//   color: lighten($light-font, 10%)
+// }
 
 .mid {
   color: $mid-font;
+}
+
+.dark {
+  color: darken($dark-background, 10%);
 }
 
 .current {
