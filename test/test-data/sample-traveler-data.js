@@ -19,4 +19,6 @@ const travelers = [
     "name": "Leila Thebeaud",
     "travelerType": "photographer"
   },
-]
+];
+
+export default travelers;

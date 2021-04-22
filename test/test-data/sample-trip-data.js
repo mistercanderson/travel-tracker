@@ -39,4 +39,6 @@ const trips = [
     "status": "approved",
     "suggestedActivities": []
   }
-]
+];
+
+export default trips;
