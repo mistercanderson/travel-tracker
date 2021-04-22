@@ -28,12 +28,23 @@
     </div>
   </nav>
   <main>
-    <h1 class="page-info">Sign In</h1>
+    <h1 class="page-info">Trip Planner</h1>
     
-      <form class="login">
+      <!-- <form class="login">
         <input placeholder="username" type="text" name="username" id="username" required>
         <input placeholder="password" type="password" name="password" id="password" required>
         <button class="login-button">Login</button>
+      </form> -->
+
+      <form class="plan-trip">
+        <input placeholder="Destination" type="text" name="destination" id="planDestination" required>
+        <label for="start-date">Start Date</label>
+        <input placeholder="Start Date" type="date" name="start-date" id="planStartDate" required>
+        <label for="end-date">End Date</label>
+        <input placeholder="End Date" type="date" name="end-date" id="planEndDate" required>
+        <input placeholder="Number of Travelers" type="number" min="1" name="travelers" id="planTravelers" required>
+        <input placeholder="Activities" type="text" name="activities" id="planActivities">
+        <button class="login-button">Plan Trip</button>
       </form>
 
     <!-- <section class="dashboard">

@@ -1,7 +1,8 @@
-.login {
+.plan-trip {
   @include form;
-  
+
   * {
+    height: 2em;
     font-family: $main-font;
     font-weight: 300;
     margin: .5em 0;
@@ -11,7 +12,17 @@
     border-radius: 3px;
   }
 
+  label {
+    margin: 0;
+    font-size: .8em;
+    color: $dark-font;
+    border: none;
+    display: flex;
+    align-items: flex-end;
+  }
+
   button {
+    margin-top: 3em;
     background: $good-button;
     color: $light-font;
   }
