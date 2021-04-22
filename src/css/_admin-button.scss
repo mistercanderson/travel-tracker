@@ -1,10 +1,9 @@
-/* Styling for the admin bar */
-.profile-wrapper {
+.logo-wrapper {
   @include flex(space-between, column, center);
   transform: scale(.8);
 }
 
-.profile-wrapper>img {
+.logo-wrapper>img {
   margin-bottom: 1.5em;
   cursor: pointer;
 }
@@ -20,32 +19,24 @@
   color: $mid-font;
 }
 
-.admin-wrapper>button {
-  background-color: transparent;
-  border: none;
-  margin: 0 1.5em;
-}
-
-.admin-button {
-  @include flex(center, row, center);
-  height: 2.5em;
-  width: 2.5em;
-  border: 1px solid $light-background !important;
-  border-radius: 50%;
-}
-
-.admin-button>img {
-  transform: scale(1.2)
-}
-
-.dropdown-arrow {
-  transform: rotate(180deg)
-}
-
 .admin-wrapper>p {
   white-space: nowrap;
 }
 
 .admin-wrapper>button>img {
   width: 1em;
+}
+
+.admin-button {
+  @include flex(center, row, center);
+  height: 2.5em;
+  width: 2.5em;
+  margin: 0 1.5em 0 0;
+  background-color: transparent;
+  border: 1px solid $light-background !important;
+  border-radius: 50%;
+}
+
+.admin-button>img {
+  transform: scale(1.2)
 }

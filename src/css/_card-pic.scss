@@ -1,4 +1,4 @@
-.profile-pic-wrapper {
+.card-image-wrapper {
   display: flex;
   width: 100%;
   justify-self: center;
@@ -7,7 +7,7 @@
   background-color: desaturate($mid-background, 50%);
 }
 
-.profile-pic-text {
+.card-image-overlay {
   @include flex(space-between);
   box-sizing: border-box;
   width: 100%;
@@ -16,7 +16,7 @@
   padding: 1em;
 }
 
-.profile-pic-text>button {
+.card-image-overlay>button {
   height: 5em;
   width: 5em;
   border-radius: 50%;
@@ -24,19 +24,19 @@
   transform: scaleX(-1)
 }
 
-.profile-pic-text>button>img {
+.card-image-overlay>button>img {
   transform: scale(.45);
   width: 100%;
 }
 
-.profile-pic-wrapper>img {
+.card-image-wrapper>img {
   object-fit: cover;
   height: 10em;
   width: 100%;
   mix-blend-mode: overlay;
 }
 
-.view-counter-wrapper {
+.day-counter-wrapper {
   @include flex(center, column, center);
   padding: 3% 0;
   width: 5em;
@@ -45,13 +45,13 @@
   color: $light-font
 }
 
-.views {
+.days {
   font-size: .7em;
   font-weight: 300;
   text-align: center;
 }
 
-.view-count {
+.day-count {
   font-size: 2em;
   font-weight: 300;
   text-align: center;

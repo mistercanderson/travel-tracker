@@ -1,11 +1,10 @@
-.card-name {
+.destination-name {
   font-size: 1.1em;
 }
 
-.card-date {
+.trip-dates {
   font-size: .9em;
   margin-top: .5em;
-  // color: $dark-font;
 }
 
 .card-info-wrapper {
@@ -20,7 +19,7 @@
   box-sizing: border-box;
 }
 
-.card-url {
+.card-activities {
   overflow-wrap: break-word;
   font-size: .9em;
   width: 100%;
@@ -30,17 +29,17 @@
   color: $dark-font;
 }
 
-.attachment-counter {
+.traveler-count {
   font-size: 2em;
   font-weight: 300;
   margin-top: .2em
 }
 
-.playlist-wrapper {
+.trip-status-wrapper {
   width: 100%;
 }
 
-.playlist-wrapper>p {
+.trip-status-wrapper>p {
   font-size: 1.1em;
   margin-top: .4em
 }
