@@ -4,7 +4,7 @@
   justify-self: center;
   align-self: flex-start;
   position: relative;
-  background-color: rgba(26, 29, 26, 0.705);
+  background-color: desaturate($mid-background, 50%);
 }
 
 .profile-pic-text {
@@ -12,7 +12,7 @@
   box-sizing: border-box;
   width: 100%;
   position: absolute;
-  color: white;
+  color: $dark-font;
   padding: 1em;
 }
 
@@ -36,4 +36,24 @@
   mix-blend-mode: overlay;
 }
 
-@import 'day-counter';
+.view-counter-wrapper {
+  @include flex(center, column, center);
+  padding: 3% 0;
+  width: 5em;
+  border-radius: 5px;
+  background: $dark-background;
+  color: $light-font
+}
+
+.views {
+  font-size: .7em;
+  font-weight: 300;
+  text-align: center;
+}
+
+.view-count {
+  font-size: 2em;
+  font-weight: 300;
+  text-align: center;
+  margin-top: .1em;
+}

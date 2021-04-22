@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: flex-start;
     height: 5em;
-    margin: 0 0 1em .1em;
+    margin: 0 0 4em 0;
   }
 
   li>img {
@@ -18,5 +18,9 @@
 
   .profile-wrapper>img {
     transform: scale(.5) translateX(8em);
+  }
+
+  .logo {
+    font-size: 2em;
   }
 }

@@ -1,11 +1,12 @@
 .card-wrapper {
   @include flex(normal, column);
   width: 100%;
+  max-width: 300px;
   height: 28em;
   border-radius: 2px;
-  background-color: lighten($tertiary-font, 40%);
+  background-color: $dark-background;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.685);
 }
 
-@import 'trip-pic';
-@import 'card-info.scss';
+@import 'card-pic';
+@import 'card-info';

@@ -7,7 +7,7 @@
 
 /* Global styling */
 body {
-  background-color: $primary-background;
+  background-color: $light-background;
   font-family: $main-font;
 }
 
@@ -28,19 +28,23 @@ button {
 }
 
 .lighter {
-  color: darken($primary-font, 10%)
+  color: lighten($light-font, 10%)
 }
 
 .current {
-  color: $primary-font
+  color: $light-font
 }
 
 /* Styling Main/Cards section */
 main {
   @include flex(normal, column);
-  color: $secondary-font;
+  color: $mid-font;
   margin: 0 1em;
   padding-bottom: 5em
+}
+
+.page-info {
+  color: $dark-font;
 }
 
 .card-display {

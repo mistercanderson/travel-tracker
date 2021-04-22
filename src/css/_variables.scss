@@ -6,12 +6,15 @@
 #457b9d
 #1d3557
 */
-$primary-background: #1d3557;
-$secondary-background: #457b9d;
-// $tertiary-background:;
-$primary-font: #f1faee;
-$secondary-font: #a8dadc;
-$tertiary-font: #e63946;
+// background-colors
+$mid-background: #457b9d;
+$light-background: lighten($mid-background, 50%);
+$dark-background: #1d3557;
 
-// FONTS
+// font-colors
+$light-font: #f1faee;
+$mid-font: #a8dadc;
+$dark-font: darken($mid-font, 50%);
+
+// font-families
 $main-font: 'Lato', sans-serif;
