@@ -12,8 +12,6 @@ const navButtons = {
 };
 
 const dashboard = document.querySelector('.dashboard');
-const userProfile = document.querySelector('.user-profile');
-const tripPlanner = document.getElementById('tripPlanner');
 
 function navClick() {
   displayPageInfo(event)
@@ -24,62 +22,25 @@ function displayPageInfo(event) {
   switch (event.target) {
     case navButtons.trips:
       pageInfo.innerText = 'My Trips';
-      hideTripPlanner();
-      hideUserProfile();
       displayTrips();
-      showDashboard();
       break;
     case navButtons.plan:
       pageInfo.innerText = 'Plan a Trip';
-      hideUserProfile();
-      hideDashboard();
-      showTripPlanner();
+      displayTripPlanner();
       break;
     case navButtons.destinations:
       pageInfo.innerText = 'Destinations';
-      hideTripPlanner();
-      hideUserProfile();
       displayDestinations();
-      showDashboard();
       break;
     case navButtons.admin:
       pageInfo.innerText = 'My Profile';
-      hideTripPlanner();
-      showUserProfile();
-      hideDashboard();
+      displayUserProfile();
       break;
     case navButtons.logo:
       pageInfo.innerText = 'My Trips';
-      hideTripPlanner();
-      hideUserProfile();
       displayTrips();
-      showDashboard();
       break;
   }
-}
-
-function hideDashboard() {
-  dashboard.classList.add('hidden')
-}
-
-function showDashboard() {
-  dashboard.classList.remove('hidden')
-}
-
-function hideUserProfile() {
-  userProfile.classList.add('hidden')
-}
-
-function showUserProfile() {
-  userProfile.classList.remove('hidden')
-}
-
-function showTripPlanner() {
-  tripPlanner.classList.remove('hidden')
-}
-
-function hideTripPlanner() {
-  tripPlanner.classList.add('hidden')
 }
 
 function displayUsername() {
@@ -114,6 +75,25 @@ function displayDestinations() {
     let lodgingCost = dest.estimatedLodgingCostPerDay;
     dashboard.innerHTML += renderDestinationDashboard(name, image, alt, flightCost, lodgingCost)
   })
+}
+
+function displayTripPlanner() {
+  dashboard.innerHTML = '';
+  dashboard.innerHTML = renderTripPlanner();
+}
+
+function displayTripPreview() {
+  renderTripPreview();
+}
+
+function displayUserProfile() {
+  dashboard.innerHTML = '';
+  dashboard.innerHTML = renderUserProfile();
+}
+
+function displayLogin() {
+  dashboard.innerHTML = '';
+  dashboard.innerHTML = renderLogin()
 }
 
 function renderTripDashboard(name, dates, activities, status, travelerCount, image, alt, duration, cost) {
@@ -171,6 +151,85 @@ function renderDestinationDashboard(name, image, alt, flightCost, lodgingCost) {
         </div>
       </div> 
       `
+}
+
+function renderTripPlanner() {
+  return `
+  <form class="plan-trip" id="tripPlanner">
+      <input placeholder="Destination" type="text" name="destination" id="planDestination" required>
+      <label for="start-date">Start Date</label>
+      <input placeholder="Start Date" type="date" name="start-date" id="planStartDate" required>
+      <label for="end-date">End Date</label>
+      <input placeholder="End Date" type="date" name="end-date" id="planEndDate" required>
+      <input placeholder="Number of Travelers" type="number" min="1" name="travelers" id="planTravelers" required>
+      <input placeholder="Activities (optional)" type="text" name="activities" id="planActivities">
+      <button type="button" id="planTripButton">Plan Trip</button>
+    </form>
+  `
+}
+
+function renderTripPreview() {
+  return `<section class="trip-preview">
+      <div class="card-wrapper">
+        <div class="card-image-wrapper">
+          <img
+            src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80"
+            alt="Trip Picture">
+          <div class="card-image-overlay caps">
+            <div class="day-counter-wrapper">
+              <p class="days">Days</p>
+              <p class="day-count">02</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-info-wrapper">
+          <div>
+            <h2 class="destination-name">Destination Name</h2>
+            <p class="trip-dates">01/23/16 - 01/25/16</p>
+          </div>
+          <p>Activities</p>
+          <p class="card-cost">Swimming, Relaxation</p>
+          <div class="trip-status-wrapper">
+            <h3 class="caps smaller-font">Status:</h3>
+            <p class="lighter">Pending</p>
+          </div>
+          <div class="traveler-wrapper">
+            <h4 class="caps smaller-font">Travelers:</h4>
+            <p class="traveler-count lighter">04</p>
+          </div>
+        </div>
+      </div>
+      <article class="trip-cost">
+        After TravelTracker agent fees, the total cost of your trip will be $100.
+      </article>
+    </section>
+    <form class="plan-trip" id="planTripTwo">
+      <button type="button" id="finalizeTrip">Plan Trip</button>
+      <button type="button" class="bad-button" id="cancelTrip">Cancel</button>
+    </form>
+  `;
+}
+
+function renderUserProfile() {
+  return `<div class="card-wrapper user-profile">
+      <h2>User Name</h2>
+      <ul class="user-data">
+        <li class="user-data">Age: 10</li>
+        <li class="user-data">Height: 6' 10</li>
+        <li class="user-data">Weight: 210</li>
+        <li class="user-data">Blah blah</li>
+      </ul>
+    </div
+  `
+}
+
+function renderLogin() {
+  return `<form class="login hidden">
+      <input placeholder="username" type="text" name="username" id="username" required>
+      <input placeholder="password" type="password" name="password" id="password" required>
+      <button class="login-button">Login</button>
+    </form>
+  `;
 }
 
 export {
