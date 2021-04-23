@@ -13,11 +13,26 @@ const navButtons = {
 
 const dashboard = document.querySelector('.dashboard');
 
-function navClick() {
-  displayPageInfo(event)
+// function navClick() {
+//   displayPageInfo(event);
+//   dashboardClick(event)
+// }
+
+function dashboardClick() {
+  switch (event.target.id) {
+    case 'planTripButton':
+      displayTripPreview();
+      break;
+    case 'bookNow':
+      displayTripPlanner();
+      break;
+    case 'cancelTrip':
+      displayTripPlanner();
+      break
+  }
 }
 
-function displayPageInfo(event) {
+function navClick() {
   const pageInfo = document.getElementById('pageInfo');
   switch (event.target) {
     case navButtons.trips:
@@ -61,7 +76,7 @@ function displayTrips() {
     let alt = trip.destination.alt;
     let duration = trip.duration;
     let cost = trip.calculateTripCost();
-    dashboard.innerHTML += renderTripDashboard(name, dates, activities, status, travelerCount, image, alt, duration, cost)
+    dashboard.innerHTML += renderTrips(name, dates, activities, status, travelerCount, image, alt, duration, cost)
   })
 }
 
@@ -73,7 +88,7 @@ function displayDestinations() {
     let alt = dest.alt;
     let flightCost = dest.estimatedFlightCostPerPerson;
     let lodgingCost = dest.estimatedLodgingCostPerDay;
-    dashboard.innerHTML += renderDestinationDashboard(name, image, alt, flightCost, lodgingCost)
+    dashboard.innerHTML += renderDestinations(name, image, alt, flightCost, lodgingCost)
   })
 }
 
@@ -83,7 +98,8 @@ function displayTripPlanner() {
 }
 
 function displayTripPreview() {
-  renderTripPreview();
+  dashboard.innerHTML = '';
+  dashboard.innerHTML = renderTripPreview();
 }
 
 function displayUserProfile() {
@@ -96,7 +112,7 @@ function displayLogin() {
   dashboard.innerHTML = renderLogin()
 }
 
-function renderTripDashboard(name, dates, activities, status, travelerCount, image, alt, duration, cost) {
+function renderTrips(name, dates, activities, status, travelerCount, image, alt, duration, cost) {
   return `
   <div class="card-wrapper">
         <div class="card-image-wrapper">
@@ -132,7 +148,7 @@ function renderTripDashboard(name, dates, activities, status, travelerCount, ima
   `
 }
 
-function renderDestinationDashboard(name, image, alt, flightCost, lodgingCost) {
+function renderDestinations(name, image, alt, flightCost, lodgingCost) {
   return `<div class="card-wrapper">
         <div class="card-image-wrapper">
           <img
@@ -147,7 +163,7 @@ function renderDestinationDashboard(name, image, alt, flightCost, lodgingCost) {
             <p>Lodging:</p>
             <p class="card-cost">$${lodgingCost}/day</p>
           </div>
-          <button class="book-now">Book Now!</button>
+          <button id="bookNow" class="book-now">Book Now!</button>
         </div>
       </div> 
       `
@@ -202,11 +218,11 @@ function renderTripPreview() {
       <article class="trip-cost">
         After TravelTracker agent fees, the total cost of your trip will be $100.
       </article>
+      <form class="plan-trip" id="planTripTwo">
+        <button type="button" id="finalizeTrip">Plan Trip</button>
+        <button type="button" class="bad-button" id="cancelTrip">Cancel</button>
+      </form>
     </section>
-    <form class="plan-trip" id="planTripTwo">
-      <button type="button" id="finalizeTrip">Plan Trip</button>
-      <button type="button" class="bad-button" id="cancelTrip">Cancel</button>
-    </form>
   `;
 }
 
@@ -235,5 +251,6 @@ function renderLogin() {
 export {
   navClick,
   displayUsername,
-  displayTrips
+  displayTrips,
+  dashboardClick
 }

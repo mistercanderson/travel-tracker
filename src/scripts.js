@@ -8,13 +8,15 @@ import {
 import {
   displayUsername,
   navClick,
-  displayTrips
+  displayTrips,
+  dashboardClick,
 } from './domManipulation'
 
 let user;
 
 window.addEventListener('load', loadFunctions)
 window.addEventListener('click', clickFunctions)
+// window.addEventListener('click', () => console.log(event.target.id))
 
 function loadFunctions() {
   instantiateClasses();
@@ -22,11 +24,12 @@ function loadFunctions() {
   displayUsername();
   displayTrips();
   // console.log(user);
-  console.log(destinationRepo);
+  // console.log(destinationRepo);
 }
 
 function clickFunctions() {
   navClick()
+  dashboardClick()
 }
 
 function pickRandomUser() {
