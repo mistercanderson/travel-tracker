@@ -7,7 +7,8 @@ import {
 
 import {
   displayUsername,
-  navClick
+  navClick,
+  displayTrips
 } from './domManipulation'
 
 let user;
@@ -19,6 +20,7 @@ function loadFunctions() {
   instantiateClasses();
   pickRandomUser();
   displayUsername();
+  displayTrips()
   console.log(user);
 }
 
