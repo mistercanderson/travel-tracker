@@ -16,23 +16,37 @@ function navClick() {
   displayPageInfo(event)
 }
 
+function hideDashboard() {
+  dashboard.classList.add('hidden')
+}
+
+function showDashboard() {
+  dashboard.classList.remove('hidden')
+}
+
 function displayPageInfo(event) {
   const pageInfo = document.getElementById('pageInfo');
   switch (event.target) {
     case navButtons.trips:
       pageInfo.innerText = 'My Trips'
+      displayTrips();
+      showDashboard();
       break;
     case navButtons.plan:
       pageInfo.innerText = 'Plan a Trip'
+      hideDashboard();
       break;
     case navButtons.destinations:
       pageInfo.innerText = 'Destinations'
       break;
     case navButtons.admin:
       pageInfo.innerText = 'My Profile'
+      hideDashboard();
       break;
     case navButtons.logo:
       pageInfo.innerText = 'My Trips'
+      displayTrips();
+      showDashboard();
       break;
   }
 }
@@ -53,8 +67,8 @@ function displayTrips() {
     let travelerCount = trip.travelers;
     let image = trip.destination.image;
     let alt = trip.destination.alt;
-    let duration = trip.duration.toString()
-    let cost = trip.calculateTripCost().toString();
+    let duration = trip.duration;
+    let cost = trip.calculateTripCost();
     dashboard.innerHTML += renderTripCard(name, dates, activities, status, travelerCount, image, alt, duration, cost)
   })
 }
@@ -78,8 +92,10 @@ function renderTripCard(name, dates, activities, status, travelerCount, image, a
             <h2 class="destination-name">${name}</h2>
             <p class="trip-dates">${dates}</p>
           </div>
-          <p>Cost</p>
-          <p class="card-cost">$${cost}</p>
+          <div class="cost-wrapper">
+            <p>Trip Price</p>
+            <p class="card-cost">$${cost}</p>
+          </div>
           <div class="trip-status-wrapper">
             <h3 class="caps smaller-font">Status:</h3>
             <p class="lighter">${status}</p>

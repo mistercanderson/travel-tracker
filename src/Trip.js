@@ -24,7 +24,7 @@ class Trip {
     const lodgingCost = this.duration * this.destination.estimatedLodgingCostPerDay;
     const expenses = flightCost + lodgingCost;
     const agentFee = expenses * .1;
-    return expenses + agentFee
+    return (expenses + agentFee).toFixed(0)
   }
 
   approveTrip() {
