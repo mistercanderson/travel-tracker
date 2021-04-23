@@ -13,11 +13,14 @@
 <body>
   <nav>
     <ul>
-      <li id="myTrips" class="current caps" tabindex="0"><img class="filter-light" src="./images/plane.svg" alt="Airplane Icon">My
+      <li id="myTrips" class="current caps" tabindex="0"><img class="filter-light" src="./images/plane.svg"
+          alt="Airplane Icon">My
         Trips</li>
-      <li id="planTrip" class="caps" tabindex="0"><img class="filter-light" src="./images/suitcase.svg" alt="Suitcase Icon">Plan a
+      <li id="planTrip" class="caps" tabindex="0"><img class="filter-light" src="./images/suitcase.svg"
+          alt="Suitcase Icon">Plan a
         trip</li>
-      <li id="destinations" class="caps" tabindex="0"><img class="filter-light" src="./images/island.svg" alt="Island Icon">Destinations
+      <li id="destinations" class="caps" tabindex="0"><img class="filter-light" src="./images/island.svg"
+          alt="Island Icon">Destinations
       </li>
     </ul>
     <div class="logo-wrapper">
@@ -31,22 +34,22 @@
   <main>
     <h1 id="pageInfo">My Trips</h1>
 
-    <!-- <form class="login">
-        <input placeholder="username" type="text" name="username" id="username" required>
-        <input placeholder="password" type="password" name="password" id="password" required>
-        <button class="login-button">Login</button>
-      </form> -->
+    <form class="login hidden">
+      <input placeholder="username" type="text" name="username" id="username" required>
+      <input placeholder="password" type="password" name="password" id="password" required>
+      <button class="login-button">Login</button>
+    </form>
 
-    <!-- <form class="plan-trip" id="planTripOne">
-        <input placeholder="Destination" type="text" name="destination" id="planDestination" required>
-        <label for="start-date">Start Date</label>
-        <input placeholder="Start Date" type="date" name="start-date" id="planStartDate" required>
-        <label for="end-date">End Date</label>
-        <input placeholder="End Date" type="date" name="end-date" id="planEndDate" required>
-        <input placeholder="Number of Travelers" type="number" min="1" name="travelers" id="planTravelers" required>
-        <input placeholder="Activities" type="text" name="activities" id="planActivities">
-        <button type="button" id="planTripButton">Plan Trip</button>
-      </form> -->
+    <form class="plan-trip hidden" id="tripPlanner">
+      <input placeholder="Destination" type="text" name="destination" id="planDestination" required>
+      <label for="start-date">Start Date</label>
+      <input placeholder="Start Date" type="date" name="start-date" id="planStartDate" required>
+      <label for="end-date">End Date</label>
+      <input placeholder="End Date" type="date" name="end-date" id="planEndDate" required>
+      <input placeholder="Number of Travelers" type="number" min="1" name="travelers" id="planTravelers" required>
+      <input placeholder="Activities (optional)" type="text" name="activities" id="planActivities">
+      <button type="button" id="planTripButton">Plan Trip</button>
+    </form>
 
     <!-- <section class="trip-preview">
       <div class="card-wrapper">
@@ -87,7 +90,7 @@
       <button type="button" class="bad-button" id="cancelTrip">Cancel</button>
     </form> -->
 
-    <!-- <section class="user-profile">
+    <section class="user-profile hidden">
       <div class="card-wrapper">
         <h2>User Name</h2>
         <ul class="user-data">
@@ -97,10 +100,8 @@
           <li class="user-data">Blah blah</li>
         </ul>
       </div>
-    </section> -->
-
+    </section>
     <section class="dashboard">
-      
     </section>
   </main>
 </body>

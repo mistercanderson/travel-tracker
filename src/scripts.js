@@ -20,8 +20,9 @@ function loadFunctions() {
   instantiateClasses();
   pickRandomUser();
   displayUsername();
-  displayTrips()
-  console.log(user);
+  displayTrips();
+  // console.log(user);
+  console.log(destinationRepo);
 }
 
 function clickFunctions() {
@@ -32,6 +33,8 @@ function pickRandomUser() {
   user = users[Math.floor(Math.random() * users.length)]
 }
 
+// function assignDestinationR
+
 
 // const buttons = {
 //   login: document.getElementById(),
@@ -40,4 +43,4 @@ function pickRandomUser() {
 //   login: document.getElementById(),
 // }
 
-export {user}
+export {user, destinationRepo}

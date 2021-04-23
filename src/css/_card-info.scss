@@ -24,7 +24,7 @@
 }
 
 .card-cost {
-  margin-top: .5em;
+  margin: .5em 0;
   overflow-wrap: break-word;
   font-size: .9em;
   width: 100%;
@@ -47,4 +47,15 @@
     font-size: 1.1em;
     margin-top: .4em
   }
+}
+
+.book-now {
+  @include form;
+  background: $good-button;
+  font-family: $main-font;
+  color: $light-font;
+  height: 3em;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
 }

@@ -1,5 +1,6 @@
 import {
   user,
+  destinationRepo
 } from './scripts'
 
 const navButtons = {
@@ -11,9 +12,50 @@ const navButtons = {
 };
 
 const dashboard = document.querySelector('.dashboard');
+const userProfile = document.querySelector('.user-profile');
+const tripPlanner = document.getElementById('tripPlanner');
 
 function navClick() {
   displayPageInfo(event)
+}
+
+function displayPageInfo(event) {
+  const pageInfo = document.getElementById('pageInfo');
+  switch (event.target) {
+    case navButtons.trips:
+      pageInfo.innerText = 'My Trips';
+      hideTripPlanner();
+      hideUserProfile();
+      displayTrips();
+      showDashboard();
+      break;
+    case navButtons.plan:
+      pageInfo.innerText = 'Plan a Trip';
+      hideUserProfile();
+      hideDashboard();
+      showTripPlanner();
+      break;
+    case navButtons.destinations:
+      pageInfo.innerText = 'Destinations';
+      hideTripPlanner();
+      hideUserProfile();
+      displayDestinations();
+      showDashboard();
+      break;
+    case navButtons.admin:
+      pageInfo.innerText = 'My Profile';
+      hideTripPlanner();
+      showUserProfile();
+      hideDashboard();
+      break;
+    case navButtons.logo:
+      pageInfo.innerText = 'My Trips';
+      hideTripPlanner();
+      hideUserProfile();
+      displayTrips();
+      showDashboard();
+      break;
+  }
 }
 
 function hideDashboard() {
@@ -24,31 +66,20 @@ function showDashboard() {
   dashboard.classList.remove('hidden')
 }
 
-function displayPageInfo(event) {
-  const pageInfo = document.getElementById('pageInfo');
-  switch (event.target) {
-    case navButtons.trips:
-      pageInfo.innerText = 'My Trips'
-      displayTrips();
-      showDashboard();
-      break;
-    case navButtons.plan:
-      pageInfo.innerText = 'Plan a Trip'
-      hideDashboard();
-      break;
-    case navButtons.destinations:
-      pageInfo.innerText = 'Destinations'
-      break;
-    case navButtons.admin:
-      pageInfo.innerText = 'My Profile'
-      hideDashboard();
-      break;
-    case navButtons.logo:
-      pageInfo.innerText = 'My Trips'
-      displayTrips();
-      showDashboard();
-      break;
-  }
+function hideUserProfile() {
+  userProfile.classList.add('hidden')
+}
+
+function showUserProfile() {
+  userProfile.classList.remove('hidden')
+}
+
+function showTripPlanner() {
+  tripPlanner.classList.remove('hidden')
+}
+
+function hideTripPlanner() {
+  tripPlanner.classList.add('hidden')
 }
 
 function displayUsername() {
@@ -58,7 +89,7 @@ function displayUsername() {
 }
 
 function displayTrips() {
-  dashboard.innerHTML = ''
+  dashboard.innerHTML = '';
   user.trips.forEach(trip => {
     let name = trip.destination.name;
     let dates = trip.returnTripDates().join(' - ');
@@ -69,11 +100,23 @@ function displayTrips() {
     let alt = trip.destination.alt;
     let duration = trip.duration;
     let cost = trip.calculateTripCost();
-    dashboard.innerHTML += renderTripCard(name, dates, activities, status, travelerCount, image, alt, duration, cost)
+    dashboard.innerHTML += renderTripDashboard(name, dates, activities, status, travelerCount, image, alt, duration, cost)
   })
 }
 
-function renderTripCard(name, dates, activities, status, travelerCount, image, alt, duration, cost) {
+function displayDestinations() {
+  dashboard.innerHTML = '';
+  destinationRepo.list.forEach(dest => {
+    let name = dest.name;
+    let image = dest.image;
+    let alt = dest.alt;
+    let flightCost = dest.estimatedFlightCostPerPerson;
+    let lodgingCost = dest.estimatedLodgingCostPerDay;
+    dashboard.innerHTML += renderDestinationDashboard(name, image, alt, flightCost, lodgingCost)
+  })
+}
+
+function renderTripDashboard(name, dates, activities, status, travelerCount, image, alt, duration, cost) {
   return `
   <div class="card-wrapper">
         <div class="card-image-wrapper">
@@ -107,6 +150,27 @@ function renderTripCard(name, dates, activities, status, travelerCount, image, a
         </div>
       </div>
   `
+}
+
+function renderDestinationDashboard(name, image, alt, flightCost, lodgingCost) {
+  return `<div class="card-wrapper">
+        <div class="card-image-wrapper">
+          <img
+            src="${image}"
+            alt="${alt}">
+        </div>
+        <div class="card-info-wrapper">
+          <h2 class="destination-name">${name}</h2>
+          <div class="cost-wrapper">
+            <p>Flight:</p>
+            <p class="card-cost">$${flightCost}/person</p>
+            <p>Lodging:</p>
+            <p class="card-cost">$${lodgingCost}/day</p>
+          </div>
+          <button class="book-now">Book Now!</button>
+        </div>
+      </div> 
+      `
 }
 
 export {
