@@ -11,19 +11,27 @@ const navButtons = {
   logo: document.querySelector('.logo')
 };
 
+const plannerInputs = {
+  name: document.getElementById('planDestination'),
+  start: document.getElementById('planStartDate'),
+  end: document.getElementById('planEndDate'),
+  travelerAmt: document.getElementById('planTravelers'),
+  activities: document.getElementById('planActivities')
+};
+
+
 const dashboard = document.querySelector('.dashboard');
 
-// function navClick() {
-//   displayPageInfo(event);
-//   dashboardClick(event)
-// }
+let plannedDest;
 
 function dashboardClick() {
+  event.preventDefault()
   switch (event.target.id) {
     case 'planTripButton':
       displayTripPreview();
       break;
     case 'bookNow':
+      plannedDest = (event.target.previousElementSibling.previousElementSibling.innerText);
       displayTripPlanner();
       break;
     case 'cancelTrip':
@@ -33,6 +41,8 @@ function dashboardClick() {
 }
 
 function navClick() {
+  event.preventDefault()
+  plannedDest = '';
   const pageInfo = document.getElementById('pageInfo');
   switch (event.target) {
     case navButtons.trips:
@@ -95,6 +105,9 @@ function displayDestinations() {
 function displayTripPlanner() {
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderTripPlanner();
+  if (plannedDest) {
+    document.getElementById('planDestination').value = plannedDest;
+  }
 }
 
 function displayTripPreview() {
