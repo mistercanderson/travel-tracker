@@ -54,6 +54,7 @@ function displayChanges() {
       autoFillDestinationName();
       break;
     case 'cancelTrip':
+      pageInfo.innerText = "Plan a Trip";
       displayTripPlanner();
       break
   }
@@ -119,6 +120,7 @@ function extractInputValues() {
   }
   if (calculateDays(inputs.start.value, inputs.end.value) < 1) {
     alert('Please Enter a Valid Date Range 🤪')
+    inputs.activities.value = null;
     return false
   }
   if (inputKeys.every(key => inputs[key].value)) {
@@ -134,6 +136,7 @@ function extractInputValues() {
 }
 
 function displayTripPreview() {
+  pageInfo.innerText = 'Trip Preview'
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderTripPreview();
 }
@@ -208,15 +211,15 @@ function renderTripPlanner() {
   return `
     <form class="plan-trip" id="tripPlanner">
       <select name="destination" id="planDestination" required>
-        <option value="">Select a Destination</option>
+        <option value="">Select a Destination (required)</option>
         ${generateNameOptions()}
       <select>
-      <label for="planStartDate">Start Date</label>
+      <label for="planStartDate">Start Date (required)</label>
       <input type="date" id="planStartDate" name="start-date" value="${today}"
        min="${today}">
-      <label for="planEndDate">End Date</label>
+      <label for="planEndDate">End Date (required)</label>
       <input type="date" id="planEndDate" name="end-date" min="${tomorrow}">
-      <input placeholder="Number of Travelers" type="number" min="1" name="travelers" id="planTravelers" required>
+      <input placeholder="Number of Travelers (required)" type="number" min="1" name="travelers" id="planTravelers" required>
       <input placeholder="Activities (optional)" type="text" name="activities" id="planActivities">
       <button type="button" id="planTripButton">Plan Trip</button>
     </form>`;
@@ -249,7 +252,7 @@ function renderTripPreview() {
             <h2 class="destination-name">${inputValues.name}</h2>
             <p class="trip-dates">${formatInputDate(inputValues.start)} - ${formatInputDate(inputValues.end)}</p>
           </div>
-          <p>Activities</p>
+          <p>Suggested Activities:</p>
           <p class="card-cost">${inputValues.activities}</p>
           <div class="trip-status-wrapper">
             <h3 class="caps smaller-font">Status:</h3>
@@ -265,7 +268,7 @@ function renderTripPreview() {
         After TravelTracker agent fees, the total cost of your trip will be $${previewCost(dest.estimatedFlightCostPerPerson, dest.estimatedLodgingCostPerDay, inputValues.travelerAmt, calculateDays(inputValues.start, inputValues.end))}.
       </article>
       <form class="plan-trip" id="planTripTwo">
-        <button type="button" id="finalizeTrip">Plan Trip</button>
+        <button type="button" id="finalizeTrip">Submit Trip Request</button>
         <button type="button" class="bad-button" id="cancelTrip">Cancel</button>
       </form>
     </section>`;
@@ -274,7 +277,7 @@ function renderTripPreview() {
 function previewCost(flightCost, lodgCost, people, days) {
   const expenses = (flightCost * people) + (lodgCost * days);
   const agentFee = expenses * .1;
-  return expenses + agentFee;
+  return (expenses + agentFee).toFixed(0)
 }
 
 function renderUserProfile() {
