@@ -45,8 +45,6 @@ function displayChanges() {
     case 'planTripButton':
       if (extractInputValues()) {
         displayTripPreview();
-      } else {
-        // alert('Please Make Sure to Include All Required Information 🤠')
       }
       break;
     case 'bookNow':
@@ -120,7 +118,7 @@ function extractInputValues() {
     inputs.activities.value = 'N/A';
   }
   if (calculateDays(inputs.start.value, inputs.end.value) < 1) {
-    alert('Please Enter a Valid Date Range')
+    alert('Please Enter a Valid Date Range 🤪')
     return false
   }
   if (inputKeys.every(key => inputs[key].value)) {
@@ -152,7 +150,7 @@ function displayLogin() {
 
 function renderTrips(name, dates, activities, status, travelerCount, image, alt, duration, cost) {
   return `
-  <div class="card-wrapper">
+     <div class="card-wrapper">
         <div class="card-image-wrapper">
           <img
             src="${image}"
@@ -182,12 +180,12 @@ function renderTrips(name, dates, activities, status, travelerCount, image, alt,
             <p class="traveler-count lighter">${travelerCount}</p>
           </div>
         </div>
-      </div>
-  `
+      </div>`;
 }
 
 function renderDestinations(name, image, alt, flightCost, lodgingCost) {
-  return `<div class="card-wrapper">
+  return `
+      <div class="card-wrapper">
         <div class="card-image-wrapper">
           <img
             src="${image}"
@@ -203,12 +201,7 @@ function renderDestinations(name, image, alt, flightCost, lodgingCost) {
           </div>
           <button id="bookNow" class="book-now">Book Now!</button>
         </div>
-      </div> 
-      `
-}
-
-{
-  /* <input placeholder="Destination" type="text" name="destination" id="planDestination" required> */
+      </div>`;
 }
 
 function renderTripPlanner() {
@@ -226,8 +219,7 @@ function renderTripPlanner() {
       <input placeholder="Number of Travelers" type="number" min="1" name="travelers" id="planTravelers" required>
       <input placeholder="Activities (optional)" type="text" name="activities" id="planActivities">
       <button type="button" id="planTripButton">Plan Trip</button>
-    </form>
-  `
+    </form>`;
 }
 
 function generateNameOptions() {
@@ -275,8 +267,7 @@ function renderTripPreview() {
         <button type="button" id="finalizeTrip">Plan Trip</button>
         <button type="button" class="bad-button" id="cancelTrip">Cancel</button>
       </form>
-    </section>
-  `;
+    </section>`;
 }
 
 function renderUserProfile() {
@@ -289,8 +280,7 @@ function renderUserProfile() {
         <li class="user-data">Weight: 210</li>
         <li class="user-data">Blah blah</li>
       </ul>
-    </div
-  `
+    </div`;
 }
 
 function renderLogin() {
@@ -299,8 +289,7 @@ function renderLogin() {
       <input placeholder="username" type="text" name="username" id="username" required>
       <input placeholder="password" type="password" name="password" id="password" required>
       <button class="login-button">Login</button>
-    </form>
-  `;
+    </form>`;
 }
 
 export {
