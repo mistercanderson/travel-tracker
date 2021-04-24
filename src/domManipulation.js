@@ -62,6 +62,10 @@ function displayChanges() {
       break;
     case 'finalizeTrip':
       tripRequest = finalizeTripRequest();
+      displayTripSuccess();
+      break;
+    case 'successHome':
+      displayTrips();
       break;
   }
 }
@@ -143,6 +147,12 @@ function displayTripPreview() {
   pageInfo.innerText = 'Trip Preview'
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderTripPreview();
+}
+
+function displayTripSuccess() {
+  pageInfo.innerText = 'Success'
+  dashboard.innerHTML = '';
+  dashboard.innerHTML = renderTripSuccess();
 }
 
 function displayUserProfile() {
@@ -313,6 +323,15 @@ function renderLogin() {
       <input placeholder="password" type="password" name="password" id="password" required>
       <button class="login-button">Login</button>
     </form>`;
+}
+
+function renderTripSuccess() {
+  return `
+    <div class="success-wrapper">
+      <p class="trip-success">Congratulations! Your trip to ${inputValues.name} has been submitted & will be reviewed by a TravelTracker agent shortly!</p>
+      <button id="successHome">View My Trips</button>
+    </div>
+  `
 }
 
 export {
