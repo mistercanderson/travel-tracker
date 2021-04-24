@@ -4,11 +4,13 @@ import {
   tomorrow,
   destinationRepo,
   formatInputDate,
-  calculateDays
+  calculateDays,
+  finalizeTripRequest
 } from './scripts'
 
 
 let plannedDest;
+let tripRequest;
 const dashboard = document.querySelector('.dashboard');
 const pageInfo = document.getElementById('pageInfo');
 const inputValues = {
@@ -44,7 +46,6 @@ function displayChanges() {
       break;
     case 'planTripButton':
       if (extractInputValues()) {
-        console.log(inputValues);
         displayTripPreview();
       }
       break;
@@ -57,7 +58,10 @@ function displayChanges() {
     case 'cancelTrip':
       pageInfo.innerText = "Plan a Trip";
       displayTripPlanner();
-      break
+      break;
+    case 'finalizeTrip':
+      tripRequest = finalizeTripRequest();
+      break;
   }
 }
 
@@ -116,12 +120,8 @@ function extractInputValues() {
     activities: document.getElementById('planActivities')
   };
   const inputKeys = Object.keys(inputs);
-  if (!inputs.activities.value) {
-    inputs.activities.value = 'N/A';
-  }
   if (calculateDays(inputs.start.value, inputs.end.value) < 1) {
     alert('Please Enter a Valid Date Range 🤪')
-    inputs.activities.value = null;
     return false
   }
   if (inputKeys.every(key => inputs[key].value)) {
@@ -131,7 +131,6 @@ function extractInputValues() {
     return true;
   } else {
     alert('Please Make Sure to Include All Required Information 🤠')
-    inputs.activities.value = null;
     return false;
   }
 }
@@ -221,14 +220,23 @@ function renderTripPlanner() {
       <label for="planEndDate">End Date (required)</label>
       <input type="date" id="planEndDate" name="end-date" min="${tomorrow}">
       <input placeholder="Number of Travelers (required)" type="number" min="1" name="travelers" id="planTravelers" required>
-      <input placeholder="Activities (optional)" type="text" name="activities" id="planActivities">
+      <select name="activities" id="planActivities">
+        <option value="N/A">Select an Activity (optional)</option>
+        ${generateActivityOptions()}
+      <select>
       <button type="button" id="planTripButton">Plan Trip</button>
-    </form>`;
+      </form>`;
 }
 
 function generateNameOptions() {
   const names = destinationRepo.list.map(d => d.name);
   const options = names.map(name => `<option value="${name}">${name}</option>`);
+  return [...options]
+}
+
+function generateActivityOptions() {
+  const suggestions = ['Relax', 'Seek Thrills', 'Shop', 'Sight-Seeing', 'Museum Hopping', 'Dine Out'];
+  const options = suggestions.map(s => `<option value="${s}">${s}</option>`);
   return [...options]
 }
 
@@ -253,7 +261,7 @@ function renderTripPreview() {
             <h2 class="destination-name">${inputValues.name}</h2>
             <p class="trip-dates">${formatInputDate(inputValues.start)} - ${formatInputDate(inputValues.end)}</p>
           </div>
-          <p>Suggested Activities:</p>
+          <p>Suggested Activity:</p>
           <p class="card-cost">${inputValues.activities}</p>
           <div class="trip-status-wrapper">
             <h3 class="caps smaller-font">Status:</h3>
@@ -266,7 +274,7 @@ function renderTripPreview() {
         </div>
       </div>
       <article class="trip-cost">
-        After TravelTracker agent fees, the total cost of your trip will be $${previewCost(dest.estimatedFlightCostPerPerson, dest.estimatedLodgingCostPerDay, inputValues.travelerAmt, calculateDays(inputValues.start, inputValues.end))}.
+        After TravelTracker agent fees, the total cost of your trip will be $${calcPreviewCost(dest.estimatedFlightCostPerPerson, dest.estimatedLodgingCostPerDay, inputValues.travelerAmt, calculateDays(inputValues.start, inputValues.end))}.
       </article>
       <form class="plan-trip" id="planTripTwo">
         <button type="button" id="finalizeTrip">Submit Trip Request</button>
@@ -275,7 +283,7 @@ function renderTripPreview() {
     </section>`;
 }
 
-function previewCost(flightCost, lodgCost, people, days) {
+function calcPreviewCost(flightCost, lodgCost, people, days) {
   const expenses = (flightCost * people) + (lodgCost * days);
   const agentFee = expenses * .1;
   return (expenses + agentFee).toFixed(0)
@@ -308,4 +316,5 @@ export {
   displayUsername,
   displayTrips,
   inputValues,
+  tripRequest
 }

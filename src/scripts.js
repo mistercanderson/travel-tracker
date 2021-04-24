@@ -15,19 +15,17 @@ import Trip from './Trip';
 
 let user;
 const today = new Date().toISOString().slice(0, 10);
-const tomorrow = new Date(new Date(today).getTime() + 86400000).toISOString().slice(0, 10)
-console.log(tomorrow);
+const tomorrow = new Date(new Date(today).getTime() + 86400000).toISOString().slice(0, 10);
 
-window.addEventListener('load', loadFunctions)
-window.addEventListener('click', clickFunctions)
-// window.addEventListener('click', () => console.log(event.target.id))
+window.addEventListener('load', loadFunctions);
+window.addEventListener('click', clickFunctions);
 
 function loadFunctions() {
   instantiateClasses();
   pickRandomUser();
   displayUsername();
   displayTrips();
-  console.log(destinationRepo);
+  console.log(users);
 }
 
 function clickFunctions() {
@@ -58,7 +56,7 @@ function finalizeTripRequest() {
     id: 999999,
     userID: user.id,
     destinationID: destRequest.id,
-    travelers: inputValues.travelerAmt,
+    travelers: Number(inputValues.travelerAmt),
     date: finalizeInputDate(),
     duration: calculateDays(inputValues.start, inputValues.end),
     status: 'pending',
@@ -66,14 +64,15 @@ function finalizeTripRequest() {
   }
   // const newTrip = new Trip(tripRequest, destinationRepo.list);
   // return newTrip
-  return tripRequest.JSONStringify();
+  return tripRequest
+  // return tripRequest.JSONStringify();
 }
 
 function finalizeSuggestedActivities() {
-  if (inputValues.activities = 'N/A') {
+  if (inputValues.activities === 'N/A') {
     return [];
   }
-  return inputValues.activities.split(',')
+  return inputValues.activities.split()
 }
 
 function finalizeInputDate() {
@@ -81,11 +80,24 @@ function finalizeInputDate() {
   return date.join('/')
 }
 
+// function extractActivities() {
+//   const activities = users.map(u => u.travelerType);
+//   return Array.from(new Set(activities));
+// }
+
+// setTimeout(() => console.log(extractActivities()), 1000)
+// // ["relaxer", "thrill-seeker", "shopper", "photographer", "history buff", "foodie"]
+// function formatActivitySuggestions() {
+//   const activities = extractActivities();
+
+// }
+
 export {
   user,
   today,
   tomorrow,
   destinationRepo,
   formatInputDate,
-  calculateDays
+  calculateDays,
+  finalizeTripRequest,
 }
