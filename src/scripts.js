@@ -13,6 +13,8 @@ import {
 
 let user;
 const today = new Date().toISOString().slice(0, 10);
+const tomorrow = new Date(new Date(today).getTime() + 86400000).toISOString().slice(0, 10)
+console.log(tomorrow);
 
 window.addEventListener('load', loadFunctions)
 window.addEventListener('click', clickFunctions)
@@ -43,4 +45,10 @@ function formatInputDate(date) {
 
 console.log(formatInputDate('2021-04-24'));
 
-export {user, today, destinationRepo, formatInputDate}
+export {
+  user,
+  today,
+  tomorrow,
+  destinationRepo,
+  formatInputDate
+}

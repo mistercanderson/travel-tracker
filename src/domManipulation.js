@@ -1,6 +1,7 @@
 import {
   user,
   today,
+  tomorrow,
   destinationRepo,
   formatInputDate
 } from './scripts'
@@ -41,11 +42,10 @@ function displayChanges() {
       displayTrips();
       break;
     case 'planTripButton':
-      // if (!inputValues.activities) {
-      //   inputValues.activities = 'N/A'
-      // }
       if (extractInputValues()) {
         displayTripPreview();
+      } else {
+        alert('Please Make Sure to Include All Required Information 🤠')
       }
       break;
     case 'bookNow':
@@ -209,7 +209,7 @@ function renderTripPlanner() {
       <input type="date" id="planStartDate" name="start-date" value="${today}"
        min="${today}">
       <label for="planEndDate">End Date</label>
-      <input type="date" id="planEndDate" name="end-date">
+      <input type="date" id="planEndDate" name="end-date" min="${tomorrow}">
       <input placeholder="Number of Travelers" type="number" min="1" name="travelers" id="planTravelers" required>
       <input placeholder="Activities (optional)" type="text" name="activities" id="planActivities">
       <button type="button" id="planTripButton">Plan Trip</button>
