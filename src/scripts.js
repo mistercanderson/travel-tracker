@@ -11,7 +11,6 @@ import {
   displayTrips,
   inputValues
 } from './domManipulation'
-import Trip from './Trip';
 
 let user;
 const today = new Date().toISOString().slice(0, 10);
@@ -25,7 +24,6 @@ function loadFunctions() {
   pickRandomUser();
   displayUsername();
   displayTrips();
-  console.log(users);
 }
 
 function clickFunctions() {
@@ -62,10 +60,7 @@ function finalizeTripRequest() {
     status: 'pending',
     suggestedActivities: finalizeSuggestedActivities()
   }
-  // const newTrip = new Trip(tripRequest, destinationRepo.list);
-  // return newTrip
   return tripRequest
-  // return tripRequest.JSONStringify();
 }
 
 function finalizeSuggestedActivities() {
@@ -79,18 +74,6 @@ function finalizeInputDate() {
   const date = inputValues.start.split('-');
   return date.join('/')
 }
-
-// function extractActivities() {
-//   const activities = users.map(u => u.travelerType);
-//   return Array.from(new Set(activities));
-// }
-
-// setTimeout(() => console.log(extractActivities()), 1000)
-// // ["relaxer", "thrill-seeker", "shopper", "photographer", "history buff", "foodie"]
-// function formatActivitySuggestions() {
-//   const activities = extractActivities();
-
-// }
 
 export {
   user,

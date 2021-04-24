@@ -58,6 +58,7 @@ function displayChanges() {
     case 'cancelTrip':
       pageInfo.innerText = "Plan a Trip";
       displayTripPlanner();
+      autoFillDestinationName();
       break;
     case 'finalizeTrip':
       tripRequest = finalizeTripRequest();
@@ -106,8 +107,11 @@ function displayTripPlanner() {
 }
 
 function autoFillDestinationName() {
+  const destName = document.getElementById('planDestination')
   if (plannedDest) {
-    document.getElementById('planDestination').value = plannedDest;
+    destName.value = plannedDest;
+  } else if (inputValues.name) {
+    destName.value = inputValues.name;
   }
 }
 
