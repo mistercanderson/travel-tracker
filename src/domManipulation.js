@@ -201,10 +201,16 @@ function renderDestinations(name, image, alt, flightCost, lodgingCost) {
       `
 }
 
+{
+  /* <input placeholder="Destination" type="text" name="destination" id="planDestination" required> */ }
+
 function renderTripPlanner() {
   return `
     <form class="plan-trip" id="tripPlanner">
-      <input placeholder="Destination" type="text" name="destination" id="planDestination" required>
+      <select name="destination" id="planDestination" required>
+        <option value="">Select a Destination</option>
+        ${generateNameOptions()}
+       <select>
       <label for="planStartDate">Start Date</label>
       <input type="date" id="planStartDate" name="start-date" value="${today}"
        min="${today}">
@@ -215,6 +221,12 @@ function renderTripPlanner() {
       <button type="button" id="planTripButton">Plan Trip</button>
     </form>
   `
+}
+
+function generateNameOptions() {
+  const names = destinationRepo.list.map(d => d.name);
+  const options = names.map(name => `<option value="${name}">${name}</option>`);
+  return [...options]
 }
 
 function renderTripPreview() {
