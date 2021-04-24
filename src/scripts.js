@@ -34,4 +34,13 @@ function pickRandomUser() {
   user = users[Math.floor(Math.random() * users.length)]
 }
 
-export {user, today, destinationRepo}
+function formatInputDate(date) {
+  const dateSplit = date.split('-');
+  const year = dateSplit.shift();
+  dateSplit.push(year);
+  return dateSplit.join('/')
+}
+
+console.log(formatInputDate('2021-04-24'));
+
+export {user, today, destinationRepo, formatInputDate}

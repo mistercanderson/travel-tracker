@@ -1,7 +1,8 @@
 import {
   user,
   today,
-  destinationRepo
+  destinationRepo,
+  formatInputDate
 } from './scripts'
 
 
@@ -227,7 +228,7 @@ function renderTripPreview() {
         <div class="card-info-wrapper">
           <div>
             <h2 class="destination-name">${inputValues.name}</h2>
-            <p class="trip-dates">${inputValues.start} - ${inputValues.end}</p>
+            <p class="trip-dates">${formatInputDate(inputValues.start)} - ${formatInputDate(inputValues.end)}</p>
           </div>
           <p>Activities</p>
           <p class="card-cost">${inputValues.activities}</p>
