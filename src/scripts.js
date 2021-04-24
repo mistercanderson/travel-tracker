@@ -6,13 +6,13 @@ import {
 } from './classStructure';
 
 import {
+  displayChanges,
   displayUsername,
-  navClick,
   displayTrips,
-  dashboardClick,
 } from './domManipulation'
 
 let user;
+const today = new Date().toISOString().slice(0, 10);
 
 window.addEventListener('load', loadFunctions)
 window.addEventListener('click', clickFunctions)
@@ -23,27 +23,15 @@ function loadFunctions() {
   pickRandomUser();
   displayUsername();
   displayTrips();
-  // console.log(user);
-  // console.log(destinationRepo);
+  console.log(destinationRepo);
 }
 
 function clickFunctions() {
-  navClick()
-  dashboardClick()
+  displayChanges()
 }
 
 function pickRandomUser() {
   user = users[Math.floor(Math.random() * users.length)]
 }
 
-// function assignDestinationR
-
-
-// const buttons = {
-//   login: document.getElementById(),
-//   login: document.getElementById(),
-//   login: document.getElementById(),
-//   login: document.getElementById(),
-// }
-
-export {user, destinationRepo}
+export {user, today, destinationRepo}
