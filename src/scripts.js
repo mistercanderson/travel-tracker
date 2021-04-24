@@ -43,16 +43,12 @@ function formatInputDate(date) {
   return dateSplit.join('/')
 }
 
-// 2021-04-24
 function calculateDays(start, end) {
   const startTime = new Date(start).getTime();
   const endTime = new Date(end).getTime();
   const timeDifference = endTime - startTime;
   return (timeDifference / 86400000) + 1;
 }
-
-console.log(calculateDays("2021-04-24", "2021-04-22"))
-
 
 export {
   user,

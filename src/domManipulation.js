@@ -229,13 +229,14 @@ function generateNameOptions() {
 }
 
 function renderTripPreview() {
+  const dest = destinationRepo.list.find(d => d.name === inputValues.name);
   return `
     <section class="trip-preview">
       <div class="card-wrapper">
         <div class="card-image-wrapper">
           <img
-            src="${destinationRepo.list.find(dest => dest.name === inputValues.name).image}"
-            alt="Trip Picture">
+            src="${dest.image}"
+            alt="${dest.alt}">
           <div class="card-image-overlay caps">
             <div class="day-counter-wrapper">
               <p class="days">Days</p>
@@ -261,13 +262,19 @@ function renderTripPreview() {
         </div>
       </div>
       <article class="trip-cost">
-        After TravelTracker agent fees, the total cost of your trip will be $100.
+        After TravelTracker agent fees, the total cost of your trip will be $${previewCost(dest.estimatedFlightCostPerPerson, dest.estimatedLodgingCostPerDay, inputValues.travelerAmt, calculateDays(inputValues.start, inputValues.end))}.
       </article>
       <form class="plan-trip" id="planTripTwo">
         <button type="button" id="finalizeTrip">Plan Trip</button>
         <button type="button" class="bad-button" id="cancelTrip">Cancel</button>
       </form>
     </section>`;
+}
+
+function previewCost(flightCost, lodgCost, people, days) {
+  const expenses = (flightCost * people) + (lodgCost * days);
+  const agentFee = expenses * .1;
+  return expenses + agentFee;
 }
 
 function renderUserProfile() {
