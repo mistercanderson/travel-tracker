@@ -43,12 +43,20 @@ function formatInputDate(date) {
   return dateSplit.join('/')
 }
 
-console.log(formatInputDate('2021-04-24'));
+// 2021-04-24
+function calculateDays(start, end) {
+  const startTime = new Date(start).getTime();
+  const endTime = new Date(end).getTime();
+  const timeDifference = endTime - startTime;
+  return (timeDifference / 86400000) + 1;
+}
+
 
 export {
   user,
   today,
   tomorrow,
   destinationRepo,
-  formatInputDate
+  formatInputDate,
+  calculateDays
 }

@@ -3,7 +3,8 @@ import {
   today,
   tomorrow,
   destinationRepo,
-  formatInputDate
+  formatInputDate,
+  calculateDays
 } from './scripts'
 
 
@@ -202,7 +203,8 @@ function renderDestinations(name, image, alt, flightCost, lodgingCost) {
 }
 
 {
-  /* <input placeholder="Destination" type="text" name="destination" id="planDestination" required> */ }
+  /* <input placeholder="Destination" type="text" name="destination" id="planDestination" required> */
+}
 
 function renderTripPlanner() {
   return `
@@ -210,7 +212,7 @@ function renderTripPlanner() {
       <select name="destination" id="planDestination" required>
         <option value="">Select a Destination</option>
         ${generateNameOptions()}
-       <select>
+      <select>
       <label for="planStartDate">Start Date</label>
       <input type="date" id="planStartDate" name="start-date" value="${today}"
        min="${today}">
@@ -230,12 +232,19 @@ function generateNameOptions() {
 }
 
 function renderTripPreview() {
-  return `<section class="trip-preview">
+  return `
+    <section class="trip-preview">
       <div class="card-wrapper">
         <div class="card-image-wrapper">
           <img
             src="${destinationRepo.list.find(dest => dest.name === inputValues.name).image}"
             alt="Trip Picture">
+          <div class="card-image-overlay caps">
+            <div class="day-counter-wrapper">
+              <p class="days">Days</p>
+              <p class="day-count">${calculateDays(inputValues.start, inputValues.end)}</p>
+            </div>
+          </div>
         </div>
         <div class="card-info-wrapper">
           <div>
@@ -266,7 +275,8 @@ function renderTripPreview() {
 }
 
 function renderUserProfile() {
-  return `<div class="card-wrapper user-profile">
+  return `
+    <div class="card-wrapper user-profile">
       <h2>User Name</h2>
       <ul class="user-data">
         <li class="user-data">Age: 10</li>
@@ -279,7 +289,8 @@ function renderUserProfile() {
 }
 
 function renderLogin() {
-  return `<form class="login hidden">
+  return `
+    <form class="login hidden">
       <input placeholder="username" type="text" name="username" id="username" required>
       <input placeholder="password" type="password" name="password" id="password" required>
       <button class="login-button">Login</button>
