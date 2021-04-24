@@ -9,7 +9,9 @@ import {
   displayChanges,
   displayUsername,
   displayTrips,
+  inputValues
 } from './domManipulation'
+import Trip from './Trip';
 
 let user;
 const today = new Date().toISOString().slice(0, 10);
@@ -48,6 +50,35 @@ function calculateDays(start, end) {
   const endTime = new Date(end).getTime();
   const timeDifference = endTime - startTime;
   return (timeDifference / 86400000) + 1;
+}
+
+function finalizeTripRequest() {
+  const destRequest = destinationRepo.list.find(d => d.name === inputValues.name)
+  const tripRequest = {
+    id: 999999,
+    userID: user.id,
+    destinationID: destRequest.id,
+    travelers: inputValues.travelerAmt,
+    date: finalizeInputDate(),
+    duration: calculateDays(inputValues.start, inputValues.end),
+    status: 'pending',
+    suggestedActivities: finalizeSuggestedActivities()
+  }
+  // const newTrip = new Trip(tripRequest, destinationRepo.list);
+  // return newTrip
+  return tripRequest.JSONStringify();
+}
+
+function finalizeSuggestedActivities() {
+  if (inputValues.activities = 'N/A') {
+    return [];
+  }
+  return inputValues.activities.split(',')
+}
+
+function finalizeInputDate() {
+  const date = inputValues.start.split('-');
+  return date.join('/')
 }
 
 export {

@@ -44,6 +44,7 @@ function displayChanges() {
       break;
     case 'planTripButton':
       if (extractInputValues()) {
+        console.log(inputValues);
         displayTripPreview();
       }
       break;
@@ -306,4 +307,5 @@ export {
   displayChanges,
   displayUsername,
   displayTrips,
+  inputValues,
 }
