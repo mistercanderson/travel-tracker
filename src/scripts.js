@@ -51,6 +51,8 @@ function calculateDays(start, end) {
   return (timeDifference / 86400000) + 1;
 }
 
+console.log(calculateDays("2021-04-24", "2021-04-22"))
+
 
 export {
   user,

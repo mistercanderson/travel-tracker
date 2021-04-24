@@ -46,7 +46,7 @@ function displayChanges() {
       if (extractInputValues()) {
         displayTripPreview();
       } else {
-        alert('Please Make Sure to Include All Required Information 🤠')
+        // alert('Please Make Sure to Include All Required Information 🤠')
       }
       break;
     case 'bookNow':
@@ -119,12 +119,17 @@ function extractInputValues() {
   if (!inputs.activities.value) {
     inputs.activities.value = 'N/A';
   }
+  if (calculateDays(inputs.start.value, inputs.end.value) < 1) {
+    alert('Please Enter a Valid Date Range')
+    return false
+  }
   if (inputKeys.every(key => inputs[key].value)) {
     inputKeys.forEach(key => {
       inputValues[key] = inputs[key].value;
     })
     return true;
   } else {
+    alert('Please Make Sure to Include All Required Information 🤠')
     inputs.activities.value = null;
     return false;
   }
