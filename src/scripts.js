@@ -9,6 +9,10 @@ import {
   displayChanges,
   inputValues,
   displayLogin,
+  // enableNavigation,
+  displayUsername,
+  displayTripsInfo,
+  displayTrips,
 } from './domManipulation'
 
 import Trip from './Trip';
@@ -16,10 +20,11 @@ import Trip from './Trip';
 import {
   postTrip,
   postMessage,
-  displayGETError
+  requests,
 } from './apiCalls'
 
 let user;
+let travelers, trips, destinations;
 const today = new Date().toISOString().slice(0, 10);
 const tomorrow = new Date(new Date(today).getTime() + 86400000).toISOString().slice(0, 10);
 
@@ -28,25 +33,21 @@ window.addEventListener('click', clickFunctions);
 
 function loadFunctions() {
   disableNavigation();
-  instantiateClasses();
-  if (checkDataLoaded()) {
-    displayLogin();
-  } else {
-    displayGETError(); 
-  }
+  displayLogin();
 }
 
 function clickFunctions() {
+  if (userLogin()) {
+    setTimeout(() => {
+      instantiateClasses();
+      user = users;
+      displayUsername();
+      displayTripsInfo();
+      displayTrips();
+    }, 200);
+  };
   displayChanges();
   sendPostRequest();
-}
-
-function checkDataLoaded() {
-  if (destinationRepo.list && users && tripRepo.list) {
-    return true
-  } else {
-    return false
-  }
 }
 
 function sendPostRequest() {
@@ -59,7 +60,7 @@ function sendPostRequest() {
         tripRepo.list.push(trip);
         user.trips.push(trip);
       }
-    }, 300)
+    }, 200)
   }
 }
 
@@ -123,15 +124,40 @@ function calcluateTotalTripsCost() {
 function userValidate() {
   const nameInput = document.getElementById('username').value;
   const password = document.getElementById('password').value;
-  const idList = users.map(u => u.id);
-  const nameId = Number(nameInput.slice(-2));
-  if (idList.includes(nameId) && password === 'travel2020') {
-    user = users.find(u => u.id === nameId);
+  const expected = 'travel2020'
+  const nameId = nameInput.slice(-2);
+  if (nameInput === 'agency' && password === expected) {
+    user = '';
+    return true
+  } else if (Number(nameId) && password === expected) {
+    user = '/' + nameId;
     return true
   } else {
     alert('Please enter a valid username & password 😓')
     return false
   }
+}
+
+function userLogin() {
+  if (event.target.id === 'login' && userValidate()) {
+    const paths = [`travelers${user}`, 'trips', 'destinations'];
+    assignResults(requests(paths));
+    return true
+  } else {
+    return false
+  }
+}
+
+function assignResults(results) {
+  results[0].then(data => {
+    if (user) {
+      travelers = data;
+    } else {
+      travelers = data.travelers;
+    }
+  });
+  results[1].then(data => trips = data.trips);
+  results[2].then(data => destinations = data.destinations);
 }
 
 function disableNavigation() {
@@ -164,5 +190,9 @@ export {
   convertTripRequest,
   userValidate,
   sendPostRequest,
-  enableNavigation
+  enableNavigation,
+  travelers,
+  trips,
+  destinations,
+  userLogin,
 }

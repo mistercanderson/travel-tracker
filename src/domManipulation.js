@@ -6,8 +6,9 @@ import {
   formatInputDate,
   calculateDays,
   calcluateTotalTripsCost,
-  userValidate,
-  enableNavigation
+  // userValidate,
+  // // enableNavigation,
+  // userLogin
 } from './scripts'
 
 let plannedDest;
@@ -24,14 +25,14 @@ const inputValues = {
 function displayChanges() {
   plannedDest = '';
   switch (event.target.id) {
-    case 'login':
-      if (userValidate()) {
-        enableNavigation();
-        displayUsername();
-        displayTripsInfo();
-        displayTrips();
-      }
-      break;
+    // case 'login':
+    //   // if (userLogin()) {
+    //   // enableNavigation();
+    //   // displayUsername();
+    //   // displayTripsInfo();
+    //   // displayTrips();
+    //   // }
+    //   break;
     case 'myTrips':
       displayTripsInfo();
       displayTrips();
@@ -86,6 +87,7 @@ function displayUsername() {
   const name = document.getElementById('user');
   const nameButton = document.getElementById('admin');
   name.innerText = user.name
+  // nameButton.innerText = user.name;
   nameButton.innerText = user.name[0];
   name.classList.remove('hidden');
   nameButton.classList.remove('hidden');
@@ -378,5 +380,9 @@ export {
   renderGETError,
   renderPOSTError,
   dashboard,
-  pageInfo
+  pageInfo,
+  // enableNavigation,
+  // displayUsername,
+  // displayTripsInfo,
+  // displayTrips,
 }
