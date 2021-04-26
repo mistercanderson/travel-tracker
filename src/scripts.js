@@ -15,7 +15,8 @@ import Trip from './Trip';
 
 import {
   postTrip,
-  postMessage
+  postMessage,
+  displayGETError
 } from './apiCalls'
 
 let user;
@@ -29,6 +30,8 @@ function loadFunctions() {
   instantiateClasses();
   if (checkDataLoaded()) {
     displayLogin();
+  } else {
+    displayGETError();
   }
 }
 
