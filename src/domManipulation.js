@@ -6,9 +6,6 @@ import {
   formatInputDate,
   calculateDays,
   calcluateTotalTripsCost,
-  // userValidate,
-  // // enableNavigation,
-  // userLogin
 } from './scripts'
 
 let plannedDest;
@@ -25,14 +22,6 @@ const inputValues = {
 function displayChanges() {
   plannedDest = '';
   switch (event.target.id) {
-    // case 'login':
-    //   // if (userLogin()) {
-    //   // enableNavigation();
-    //   // displayUsername();
-    //   // displayTripsInfo();
-    //   // displayTrips();
-    //   // }
-    //   break;
     case 'myTrips':
       displayTripsInfo();
       displayTrips();
@@ -87,7 +76,6 @@ function displayUsername() {
   const name = document.getElementById('user');
   const nameButton = document.getElementById('admin');
   name.innerText = user.name
-  // nameButton.innerText = user.name;
   nameButton.innerText = user.name[0];
   name.classList.remove('hidden');
   nameButton.classList.remove('hidden');
@@ -98,13 +86,13 @@ function displayTrips() {
   user.trips.forEach(trip => {
     let name = trip.destination.name;
     let dates = trip.returnTripDates().join(' - ');
-    // let activities = trip.suggestedActivities.join(', ');
     let status = trip.status;
     let travelerCount = trip.travelers;
     let image = trip.destination.image;
     let alt = trip.destination.alt;
     let duration = trip.duration;
     let cost = trip.calculateTripCost();
+    // let activities = trip.suggestedActivities.join(', ');
     dashboard.innerHTML += renderTrips(name, dates, status, travelerCount, image, alt, duration, cost)
   })
 }
@@ -381,8 +369,4 @@ export {
   renderPOSTError,
   dashboard,
   pageInfo,
-  // enableNavigation,
-  // displayUsername,
-  // displayTripsInfo,
-  // displayTrips,
 }

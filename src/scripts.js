@@ -9,7 +9,6 @@ import {
   displayChanges,
   inputValues,
   displayLogin,
-  // enableNavigation,
   displayUsername,
   displayTripsInfo,
   displayTrips,
@@ -129,7 +128,7 @@ function userValidate() {
   if (nameInput === 'agency' && password === expected) {
     user = '';
     return true
-  } else if (Number(nameId) && password === expected) {
+  } else if (Number(nameId) && nameInput.includes('traveler') && password === expected) {
     user = '/' + nameId;
     return true
   } else {
