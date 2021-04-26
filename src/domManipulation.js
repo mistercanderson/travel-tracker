@@ -5,15 +5,11 @@ import {
   destinationRepo,
   formatInputDate,
   calculateDays,
-  formatTripRequest,
   calcluateTotalTripsCost,
-  convertTripRequest,
-  userValidate
+  userValidate,
 } from './scripts'
 
-
 let plannedDest;
-let tripRequest;
 const dashboard = document.querySelector('.dashboard');
 const pageInfo = document.getElementById('pageInfo');
 const inputValues = {
@@ -28,11 +24,11 @@ function displayChanges() {
   plannedDest = '';
   switch (event.target.id) {
     case 'login':
-    if (userValidate()) {
-      displayUsername();
-      displayTripsInfo();
-      displayTrips();
-    }
+      if (userValidate()) {
+        displayUsername();
+        displayTripsInfo();
+        displayTrips();
+      }
       break;
     case 'myTrips':
       displayTripsInfo();
@@ -71,9 +67,6 @@ function displayChanges() {
       autoFillDestinationName();
       break;
     case 'finalizeTrip':
-      tripRequest = formatTripRequest();
-      // ✨ Eventually Change This to include a POST request
-      user.trips.push(convertTripRequest(tripRequest))
       displayTripSuccess();
       break;
     case 'successHome':
@@ -358,12 +351,30 @@ function renderTripSuccess() {
   `
 }
 
+function renderGETError() {
+  return `
+  <p class="error-message">Sorry, it looks like the TravelTracker servers are down right now. Please try again later.</p>
+  `
+}
+
+function renderPOSTError() {
+  return `
+  <div class="plan-trip">
+    <p class="error-message">Something went wrong with your trip request. Please try again later.</p>
+    <button type="button" class="bad-button" id="cancelTrip">Back</button>
+  </div>
+  `
+}
+
 export {
   displayChanges,
   displayUsername,
   displayTrips,
   inputValues,
-  tripRequest,
   displayTripsInfo,
-  displayLogin
+  displayLogin,
+  renderGETError,
+  renderPOSTError,
+  dashboard,
+  pageInfo
 }

@@ -8,9 +8,15 @@ import {
 import {
   displayChanges,
   inputValues,
-  displayLogin
+  displayLogin,
 } from './domManipulation'
+
 import Trip from './Trip';
+
+import {
+  postTrip,
+  postMessage
+} from './apiCalls'
 
 let user;
 const today = new Date().toISOString().slice(0, 10);
@@ -21,16 +27,37 @@ window.addEventListener('click', clickFunctions);
 
 function loadFunctions() {
   instantiateClasses();
-  displayLogin();
+  if (checkDataLoaded()) {
+    displayLogin();
+  }
 }
 
 function clickFunctions() {
   displayChanges();
+  sendPostRequest();
 }
 
-// function pickRandomUser() {
-//   user = users[Math.floor(Math.random() * users.length)]
-// }
+function checkDataLoaded() {
+  if (destinationRepo.list && users && tripRepo.list) {
+    return true
+  } else {
+    return false
+  }
+}
+
+function sendPostRequest() {
+  if (event.target.id === 'finalizeTrip') {
+    const tripRequest = formatTripRequest();
+    postTrip(tripRequest);
+    setTimeout(() => {
+      if (postMessage) {
+        const trip = convertTripRequest(tripRequest)
+        tripRepo.list.push(trip);
+        user.trips.push(trip);
+      }
+    }, 300)
+  }
+}
 
 function formatInputDate(date) {
   const dateSplit = date.split('-');
@@ -85,8 +112,8 @@ function convertTripRequest(tripReq) {
 }
 
 function calcluateTotalTripsCost() {
- const costs = user.trips.map(t => t.calculateTripCost());
- return costs.reduce((a, cost) => a + cost);
+  const costs = user.trips.map(t => t.calculateTripCost());
+  return costs.reduce((a, cost) => a + cost);
 }
 
 function userValidate() {
@@ -113,5 +140,6 @@ export {
   formatTripRequest,
   calcluateTotalTripsCost,
   convertTripRequest,
-  userValidate
+  userValidate,
+  sendPostRequest
 }

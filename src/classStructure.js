@@ -25,8 +25,6 @@ function instantiateClasses() {
 function generateDestinations() {
   if (destinations) {
     return destinations.map(dest => dest = new Destination(dest))
-  } else {
-    console.log('oh crap destinations is shitty');
   }
 }
 
@@ -37,8 +35,6 @@ function generateDestinationRepo() {
 function generateTrips() {
   if (trips) {
     return trips.map(trip => trip = new Trip(trip, destinationRepo.list))
-  } else {
-    console.log('trips is bad');
   }
 }
 
@@ -49,8 +45,6 @@ function generateTripRepo() {
 function generateTravelers() {
   if (travelers) {
     users = travelers.map(traveler => traveler = new Traveler(traveler, tripRepo.list))
-  } else {
-    console.log('travelers is bad');
   }
 }
 
