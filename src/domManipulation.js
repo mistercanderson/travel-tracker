@@ -238,16 +238,16 @@ function renderDestinations(name, image, alt, flightCost, lodgingCost) {
 function renderTripPlanner() {
   return `
     <form class="plan-trip" id="tripPlanner">
-      <select name="destination" id="planDestination" required>
+      <select name="destination" id="planDestination" required aria-required="true">
         <option value="">Select a Destination (required)</option>
         ${generateNameOptions()}
       <select>
       <label for="planStartDate">Start Date (required)</label>
       <input type="date" id="planStartDate" name="start-date" value="${today}"
-       min="${today}">
+       min="${today}" required aria-required="true">
       <label for="planEndDate">End Date (required)</label>
-      <input type="date" id="planEndDate" name="end-date" min="${tomorrow}">
-      <input placeholder="Number of Travelers (required)" type="number" min="1" name="travelers" id="planTravelers" required>
+      <input type="date" id="planEndDate" name="end-date" min="${tomorrow}" required aria-required="true">
+      <input placeholder="Number of Travelers (required)" type="number" min="1" name="travelers" id="planTravelers" required aria-required="true">
       <select name="activities" id="planActivities">
         <option value="N/A">Select an Activity (optional)</option>
         ${generateActivityOptions()}
