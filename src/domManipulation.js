@@ -5,7 +5,7 @@ import {
   destinationRepo,
   formatInputDate,
   calculateDays,
-  finalizeTripRequest,
+  formatTripRequest,
   calcluateTotalTripsCost,
   convertTripRequest,
   userValidate
@@ -71,7 +71,8 @@ function displayChanges() {
       autoFillDestinationName();
       break;
     case 'finalizeTrip':
-      tripRequest = finalizeTripRequest();
+      tripRequest = formatTripRequest();
+      // ✨ Eventually Change This to include a POST request
       user.trips.push(convertTripRequest(tripRequest))
       displayTripSuccess();
       break;
@@ -100,14 +101,14 @@ function displayTrips() {
   user.trips.forEach(trip => {
     let name = trip.destination.name;
     let dates = trip.returnTripDates().join(' - ');
-    let activities = trip.suggestedActivities.join(', ');
+    // let activities = trip.suggestedActivities.join(', ');
     let status = trip.status;
     let travelerCount = trip.travelers;
     let image = trip.destination.image;
     let alt = trip.destination.alt;
     let duration = trip.duration;
     let cost = trip.calculateTripCost();
-    dashboard.innerHTML += renderTrips(name, dates, activities, status, travelerCount, image, alt, duration, cost)
+    dashboard.innerHTML += renderTrips(name, dates, status, travelerCount, image, alt, duration, cost)
   })
 }
 
@@ -183,7 +184,7 @@ function displayLogin() {
   dashboard.innerHTML = renderLogin()
 }
 
-function renderTrips(name, dates, activities, status, travelerCount, image, alt, duration, cost) {
+function renderTrips(name, dates, status, travelerCount, image, alt, duration, cost) {
   return `
      <div class="card-wrapper">
         <div class="card-image-wrapper">
@@ -322,14 +323,19 @@ function calcPreviewCost(flightCost, lodgCost, people, days) {
 }
 
 function renderUserProfile() {
+  const highestCost = Math.max(...user.trips.map(t => t.calculateTripCost()));
+  const expensiveTrip = user.trips.find(t => t.calculateTripCost() === highestCost);
+  const pending = user.trips.filter(t => t.status === 'pending')
   return `
     <div class="card-wrapper user-profile">
-      <h2>User Name</h2>
+      <h2>${user.name}</h2>
       <ul class="user-data">
-        <li class="user-data">Age: 10</li>
-        <li class="user-data">Height: 6' 10</li>
-        <li class="user-data">Weight: 210</li>
-        <li class="user-data">Blah blah</li>
+        <li class="user-data">Total Trips: ${user.trips.length}</li>
+        <li class="user-data">Most Expensive Trip:</li>
+        <li class="user-data">${expensiveTrip.destination.name} ($${expensiveTrip.calculateTripCost()})</li>
+        <li class="user-data">Pending Trips: ${pending.length}</li>
+        <li class="user-data">Traveler Type:</li>
+        <li class="user-data">${user.travelerType}</li>
       </ul>
     </div`;
 }

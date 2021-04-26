@@ -7,10 +7,7 @@ import {
 
 import {
   displayChanges,
-  displayUsername,
-  displayTrips,
   inputValues,
-  displayTripsInfo,
   displayLogin
 } from './domManipulation'
 import Trip from './Trip';
@@ -18,10 +15,6 @@ import Trip from './Trip';
 let user;
 const today = new Date().toISOString().slice(0, 10);
 const tomorrow = new Date(new Date(today).getTime() + 86400000).toISOString().slice(0, 10);
-const loginValues = {
-  username: null,
-  password: null,
-}
 
 window.addEventListener('load', loadFunctions);
 window.addEventListener('click', clickFunctions);
@@ -29,19 +22,15 @@ window.addEventListener('click', clickFunctions);
 function loadFunctions() {
   instantiateClasses();
   displayLogin();
-  // pickRandomUser();
-  // displayUsername();
-  // displayTripsInfo();
-  // displayTrips();
 }
 
 function clickFunctions() {
   displayChanges();
 }
 
-function pickRandomUser() {
-  user = users[Math.floor(Math.random() * users.length)]
-}
+// function pickRandomUser() {
+//   user = users[Math.floor(Math.random() * users.length)]
+// }
 
 function formatInputDate(date) {
   const dateSplit = date.split('-');
@@ -57,7 +46,7 @@ function calculateDays(start, end) {
   return (timeDifference / 86400000) + 1;
 }
 
-function finalizeTripRequest() {
+function formatTripRequest() {
   const destRequest = destinationRepo.list.find(d => d.name === inputValues.name)
   const tripRequest = {
     id: generateTripRequestId(),
@@ -102,7 +91,6 @@ function calcluateTotalTripsCost() {
 
 function userValidate() {
   const nameInput = document.getElementById('username').value;
-  console.log(nameInput);
   const password = document.getElementById('password').value;
   const idList = users.map(u => u.id);
   const nameId = Number(nameInput.slice(-2));
@@ -110,6 +98,7 @@ function userValidate() {
     user = users.find(u => u.id === nameId);
     return true
   } else {
+    alert('Please enter a valid username & password 😓')
     return false
   }
 }
@@ -121,9 +110,8 @@ export {
   destinationRepo,
   formatInputDate,
   calculateDays,
-  finalizeTripRequest,
+  formatTripRequest,
   calcluateTotalTripsCost,
   convertTripRequest,
-  loginValues,
   userValidate
 }
