@@ -18,6 +18,10 @@ const inputValues = {
   travelerAmt: null,
   activities: null,
 }
+const agentInputValues = {
+  tripId: null,
+  activities: null
+}
 
 function displayChanges() {
   plannedDest = '';
@@ -27,15 +31,12 @@ function displayChanges() {
       displayTrips();
       break;
     case 'planTrip':
-      pageInfo.innerText = 'Plan a Trip';
       displayTripPlanner();
       break;
     case 'destinations':
-      pageInfo.innerText = 'Destinations';
       displayDestinations();
       break;
     case 'admin':
-      pageInfo.innerText = 'My Profile';
       displayUserProfile();
       break;
     case 'logo':
@@ -48,13 +49,11 @@ function displayChanges() {
       }
       break;
     case 'bookNow':
-      pageInfo.innerText = "Plan a Trip";
       plannedDest = (event.target.previousElementSibling.previousElementSibling.innerText);
       displayTripPlanner();
       autoFillDestinationName();
       break;
     case 'cancelTrip':
-      pageInfo.innerText = "Plan a Trip";
       displayTripPlanner();
       autoFillDestinationName();
       break;
@@ -64,6 +63,16 @@ function displayChanges() {
     case 'successHome':
       displayTripsInfo();
       displayTrips();
+      break;
+    case 'approveTrip':
+      if (extractAgentInputValues()) {
+        displayTripUpdate();
+      }
+      break;
+    case 'denyTrip':
+      if (extractAgentInputValues()) {
+        displayTripDelete();
+      }
       break;
   }
 }
@@ -118,6 +127,7 @@ function displayDestinations() {
 }
 
 function displayTripPlanner() {
+
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderTripPlanner();
 }
@@ -216,6 +226,7 @@ function renderTrips(name, dates, status, travelerCount, image, alt, duration, c
 }
 
 function renderDestinations(name, image, alt, flightCost, lodgingCost) {
+  pageInfo.innerText = 'Destinations';
   return `
       <div class="card-wrapper">
         <div class="card-image-wrapper">
@@ -237,6 +248,10 @@ function renderDestinations(name, image, alt, flightCost, lodgingCost) {
 }
 
 function renderTripPlanner() {
+  if (user.name === 'Agency') {
+    return renderAgentApproval();
+  }
+  pageInfo.innerText = 'Plan a Trip';
   return `
     <form class="plan-trip" id="tripPlanner">
       <select name="destination" id="planDestination" required>
@@ -321,7 +336,8 @@ function calcPreviewCost(flightCost, lodgCost, people, days) {
 function renderUserProfile() {
   const highestCost = Math.max(...user.trips.map(t => t.calculateTripCost()));
   const expensiveTrip = user.trips.find(t => t.calculateTripCost() === highestCost);
-  const pending = user.trips.filter(t => t.status === 'pending')
+  const pending = user.trips.filter(t => t.status === 'pending');
+  pageInfo.innerText = 'My Profile';
   return `
     <div class="card-wrapper user-profile">
       <h2>${user.name}</h2>
@@ -422,6 +438,55 @@ function renderAgentTrips(name, dates, status, travelerCount, image, alt, durati
       </div>`;
 }
 
+function renderAgentApproval() {
+  pageInfo.innerText = 'Approve/Deny Trips';
+  return `
+   <form class="plan-trip" id="tripApproval">
+      <select name="trips" id="pendingTrips" required>
+        <option value="">Select a Pending Trip (required)</option>
+        ${generatePendingTripOptions()}
+      <select>
+      <select name="activities" id="suggestActivities">
+        <option value="N/A">Suggest an Activity (optional)</option>
+        ${generateActivityOptions()}
+      <select>
+      <button type="button" id="approveTrip">Approve Trip</button>
+      <button type="button" id="denyTrip" class="bad-button">Deny Trip</button>
+    </form> 
+  `
+}
+
+function generatePendingTripOptions() {
+  const pendingTrips = user.trips.filter(t => t.status === 'pending');
+  const options = pendingTrips.map(t => `<option value="${t.id}">${t.destination.name}: User #${t.userID}</option>`);
+  return [...options]
+}
+
+function extractAgentInputValues() {
+  const inputs = {
+    tripId: document.getElementById('pendingTrips'),
+    activities: document.getElementById('suggestActivities')
+  };
+  const inputKeys = Object.keys(inputs);
+  if (inputKeys.every(key => inputs[key].value)) {
+    inputKeys.forEach(key => {
+      agentInputValues[key] = inputs[key].value;
+    })
+    return true;
+  } else {
+    alert('Please Make Sure to Include All Required Information 🤠')
+    return false;
+  }
+}
+
+function displayTripUpdate() {
+  console.log('trip has been updated');
+}
+
+function displayTripDelete() {
+  console.log('trip has been deleted');
+}
+
 
 export {
   displayChanges,
@@ -434,4 +499,5 @@ export {
   renderPOSTError,
   dashboard,
   pageInfo,
+  agentInputValues,
 }

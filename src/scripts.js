@@ -12,6 +12,7 @@ import {
   displayUsername,
   displayTripsInfo,
   displayTrips,
+  agentInputValues
 } from './domManipulation'
 
 import Trip from './Trip';
@@ -20,6 +21,7 @@ import {
   postTrip,
   postMessage,
   requests,
+  updateTrip
 } from './apiCalls'
 
 let user;
@@ -48,6 +50,7 @@ function clickFunctions() {
   };
   displayChanges();
   sendPostRequest();
+  sendUpdateRequest();
 }
 
 function sendPostRequest() {
@@ -59,6 +62,19 @@ function sendPostRequest() {
         const trip = convertTripRequest(tripRequest)
         tripRepo.list.push(trip);
         user.trips.push(trip);
+      }
+    }, 200)
+  }
+}
+
+function sendUpdateRequest() {
+  if (event.target.id === 'approveTrip') {
+    const updateRequest = formatTripUpdate();
+    updateTrip(updateRequest);
+    setTimeout(() => {
+      if (postMessage) {
+        const trip = user.trips.find(t => t.id === Number(agentInputValues.tripId));
+        trip.approveTrip();
       }
     }, 200)
   }
@@ -93,6 +109,15 @@ function formatTripRequest() {
   return tripRequest
 }
 
+function formatTripUpdate() {
+  const updateRequest = {
+    id: Number(agentInputValues.tripId),
+    status: 'approved',
+    suggestedActivities: finalizeUpdateActivities()
+  }
+  return updateRequest
+}
+
 function generateTripRequestId() {
   const tripIds = tripRepo.list.map(t => t.id);
   const highestId = Math.max(...tripIds);
@@ -104,6 +129,13 @@ function finalizeSuggestedActivities() {
     return [];
   }
   return inputValues.activities.split()
+}
+
+function finalizeUpdateActivities() {
+  if (agentInputValues.activities === 'N/A') {
+    return [];
+  }
+  return agentInputValues.activities.split()
 }
 
 function finalizeInputDate() {
