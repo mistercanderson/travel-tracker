@@ -7,6 +7,7 @@ import {
   calculateDays,
   calcluateTotalTripsCost,
   userValidate,
+  enableNavigation
 } from './scripts'
 
 let plannedDest;
@@ -25,6 +26,7 @@ function displayChanges() {
   switch (event.target.id) {
     case 'login':
       if (userValidate()) {
+        enableNavigation();
         displayUsername();
         displayTripsInfo();
         displayTrips();
@@ -179,7 +181,7 @@ function displayLogin() {
 
 function renderTrips(name, dates, status, travelerCount, image, alt, duration, cost) {
   return `
-     <div class="card-wrapper">
+     <div class="card-wrapper" tabindex="0">
         <div class="card-image-wrapper">
           <img
             src="${image}"

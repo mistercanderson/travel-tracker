@@ -93,4 +93,9 @@ main {
   color: $dark-font
 }
 
+.disable {
+  pointer-events: none;
+  user-select: none;
+}
+
 @import 'media-query';

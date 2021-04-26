@@ -27,11 +27,12 @@ window.addEventListener('load', loadFunctions);
 window.addEventListener('click', clickFunctions);
 
 function loadFunctions() {
+  disableNavigation();
   instantiateClasses();
   if (checkDataLoaded()) {
     displayLogin();
   } else {
-    displayGETError();
+    displayGETError(); 
   }
 }
 
@@ -133,6 +134,16 @@ function userValidate() {
   }
 }
 
+function disableNavigation() {
+  const navBar = document.querySelector('nav');
+  Array.from(navBar.children).forEach(child => child.classList.add('disable'))
+}
+
+function enableNavigation() {
+  const navBar = document.querySelector('nav');
+  Array.from(navBar.children).forEach(child => child.classList.remove('disable'))
+}
+
 export {
   user,
   today,
@@ -144,5 +155,6 @@ export {
   calcluateTotalTripsCost,
   convertTripRequest,
   userValidate,
-  sendPostRequest
+  sendPostRequest,
+  enableNavigation
 }
