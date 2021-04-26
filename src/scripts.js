@@ -14,7 +14,8 @@ import {
 import Trip from './Trip';
 
 import {
-  postTrip
+  postTrip,
+  postMessage
 } from './apiCalls'
 
 let user;
@@ -47,9 +48,14 @@ function checkApi() {
 function sendPostRequest() {
   if (event.target.id === 'finalizeTrip') {
     const tripRequest = formatTripRequest();
-    tripRepo.list.push(convertTripRequest(tripRequest));
-    user.trips.push(convertTripRequest(tripRequest))
     postTrip(tripRequest);
+    setTimeout(() => {
+      if (postMessage) {
+        const trip = convertTripRequest(tripRequest)
+        tripRepo.list.push(trip);
+        user.trips.push(trip);
+      }
+    }, 300)
   }
 }
 

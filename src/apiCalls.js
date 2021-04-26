@@ -7,6 +7,8 @@ import {
 
 let travelers, trips, destinations;
 
+let postMessage;
+
 const names = ['travelers', 'trips', 'destinations'];
 
 const requests = () => {
@@ -48,7 +50,9 @@ const postTrip = trip => {
       }
       throw new Error(response)
     })
-    .then(data => trips = data.trips)
+    .then(data => {
+      postMessage = data.message
+    })
     .catch(err => {
       displayPOSTError();
       console.log(err)
@@ -63,7 +67,7 @@ const displayGETError = () => {
 const displayPOSTError = () => {
   pageInfo.innerText = 'Sorry'
   dashboard.innerHTML = '';
-  dashboard.innerHTML = renderPOSTError()
+  dashboard.innerHTML = renderPOSTError();
 }
 
 assignResults(requests());
@@ -72,5 +76,6 @@ export {
   travelers,
   trips,
   destinations,
-  postTrip
+  postTrip,
+  postMessage
 }
