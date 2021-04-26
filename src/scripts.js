@@ -9,7 +9,9 @@ import {
   displayChanges,
   displayUsername,
   displayTrips,
-  inputValues
+  inputValues,
+  pageInfo,
+  displayTripsInfo
 } from './domManipulation'
 
 let user;
@@ -23,7 +25,9 @@ function loadFunctions() {
   instantiateClasses();
   pickRandomUser();
   displayUsername();
+  displayTripsInfo();
   displayTrips();
+  console.log(user.trips.map(t => t.calculateTripCost()));
 }
 
 function clickFunctions() {
@@ -51,7 +55,7 @@ function calculateDays(start, end) {
 function finalizeTripRequest() {
   const destRequest = destinationRepo.list.find(d => d.name === inputValues.name)
   const tripRequest = {
-    id: 999999,
+    id: generateTripRequestId(),
     userID: user.id,
     destinationID: destRequest.id,
     travelers: Number(inputValues.travelerAmt),
@@ -61,6 +65,12 @@ function finalizeTripRequest() {
     suggestedActivities: finalizeSuggestedActivities()
   }
   return tripRequest
+}
+
+function generateTripRequestId() {
+  const tripIds = tripRepo.list.map(t => t.id);
+  const highestId = Math.max(...tripIds);
+  return highestId + 1
 }
 
 function finalizeSuggestedActivities() {
@@ -75,6 +85,11 @@ function finalizeInputDate() {
   return date.join('/')
 }
 
+function calcluateTotalTripsCost() {
+ const costs = user.trips.map(t => t.calculateTripCost());
+ return costs.reduce((a, cost) => a + cost);
+}
+
 export {
   user,
   today,
@@ -83,4 +98,5 @@ export {
   formatInputDate,
   calculateDays,
   finalizeTripRequest,
+  calcluateTotalTripsCost,
 }

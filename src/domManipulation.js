@@ -5,7 +5,8 @@ import {
   destinationRepo,
   formatInputDate,
   calculateDays,
-  finalizeTripRequest
+  finalizeTripRequest,
+  calcluateTotalTripsCost,
 } from './scripts'
 
 
@@ -25,7 +26,7 @@ function displayChanges() {
   plannedDest = '';
   switch (event.target.id) {
     case 'myTrips':
-      pageInfo.innerText = 'My Trips';
+      displayTripsInfo();
       displayTrips();
       break;
     case 'planTrip':
@@ -41,7 +42,7 @@ function displayChanges() {
       displayUserProfile();
       break;
     case 'logo':
-      pageInfo.innerText = 'My Trips';
+      displayTripsInfo();
       displayTrips();
       break;
     case 'planTripButton':
@@ -65,9 +66,14 @@ function displayChanges() {
       displayTripSuccess();
       break;
     case 'successHome':
+      displayTripsInfo();
       displayTrips();
       break;
   }
+}
+
+function displayTripsInfo() {
+  pageInfo.innerText = `My Trips ($${calcluateTotalTripsCost()})`;
 }
 
 function displayUsername() {
@@ -279,7 +285,7 @@ function renderTripPreview() {
           <p class="card-cost">${inputValues.activities}</p>
           <div class="trip-status-wrapper">
             <h3 class="caps smaller-font">Status:</h3>
-            <p class="lighter">Pending</p>
+            <p class="lighter">pending</p>
           </div>
           <div class="traveler-wrapper">
             <h4 class="caps smaller-font">Travelers:</h4>
@@ -339,5 +345,7 @@ export {
   displayUsername,
   displayTrips,
   inputValues,
-  tripRequest
+  tripRequest,
+  pageInfo,
+  displayTripsInfo,
 }

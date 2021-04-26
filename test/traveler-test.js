@@ -2,14 +2,14 @@ import chai from 'chai';
 const expect = chai.expect;
 import Traveler from '../src/Traveler';
 import travelers from './test-data/sample-traveler-data';
-import trips from './test-data/sample-trip-data'
+import trips from './test-data/sample-trip-data';
 
 describe('Traveler', () => {
 
   let traveler;
 
   beforeEach(() => {
-    traveler = new Traveler(travelers[0], trips)
+    traveler = new Traveler(travelers[0], trips);
   });
 
   it('should be an instance of Traveler', () => {
