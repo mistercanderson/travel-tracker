@@ -27,12 +27,22 @@ window.addEventListener('click', clickFunctions);
 
 function loadFunctions() {
   instantiateClasses();
-  // displayLogin();
+  if (checkApi()) {
+    displayLogin();
+  }
 }
 
 function clickFunctions() {
   displayChanges();
   sendPostRequest();
+}
+
+function checkApi() {
+  if (destinationRepo.list && users && tripRepo.list) {
+    return true
+  } else {
+    return false
+  }
 }
 
 function sendPostRequest() {

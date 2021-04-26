@@ -360,13 +360,13 @@ function renderTripSuccess() {
 
 function renderGETError() {
   return `
-  <p class="error-message">Sorry, something went wrong with the TravelTracker Servers. Please try again later.</p>
+  <p class="error-message">Sorry, it looks like the TravelTracker Servers are down right now. Please try again later.</p>
   `
 }
 
 function renderPOSTError() {
   return `
-  <p class="error-message">Sorry, something went wrong with your trip request. Please try again later.</p>
+  <p class="error-message">Something went wrong with your trip request. Please try again later.</p>
   `
 }
 
@@ -380,5 +380,6 @@ export {
   displayLogin,
   renderGETError,
   renderPOSTError,
-  dashboard
+  dashboard,
+  pageInfo
 }

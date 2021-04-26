@@ -1,7 +1,8 @@
 import {
   renderGETError,
   renderPOSTError,
-  dashboard
+  dashboard,
+  pageInfo
 } from './domManipulation'
 
 let travelers, trips, destinations;
@@ -58,6 +59,7 @@ const displayGETError = () => {
 }
 
 const displayPOSTError = () => {
+  pageInfo.innerText = 'Sorry'
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderPOSTError()
 }
