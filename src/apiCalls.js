@@ -70,6 +70,7 @@ const updateTrip = trip => {
       postMessage = data.message
     })
     .catch(err => {
+      postMessage = '';
       displayPOSTError();
       console.log(err)
     })

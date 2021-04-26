@@ -76,7 +76,7 @@ function sendUpdateRequest() {
         const trip = user.trips.find(t => t.id === Number(agentInputValues.tripId));
         trip.approveTrip();
       }
-    }, 200)
+    }, 500)
   }
 }
 
