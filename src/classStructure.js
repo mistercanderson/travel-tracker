@@ -10,6 +10,7 @@ import Destination from './Destination';
 import TripRepo from './TripRepo';
 import DestinationRepo from './DestinationRepo';
 import Trip from './Trip';
+import Agency from './Agency';
 
 let destinationRepo;
 let tripRepo;
@@ -23,7 +24,7 @@ function instantiateClasses() {
   if (user) {
     generateTraveler();
   } else {
-    generateTravelers();
+    generateAgency();
   }
 }
 
@@ -47,9 +48,9 @@ function generateTripRepo() {
   tripRepo = new TripRepo(generateTrips());
 }
 
-function generateTravelers() {
+function generateAgency() {
   if (travelers) {
-    users = travelers.map(traveler => traveler = new Traveler(traveler, tripRepo.list))
+    users = new Agency(tripRepo.list);
   }
 }
 
