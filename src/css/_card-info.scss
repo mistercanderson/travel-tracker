@@ -50,12 +50,5 @@
 }
 
 .book-now {
-  @include form;
-  background: $good-button;
-  font-family: $main-font;
-  color: $light-font;
-  height: 3em;
-  border-radius: 2px;
-  border: none;
-  cursor: pointer;
+  @include dashButton
 }

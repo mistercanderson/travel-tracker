@@ -73,14 +73,7 @@ main {
   }
 
   button {
-    height: 3em;
-    width: 100%;
-    border: none;
-    border-radius: 2px;
-    background: #1d3557;
-    color: #f1faee;
-    font-family: $main-font;
-    cursor: pointer
+    @include dashButton;
   }
 }
 

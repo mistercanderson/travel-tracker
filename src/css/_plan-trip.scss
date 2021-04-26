@@ -22,10 +22,7 @@
   }
 
   button {
-    height: 3em;
-    margin-top: 3em;
-    background: $good-button;
-    color: $light-font;
+    @include dashButton
   }
 
   p {
@@ -44,5 +41,9 @@
 }
 
 .bad-button {
-  background: $bad-button!important
+  background: $bad-button!important;
+  
+  &:hover {
+    background: darken($bad-button, 10%)!important;
+  }
 }

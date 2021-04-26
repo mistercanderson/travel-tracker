@@ -12,6 +12,22 @@
   @include flex(space-evenly, column, center);
 }
 
+@mixin dashButton {
+  width: 100%;
+  font-family: $main-font;
+  height: 3em;
+  margin-top: 3em;
+  background: $good-button;
+  color: $light-font;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  
+  &:hover {
+    background: lighten($good-button, 20%);
+   }
+}
+
 @mixin hex-to-filter($color: #000, $opacity: 1) {
   $r: red($color) / 255;
   $g: green($color) / 255;
