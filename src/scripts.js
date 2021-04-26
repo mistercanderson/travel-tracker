@@ -135,13 +135,17 @@ function userValidate() {
 }
 
 function disableNavigation() {
-  const navBar = document.querySelector('nav');
-  Array.from(navBar.children).forEach(child => child.classList.add('disable'))
+  const logo = document.querySelector('.logo');
+  const navBtns = document.querySelectorAll('.nav-btn');
+  logo.disabled = true;
+  navBtns.forEach(btn => btn.disabled = true);
 }
 
 function enableNavigation() {
-  const navBar = document.querySelector('nav');
-  Array.from(navBar.children).forEach(child => child.classList.remove('disable'))
+  const logo = document.querySelector('.logo');
+  const navBtns = document.querySelectorAll('.nav-btn');
+  logo.disabled = false;
+  navBtns.forEach(btn => btn.disabled = false);
 }
 
 export {

@@ -22,20 +22,22 @@ li {
   @include flex(center);
   white-space: nowrap;
   margin: 0 1em 0 0;
-  cursor: pointer;
 
-  img {
-    transform: scale(1.3);
-    width: 1em;
-    margin: 0 1em;
-    pointer-events: none;
-  }
 
   button {
+    @include flex(center, row, center);
     font-family: $main-font;
     color: $mid-font;
     border: none;
     background: none;
+    cursor: pointer;
+
+    img {
+      transform: scale(1.3);
+      width: 1em;
+      margin: 0 1em;
+      pointer-events: none;
+    }
   }
 }
 
