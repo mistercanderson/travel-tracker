@@ -7,6 +7,7 @@ import {
   calculateDays,
   finalizeTripRequest,
   calcluateTotalTripsCost,
+  convertTripRequest
 } from './scripts'
 
 
@@ -63,6 +64,7 @@ function displayChanges() {
       break;
     case 'finalizeTrip':
       tripRequest = finalizeTripRequest();
+      user.trips.push(convertTripRequest(tripRequest))
       displayTripSuccess();
       break;
     case 'successHome':

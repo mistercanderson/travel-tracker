@@ -13,6 +13,7 @@ import {
   pageInfo,
   displayTripsInfo
 } from './domManipulation'
+import Trip from './Trip';
 
 let user;
 const today = new Date().toISOString().slice(0, 10);
@@ -85,6 +86,11 @@ function finalizeInputDate() {
   return date.join('/')
 }
 
+function convertTripRequest(tripReq) {
+  const trip = new Trip(tripReq, destinationRepo.list);
+  return trip
+}
+
 function calcluateTotalTripsCost() {
  const costs = user.trips.map(t => t.calculateTripCost());
  return costs.reduce((a, cost) => a + cost);
@@ -99,4 +105,5 @@ export {
   calculateDays,
   finalizeTripRequest,
   calcluateTotalTripsCost,
+  convertTripRequest
 }
