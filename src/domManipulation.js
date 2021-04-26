@@ -69,7 +69,11 @@ function displayChanges() {
 }
 
 function displayTripsInfo() {
+  if (user.name !== 'Agency') {
   pageInfo.innerText = `My Trips ($${calcluateTotalTripsCost()})`;
+  } else {
+    displayAgencyInfo();
+  }
 }
 
 function displayUsername() {
@@ -358,6 +362,10 @@ function renderPOSTError() {
   `
 }
 
+function displayAgencyInfo() {
+    pageInfo.innerText = `All Trips ($${user.calculateTotalTripCommission()} total commission)`
+}
+
 export {
   displayChanges,
   displayUsername,
@@ -369,4 +377,5 @@ export {
   renderPOSTError,
   dashboard,
   pageInfo,
+  displayAgencyInfo
 }

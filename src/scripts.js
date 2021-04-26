@@ -12,6 +12,7 @@ import {
   displayUsername,
   displayTripsInfo,
   displayTrips,
+  displayAgencyInfo
 } from './domManipulation'
 
 import Trip from './Trip';
