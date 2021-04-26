@@ -8,9 +8,15 @@ import {
 import {
   displayChanges,
   inputValues,
-  displayLogin
+  displayLogin,
+  tripRequest
 } from './domManipulation'
+
 import Trip from './Trip';
+
+import {
+  postTrip
+} from './apiCalls'
 
 let user;
 const today = new Date().toISOString().slice(0, 10);
@@ -21,11 +27,18 @@ window.addEventListener('click', clickFunctions);
 
 function loadFunctions() {
   instantiateClasses();
-  displayLogin();
+  // displayLogin();
 }
 
 function clickFunctions() {
   displayChanges();
+  sendPostRequest();
+}
+
+function sendPostRequest() {
+  if (event.target.id === 'finalizeTrip') {
+    postTrip(tripRequest);
+  }
 }
 
 // function pickRandomUser() {
@@ -85,8 +98,8 @@ function convertTripRequest(tripReq) {
 }
 
 function calcluateTotalTripsCost() {
- const costs = user.trips.map(t => t.calculateTripCost());
- return costs.reduce((a, cost) => a + cost);
+  const costs = user.trips.map(t => t.calculateTripCost());
+  return costs.reduce((a, cost) => a + cost);
 }
 
 function userValidate() {
@@ -113,5 +126,6 @@ export {
   formatTripRequest,
   calcluateTotalTripsCost,
   convertTripRequest,
-  userValidate
+  userValidate,
+  sendPostRequest
 }

@@ -8,7 +8,8 @@ import {
   formatTripRequest,
   calcluateTotalTripsCost,
   convertTripRequest,
-  userValidate
+  userValidate,
+  sendPostRequest
 } from './scripts'
 
 
@@ -28,11 +29,11 @@ function displayChanges() {
   plannedDest = '';
   switch (event.target.id) {
     case 'login':
-    if (userValidate()) {
-      displayUsername();
-      displayTripsInfo();
-      displayTrips();
-    }
+      if (userValidate()) {
+        displayUsername();
+        displayTripsInfo();
+        displayTrips();
+      }
       break;
     case 'myTrips':
       displayTripsInfo();
@@ -72,7 +73,6 @@ function displayChanges() {
       break;
     case 'finalizeTrip':
       tripRequest = formatTripRequest();
-      // ✨ Eventually Change This to include a POST request
       user.trips.push(convertTripRequest(tripRequest))
       displayTripSuccess();
       break;
@@ -358,6 +358,18 @@ function renderTripSuccess() {
   `
 }
 
+function renderGETError() {
+  return `
+  <p class="error-message">Sorry, something went wrong with the TravelTracker Servers. Please try again later.</p>
+  `
+}
+
+function renderPOSTError() {
+  return `
+  <p class="error-message">Sorry, something went wrong with your trip request. Please try again later.</p>
+  `
+}
+
 export {
   displayChanges,
   displayUsername,
@@ -365,5 +377,8 @@ export {
   inputValues,
   tripRequest,
   displayTripsInfo,
-  displayLogin
+  displayLogin,
+  renderGETError,
+  renderPOSTError,
+  dashboard
 }
