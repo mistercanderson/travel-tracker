@@ -27,7 +27,7 @@ window.addEventListener('click', clickFunctions);
 
 function loadFunctions() {
   instantiateClasses();
-  if (checkApi()) {
+  if (checkDataLoaded()) {
     displayLogin();
   }
 }
@@ -37,7 +37,7 @@ function clickFunctions() {
   sendPostRequest();
 }
 
-function checkApi() {
+function checkDataLoaded() {
   if (destinationRepo.list && users && tripRepo.list) {
     return true
   } else {
