@@ -7,6 +7,7 @@ import {
   calculateDays,
   calcluateTotalTripsCost,
   userValidate,
+  enableNavigation
 } from './scripts'
 
 let plannedDest;
@@ -25,6 +26,7 @@ function displayChanges() {
   switch (event.target.id) {
     case 'login':
       if (userValidate()) {
+        enableNavigation();
         displayUsername();
         displayTripsInfo();
         displayTrips();
@@ -179,7 +181,7 @@ function displayLogin() {
 
 function renderTrips(name, dates, status, travelerCount, image, alt, duration, cost) {
   return `
-     <div class="card-wrapper">
+     <div class="card-wrapper" tabindex="0">
         <div class="card-image-wrapper">
           <img
             src="${image}"
@@ -242,16 +244,16 @@ function renderTripPlanner() {
       <select>
       <label for="planStartDate">Start Date (required)</label>
       <input type="date" id="planStartDate" name="start-date" value="${today}"
-       min="${today}">
+       min="${today}" required>
       <label for="planEndDate">End Date (required)</label>
-      <input type="date" id="planEndDate" name="end-date" min="${tomorrow}">
+      <input type="date" id="planEndDate" name="end-date" min="${tomorrow}" required>
       <input placeholder="Number of Travelers (required)" type="number" min="1" name="travelers" id="planTravelers" required>
       <select name="activities" id="planActivities">
         <option value="N/A">Select an Activity (optional)</option>
         ${generateActivityOptions()}
       <select>
       <button type="button" id="planTripButton">Plan Trip</button>
-      </form>`;
+    </form>`;
 }
 
 function generateNameOptions() {

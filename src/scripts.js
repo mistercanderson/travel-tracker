@@ -15,7 +15,8 @@ import Trip from './Trip';
 
 import {
   postTrip,
-  postMessage
+  postMessage,
+  displayGETError
 } from './apiCalls'
 
 let user;
@@ -26,9 +27,12 @@ window.addEventListener('load', loadFunctions);
 window.addEventListener('click', clickFunctions);
 
 function loadFunctions() {
+  disableNavigation();
   instantiateClasses();
   if (checkDataLoaded()) {
     displayLogin();
+  } else {
+    displayGETError(); 
   }
 }
 
@@ -130,6 +134,24 @@ function userValidate() {
   }
 }
 
+function disableNavigation() {
+  const logo = document.querySelector('.logo');
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const navTabs = document.querySelectorAll('li');
+  logo.disabled = true;
+  navBtns.forEach(btn => btn.disabled = true);
+  navTabs.forEach(tab => tab.classList.add('hidden'))
+}
+
+function enableNavigation() {
+  const logo = document.querySelector('.logo');
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const navTabs = document.querySelectorAll('li');
+  logo.disabled = false;
+  navBtns.forEach(btn => btn.disabled = false);
+  navTabs.forEach(tab => tab.classList.remove('hidden'))
+}
+
 export {
   user,
   today,
@@ -141,5 +163,6 @@ export {
   calcluateTotalTripsCost,
   convertTripRequest,
   userValidate,
-  sendPostRequest
+  sendPostRequest,
+  enableNavigation
 }

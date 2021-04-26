@@ -77,5 +77,6 @@ export {
   trips,
   destinations,
   postTrip,
-  postMessage
+  postMessage,
+  displayGETError
 }

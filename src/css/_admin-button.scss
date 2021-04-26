@@ -1,18 +1,28 @@
 .logo-wrapper {
   @include flex(space-between, column, center);
   transform: scale(.8);
+
 }
 
 .logo {
   font-size: 2.7em;
   cursor: pointer;
+  font-family: $main-font;
+  color: $mid-font;
+  background: none;
+  border: none;
+  @include transitionColor;
+
+  &:hover {
+    color: lighten($mid-font, 20%)
+  }
 }
 
 .admin-wrapper {
   @include flex(space-between, row, center);
   height: 2.5em;
   color: $mid-font;
-  
+
   p {
     white-space: nowrap;
     font-size: 1.1em;
@@ -33,4 +43,9 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  @include transitionColor;
+
+  &:hover {
+    background: lighten($light-background, 5%);
+  }
 }
