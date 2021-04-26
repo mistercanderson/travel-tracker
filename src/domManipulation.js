@@ -7,7 +7,8 @@ import {
   calculateDays,
   finalizeTripRequest,
   calcluateTotalTripsCost,
-  convertTripRequest
+  convertTripRequest,
+  userValidate
 } from './scripts'
 
 
@@ -26,6 +27,13 @@ const inputValues = {
 function displayChanges() {
   plannedDest = '';
   switch (event.target.id) {
+    case 'login':
+    if (userValidate()) {
+      displayUsername();
+      displayTripsInfo();
+      displayTrips();
+    }
+      break;
     case 'myTrips':
       displayTripsInfo();
       displayTrips();
@@ -79,10 +87,12 @@ function displayTripsInfo() {
 }
 
 function displayUsername() {
-  const name = document.getElementById('username');
-  const nameButton = document.getElementById('admin')
+  const name = document.getElementById('user');
+  const nameButton = document.getElementById('admin');
   name.innerText = user.name
   nameButton.innerText = user.name[0];
+  name.classList.remove('hidden');
+  nameButton.classList.remove('hidden');
 }
 
 function displayTrips() {
@@ -326,10 +336,10 @@ function renderUserProfile() {
 
 function renderLogin() {
   return `
-    <form class="login hidden">
+    <form class="login">
       <input placeholder="username" type="text" name="username" id="username" required>
       <input placeholder="password" type="password" name="password" id="password" required>
-      <button class="login-button">Login</button>
+      <button type="button" class="login-button" id="login">Login</button>
     </form>`;
 }
 
@@ -348,6 +358,6 @@ export {
   displayTrips,
   inputValues,
   tripRequest,
-  pageInfo,
   displayTripsInfo,
+  displayLogin
 }

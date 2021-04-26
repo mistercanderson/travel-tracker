@@ -10,29 +10,33 @@ import {
   displayUsername,
   displayTrips,
   inputValues,
-  pageInfo,
-  displayTripsInfo
+  displayTripsInfo,
+  displayLogin
 } from './domManipulation'
 import Trip from './Trip';
 
 let user;
 const today = new Date().toISOString().slice(0, 10);
 const tomorrow = new Date(new Date(today).getTime() + 86400000).toISOString().slice(0, 10);
+const loginValues = {
+  username: null,
+  password: null,
+}
 
 window.addEventListener('load', loadFunctions);
 window.addEventListener('click', clickFunctions);
 
 function loadFunctions() {
   instantiateClasses();
-  pickRandomUser();
-  displayUsername();
-  displayTripsInfo();
-  displayTrips();
-  console.log(user.trips.map(t => t.calculateTripCost()));
+  displayLogin();
+  // pickRandomUser();
+  // displayUsername();
+  // displayTripsInfo();
+  // displayTrips();
 }
 
 function clickFunctions() {
-  displayChanges()
+  displayChanges();
 }
 
 function pickRandomUser() {
@@ -96,6 +100,20 @@ function calcluateTotalTripsCost() {
  return costs.reduce((a, cost) => a + cost);
 }
 
+function userValidate() {
+  const nameInput = document.getElementById('username').value;
+  console.log(nameInput);
+  const password = document.getElementById('password').value;
+  const idList = users.map(u => u.id);
+  const nameId = Number(nameInput.slice(-2));
+  if (idList.includes(nameId) && password === 'travel2020') {
+    user = users.find(u => u.id === nameId);
+    return true
+  } else {
+    return false
+  }
+}
+
 export {
   user,
   today,
@@ -105,5 +123,7 @@ export {
   calculateDays,
   finalizeTripRequest,
   calcluateTotalTripsCost,
-  convertTripRequest
+  convertTripRequest,
+  loginValues,
+  userValidate
 }
