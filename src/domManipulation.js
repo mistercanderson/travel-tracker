@@ -480,11 +480,22 @@ function extractAgentInputValues() {
 }
 
 function displayTripUpdate() {
-  console.log('trip has been updated');
+  pageInfo.innerText = 'Success'
+  dashboard.innerHTML = '';
+  dashboard.innerHTML = renderUpdateSuccess();
 }
 
 function displayTripDelete() {
   console.log('trip has been deleted');
+}
+
+function renderUpdateSuccess() {
+  return `
+    <div class="success-wrapper">
+      <p class="trip-success">Trip has been updated successfully.</p>
+      <button id="successHome">View All Trips</button>
+    </div>
+  `
 }
 
 
