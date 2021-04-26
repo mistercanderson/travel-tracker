@@ -9,7 +9,6 @@ import {
   displayChanges,
   inputValues,
   displayLogin,
-  tripRequest
 } from './domManipulation'
 
 import Trip from './Trip';
@@ -47,13 +46,12 @@ function checkApi() {
 
 function sendPostRequest() {
   if (event.target.id === 'finalizeTrip') {
+    const tripRequest = formatTripRequest();
+    tripRepo.list.push(convertTripRequest(tripRequest));
+    user.trips.push(convertTripRequest(tripRequest))
     postTrip(tripRequest);
   }
 }
-
-// function pickRandomUser() {
-//   user = users[Math.floor(Math.random() * users.length)]
-// }
 
 function formatInputDate(date) {
   const dateSplit = date.split('-');

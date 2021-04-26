@@ -5,14 +5,11 @@ import {
   destinationRepo,
   formatInputDate,
   calculateDays,
-  formatTripRequest,
   calcluateTotalTripsCost,
-  convertTripRequest,
   userValidate,
 } from './scripts'
 
 let plannedDest;
-let tripRequest;
 const dashboard = document.querySelector('.dashboard');
 const pageInfo = document.getElementById('pageInfo');
 const inputValues = {
@@ -70,8 +67,6 @@ function displayChanges() {
       autoFillDestinationName();
       break;
     case 'finalizeTrip':
-      tripRequest = formatTripRequest();
-      user.trips.push(convertTripRequest(tripRequest))
       displayTripSuccess();
       break;
     case 'successHome':
@@ -376,7 +371,6 @@ export {
   displayUsername,
   displayTrips,
   inputValues,
-  tripRequest,
   displayTripsInfo,
   displayLogin,
   renderGETError,

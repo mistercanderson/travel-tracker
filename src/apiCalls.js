@@ -51,7 +51,7 @@ const postTrip = trip => {
     .then(data => trips = data.trips)
     .catch(err => {
       displayPOSTError();
-      console.log(err.message)
+      console.log(err)
     })
 };
 
