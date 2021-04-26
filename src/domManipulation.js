@@ -70,7 +70,7 @@ function displayChanges() {
 
 function displayTripsInfo() {
   if (user.name !== 'Agency') {
-  pageInfo.innerText = `My Trips ($${calcluateTotalTripsCost()})`;
+    pageInfo.innerText = `My Trips ($${calcluateTotalTripsCost()})`;
   } else {
     displayAgencyInfo();
   }
@@ -96,8 +96,12 @@ function displayTrips() {
     let alt = trip.destination.alt;
     let duration = trip.duration;
     let cost = trip.calculateTripCost();
+    let commission;
+    if (user.name === 'Agency') {
+      commission = user.calculateTripCommission(trip);
+    }
     // let activities = trip.suggestedActivities.join(', ');
-    dashboard.innerHTML += renderTrips(name, dates, status, travelerCount, image, alt, duration, cost)
+    dashboard.innerHTML += renderTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission)
   })
 }
 
@@ -173,7 +177,10 @@ function displayLogin() {
   dashboard.innerHTML = renderLogin()
 }
 
-function renderTrips(name, dates, status, travelerCount, image, alt, duration, cost) {
+function renderTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission) {
+  if (user.name === 'Agency') {
+    return renderAgentTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission);
+  }
   return `
      <div class="card-wrapper" tabindex="0">
         <div class="card-image-wrapper">
@@ -363,8 +370,58 @@ function renderPOSTError() {
 }
 
 function displayAgencyInfo() {
-    pageInfo.innerText = `All Trips ($${user.calculateTotalTripCommission()} total commission)`
+  const navButtons = {
+    trips: document.getElementById('myTrips'),
+    plan: document.getElementById('planTrip'),
+    dest: document.getElementById('destinations'),
+  }
+  const navImages = {
+    plane: document.getElementById('planeIcon'),
+    suitcase: document.getElementById('suitcaseIcon')
+  }
+  navButtons.trips.innerText = 'All Trips';
+  navButtons.trips.insertAdjacentElement('afterbegin', navImages.plane);
+  navButtons.plan.innerText = 'Approve/Deny Trips';
+  navButtons.plan.insertAdjacentElement('afterbegin', navImages.suitcase);
+  navButtons.dest.style.display = 'none';
+  pageInfo.innerText = `All Trips ($${user.calculateTotalTripCommission()} total commission)`;
 }
+
+function renderAgentTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission) {
+  return `
+     <div class="card-wrapper" tabindex="0">
+        <div class="card-image-wrapper">
+          <img
+            src="${image}"
+            alt="${alt}">
+          <div class="card-image-overlay caps">
+            <div class="day-counter-wrapper">
+              <p class="days">Days</p>
+              <p class="day-count">${duration}</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-info-wrapper">
+          <div>
+            <h2 class="destination-name">${name}</h2>
+            <p class="trip-dates">${dates}</p>
+          </div>
+          <div class="cost-wrapper">
+            <p>Commission Earned:</p>
+            <p class="card-cost">$${commission}</p>
+          </div>
+          <div class="trip-status-wrapper">
+            <h3 class="caps smaller-font">Status:</h3>
+            <p class="lighter">${status}</p>
+          </div>
+          <div class="traveler-wrapper">
+            <h4 class="caps smaller-font">Travelers:</h4>
+            <p class="traveler-count lighter">${travelerCount}</p>
+          </div>
+        </div>
+      </div>`;
+}
+
 
 export {
   displayChanges,
@@ -377,5 +434,4 @@ export {
   renderPOSTError,
   dashboard,
   pageInfo,
-  displayAgencyInfo
 }

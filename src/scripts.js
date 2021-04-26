@@ -12,7 +12,6 @@ import {
   displayUsername,
   displayTripsInfo,
   displayTrips,
-  displayAgencyInfo
 } from './domManipulation'
 
 import Trip from './Trip';
@@ -42,6 +41,7 @@ function clickFunctions() {
       instantiateClasses();
       user = users;
       displayUsername();
+      enableNavigation();
       displayTripsInfo();
       displayTrips();
     }, 200);

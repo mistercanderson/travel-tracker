@@ -5,17 +5,12 @@ import {
   pageInfo
 } from './domManipulation';
 
-import {
-  enableNavigation
-} from './scripts';
-
 let postMessage;
 
 const requests = (paths) => {
   const results = paths.map(path => fetch(`http://localhost:3001/api/v1/${path}`)
     .then(response => {
       if (response.ok) {
-        enableNavigation();
         return response.json()
       }
       throw new Error(response)

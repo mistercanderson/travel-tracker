@@ -20,7 +20,7 @@ class Agency {
   }
 
   calculateTripCommission(trip) {
-    return trip.calculateTripCost() * .1
+    return (trip.calculateTripCost() * .1).toFixed(0)
   }
 }
 
