@@ -16,5 +16,3 @@ import './images/suitcase.svg'
 import './images/plane.svg'
 
 import './scripts.js'
-
-// console.log('This is the JavaScript entry file - your code begins here.');

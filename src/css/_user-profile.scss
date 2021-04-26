@@ -1,15 +1,24 @@
 .user-profile {
   @include flex(center, column, center);
+  text-align: center;
+  padding: 2em;
+  max-height: 20em;
+
   .card-wrapper {
     @include flex(normal, column, center);
     box-sizing: border-box;
     padding: 2em 1em;
   }
+
   ul {
     height: 10em;
     padding: 0;
     margin: 2em 0 0 0;
     @include flex(space-between, column, center);
     align-self: center;
+
+    li {
+      cursor: default;
+    }
   }
 }

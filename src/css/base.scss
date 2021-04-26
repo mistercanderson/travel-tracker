@@ -57,5 +57,37 @@ main {
   }
 }
 
+.success-wrapper {
+  height: 20em;
+  @include flex(space-around, column, center);
+
+  .trip-success {
+    color: $dark-font;
+    width: 17em;
+    height: 12em;
+    padding: 3em;
+    text-align: center;
+    background: white;
+    border-radius: 2px;
+    box-shadow: $box-shadow
+  }
+
+  button {
+    height: 3em;
+    width: 100%;
+    border: none;
+    border-radius: 2px;
+    background: #1d3557;
+    color: #f1faee;
+    font-family: $main-font;
+    cursor: pointer
+  }
+}
+
+
+.hidden {
+  display: none !important;
+}
+
 
 @import 'media-query';

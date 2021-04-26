@@ -13,180 +13,27 @@
 <body>
   <nav>
     <ul>
-      <li class="current caps" tabindex="0"><img class="filter-light" src="./images/plane.svg" alt="Airplane Icon">My
+      <li id="myTrips" class="current caps" tabindex="0"><img class="filter-light" src="./images/plane.svg"
+          alt="Airplane Icon">My
         Trips</li>
-      <li class="caps" tabindex="0"><img class="filter-light" src="./images/suitcase.svg" alt="Suitcase Icon">Plan a
+      <li id="planTrip" class="caps" tabindex="0"><img class="filter-light" src="./images/suitcase.svg"
+          alt="Suitcase Icon">Plan a
         trip</li>
-      <li class="caps" tabindex="0"><img class="filter-light" src="./images/island.svg" alt="Island Icon">Destinations
+      <li id="destinations" class="caps" tabindex="0"><img class="filter-light" src="./images/island.svg"
+          alt="Island Icon">Destinations
       </li>
     </ul>
     <div class="logo-wrapper">
       <div class="admin-wrapper">
-        <button class="admin-button">A</button>
-        <p>Admin Username</p>
+        <button id="admin" class="admin-button hidden">A</button>
+        <p id="user" class="hidden">Admin Username</p>
       </div>
-      <p class="logo" tabindex="0">TravelTracker</p>
+      <p id="logo" class="logo" tabindex="0">TravelTracker</p>
     </div>
   </nav>
   <main>
-    <h1 class="page-info">Trips</h1>
-
-    <!-- <form class="login">
-        <input placeholder="username" type="text" name="username" id="username" required>
-        <input placeholder="password" type="password" name="password" id="password" required>
-        <button class="login-button">Login</button>
-      </form> -->
-
-    <!-- <form class="plan-trip" id="planTripOne">
-        <input placeholder="Destination" type="text" name="destination" id="planDestination" required>
-        <label for="start-date">Start Date</label>
-        <input placeholder="Start Date" type="date" name="start-date" id="planStartDate" required>
-        <label for="end-date">End Date</label>
-        <input placeholder="End Date" type="date" name="end-date" id="planEndDate" required>
-        <input placeholder="Number of Travelers" type="number" min="1" name="travelers" id="planTravelers" required>
-        <input placeholder="Activities" type="text" name="activities" id="planActivities">
-        <button type="button" id="planTripButton">Plan Trip</button>
-      </form> -->
-
-    <!-- <section class="trip-preview">
-      <div class="card-wrapper">
-        <div class="card-image-wrapper">
-          <img
-            src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80"
-            alt="Trip Picture">
-          <div class="card-image-overlay caps">
-            <div class="day-counter-wrapper">
-              <p class="days">Days</p>
-              <p class="day-count">02</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-info-wrapper">
-          <div>
-            <h2 class="destination-name">Destination Name</h2>
-            <p class="trip-dates">01/23/16 - 01/25/16</p>
-          </div>
-          <p>Activities</p>
-          <p class="card-activities">Swimming, Relaxation</p>
-          <div class="trip-status-wrapper">
-            <h3 class="caps smaller-font">Status:</h3>
-            <p class="lighter">Pending</p>
-          </div>
-          <div class="traveler-wrapper">
-            <h4 class="caps smaller-font">Travelers:</h4>
-            <p class="traveler-count lighter">04</p>
-          </div>
-        </div>
-      </div>
-      <article class="trip-cost">
-        After TravelTracker agent fees, the total cost of your trip will be $100.
-      </article>
-    </section>
-    <form class="plan-trip" id="planTripTwo">
-      <button type="button" id="finalizeTrip">Plan Trip</button>
-      <button type="button" class="bad-button" id="cancelTrip">Cancel</button>
-    </form> -->
-
-    <!-- <section class="user-profile">
-      <div class="card-wrapper">
-        <h2>User Name</h2>
-        <ul class="user-data">
-          <li class="user-data">Age: 10</li>
-          <li class="user-data">Height: 6' 10</li>
-          <li class="user-data">Weight: 210</li>
-          <li class="user-data">Blah blah</li>
-        </ul>
-      </div>
-    </section> -->
-
+    <h1 id="pageInfo">Login</h1>
     <section class="dashboard">
-      <div class="card-wrapper">
-        <div class="card-image-wrapper">
-          <img
-            src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80"
-            alt="Trip Picture">
-          <div class="card-image-overlay caps">
-            <div class="day-counter-wrapper">
-              <p class="days">Days</p>
-              <p class="day-count">02</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-info-wrapper">
-          <div>
-            <h2 class="destination-name">Destination Name</h2>
-            <p class="trip-dates">01/23/16 - 01/25/16</p>
-          </div>
-          <p>Activities</p>
-          <p class="card-activities">Swimming, Relaxation</p>
-          <div class="trip-status-wrapper">
-            <h3 class="caps smaller-font">Status:</h3>
-            <p class="lighter">Approved</p>
-          </div>
-          <div class="traveler-wrapper">
-            <h4 class="caps smaller-font">Travelers:</h4>
-            <p class="traveler-count lighter">04</p>
-          </div>
-        </div>
-      </div>
-      <div class="card-wrapper">
-        <div class="card-image-wrapper">
-          <img
-            src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80"
-            alt="Trip Picture">
-          <div class="card-image-overlay caps">
-            <div class="day-counter-wrapper">
-              <p class="days">Days</p>
-              <p class="day-count">02</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-info-wrapper">
-          <div>
-            <h2 class="destination-name">Destination Name</h2>
-            <p class="trip-dates">01/23/16 - 01/25/16</p>
-          </div>
-          <p>Activities</p>
-          <p class="card-activities">Swimming, Relaxation</p>
-          <div class="trip-status-wrapper">
-            <h3 class="caps smaller-font">Status:</h3>
-            <p class="lighter">Approved</p>
-          </div>
-          <div class="traveler-wrapper">
-            <h4 class="caps smaller-font">Travelers:</h4>
-            <p class="traveler-count lighter">04</p>
-          </div>
-        </div>
-      </div>
-      <div class="card-wrapper">
-        <div class="card-image-wrapper">
-          <img
-            src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80"
-            alt="Trip Picture">
-          <div class="card-image-overlay caps">
-            <div class="day-counter-wrapper">
-              <p class="days">Days</p>
-              <p class="day-count">02</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-info-wrapper">
-          <div>
-            <h2 class="destination-name">Destination Name</h2>
-            <p class="trip-dates">01/23/16 - 01/25/16</p>
-          </div>
-          <p>Activities</p>
-          <p class="card-activities">Swimming, Relaxation</p>
-          <div class="trip-status-wrapper">
-            <h3 class="caps smaller-font">Status:</h3>
-            <p class="lighter">Approved</p>
-          </div>
-          <div class="traveler-wrapper">
-            <h4 class="caps smaller-font">Travelers:</h4>
-            <p class="traveler-count lighter">04</p>
-          </div>
-        </div>
-      </div>
     </section>
   </main>
 </body>
