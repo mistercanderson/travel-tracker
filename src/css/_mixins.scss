@@ -28,6 +28,12 @@
    }
 }
 
+@mixin transitionColor {
+  transition-property: background-color, color;
+  transition-duration: .2s;
+  transition-timing-function: ease-in-out;
+}
+
 @mixin hex-to-filter($color: #000, $opacity: 1) {
   $r: red($color) / 255;
   $g: green($color) / 255;

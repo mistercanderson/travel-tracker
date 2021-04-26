@@ -7,7 +7,6 @@ nav {
   height: 10em;
   background-color: $dark-background;
   color: $mid-font;
-
 }
 
 ul {
@@ -31,6 +30,10 @@ li {
     border: none;
     background: none;
     cursor: pointer;
+
+    &:hover {
+      color: lighten($mid-font, 20%);
+    }
 
     img {
       transform: scale(1.3);

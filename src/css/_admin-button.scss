@@ -10,7 +10,12 @@
   font-family: $main-font;
   color: $mid-font;
   background: none;
-  border: none
+  border: none;
+  @include transitionColor;
+
+  &:hover {
+    color: lighten($mid-font, 20%)
+  }
 }
 
 .admin-wrapper {
@@ -38,4 +43,9 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  @include transitionColor;
+
+  &:hover {
+    background: lighten($light-background, 5%);
+  }
 }
