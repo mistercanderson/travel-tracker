@@ -253,7 +253,7 @@ function renderTripPlanner() {
         ${generateActivityOptions()}
       <select>
       <button type="button" id="planTripButton">Plan Trip</button>
-      </form>`;
+    </form>`;
 }
 
 function generateNameOptions() {

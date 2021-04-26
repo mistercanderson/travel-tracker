@@ -30,6 +30,13 @@ li {
     margin: 0 1em;
     pointer-events: none;
   }
+
+  button {
+    font-family: $main-font;
+    color: $mid-font;
+    border: none;
+    background: none;
+  }
 }
 
 .current {
