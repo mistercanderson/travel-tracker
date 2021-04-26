@@ -10,7 +10,8 @@ let travelers, trips, destinations;
 const names = ['travelers', 'trips', 'destinations'];
 
 const requests = () => {
-  const results = names.map(name => fetch(`http://localhost:3001/api/v1/${name}`).then(response => {
+  const results = names.map(name => fetch(`http://localhost:3001/api/v1/${name}`)
+    .then(response => {
       if (response.ok) {
         return response.json()
       }
@@ -18,16 +19,17 @@ const requests = () => {
     })
     .catch(err => {
       displayGETError();
-      console.log(err)
+      console.log(err.message)
     })
   );
-  const assignResults = () => {
-    results[0].then(data => travelers = data.travelers);
-    results[1].then(data => trips = data.trips);
-    results[2].then(data => destinations = data.destinations);
-  }
-  return assignResults()
+  return results
 };
+
+const assignResults = (results) => {
+  results[0].then(data => travelers = data.travelers);
+  results[1].then(data => trips = data.trips);
+  results[2].then(data => destinations = data.destinations);
+}
 
 const postTrip = trip => {
   const tripJSON = JSON.stringify(trip);
@@ -49,7 +51,7 @@ const postTrip = trip => {
     .then(data => trips = data.trips)
     .catch(err => {
       displayPOSTError();
-      console.log(err)
+      console.log(err.message)
     })
 };
 
@@ -64,7 +66,7 @@ const displayPOSTError = () => {
   dashboard.innerHTML = renderPOSTError()
 }
 
-requests();
+assignResults(requests());
 
 export {
   travelers,

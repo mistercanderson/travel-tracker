@@ -89,5 +89,8 @@ main {
   display: none !important;
 }
 
+.error-message {
+  color: $dark-font
+}
 
 @import 'media-query';

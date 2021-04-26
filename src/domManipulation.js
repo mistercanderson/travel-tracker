@@ -9,9 +9,7 @@ import {
   calcluateTotalTripsCost,
   convertTripRequest,
   userValidate,
-  sendPostRequest
 } from './scripts'
-
 
 let plannedDest;
 let tripRequest;
@@ -360,13 +358,16 @@ function renderTripSuccess() {
 
 function renderGETError() {
   return `
-  <p class="error-message">Sorry, it looks like the TravelTracker Servers are down right now. Please try again later.</p>
+  <p class="error-message">Sorry, it looks like the TravelTracker servers are down right now. Please try again later.</p>
   `
 }
 
 function renderPOSTError() {
   return `
-  <p class="error-message">Something went wrong with your trip request. Please try again later.</p>
+  <div class="plan-trip">
+    <p class="error-message">Something went wrong with your trip request. Please try again later.</p>
+    <button type="button" class="bad-button" id="cancelTrip">Back</button>
+  </div>
   `
 }
 
