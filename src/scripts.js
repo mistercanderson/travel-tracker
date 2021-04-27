@@ -48,7 +48,7 @@ function clickFunctions() {
       displayTripsInfo();
       displayTrips();
     }, 200);
-  };
+  }
   displayChanges();
   sendPostRequest();
   sendUpdateRequest();
@@ -66,7 +66,7 @@ function sendPostRequest() {
         user.trips.push(trip);
       }
     }, 200);
-  };
+  }
 }
 
 function sendUpdateRequest() {
@@ -80,7 +80,7 @@ function sendUpdateRequest() {
         user.getPendingTrips();
       }
     }, 500);
-  };
+  }
 }
 
 function sendDeleteRequest() {
@@ -94,7 +94,7 @@ function sendDeleteRequest() {
         user.getPendingTrips();
       }
     }, 500);
-  };
+  }
 }
 
 function verifyInputValues() {

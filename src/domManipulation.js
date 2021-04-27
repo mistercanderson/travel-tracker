@@ -83,7 +83,7 @@ function getPreviousElementSiblings(num) {
   while (i < num) {
     element = element.previousElementSibling;
     i++;
-  };
+  }
   return element
 }
 
@@ -109,7 +109,7 @@ function displayTrips() {
   if (user.name === 'Agency') {
     displayPendingTrips();
     return
-  };
+  }
   displayAllTrips()
 }
 
@@ -152,7 +152,7 @@ function displayDestinations() {
     displayAllTrips();
     pageInfo.innerText = `All Trips ($${user.calculateTotalTripCommission()} total commission)`
     return
-  };
+  }
   destinationRepo.list.forEach(dest => {
     let name = dest.name;
     let image = dest.image;
@@ -226,7 +226,7 @@ function displayLogin() {
 function renderTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission) {
   if (user.name === 'Agency') {
     return renderAgentTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission);
-  };
+  }
   return `
      <div class="card-wrapper" tabindex="0">
         <div class="card-image-wrapper">
@@ -286,7 +286,7 @@ function renderDestinations(name, image, alt, flightCost, lodgingCost) {
 function renderTripPlanner() {
   if (user.name === 'Agency') {
     return renderAgentApproval();
-  };
+  }
   pageInfo.innerText = 'Plan a Trip';
   return `
     <form class="plan-trip" id="tripPlanner">
