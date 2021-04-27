@@ -49,7 +49,7 @@ function displayChanges() {
     }
     break;
   case 'bookNow':
-    plannedDest = getPreviousElementSibling(2).innerText;
+    plannedDest = getPreviousElementSiblings(2).innerText;
     displayTripPlanner();
     autoFillDestinationName();
     break;
@@ -77,7 +77,7 @@ function displayChanges() {
   }
 }
 
-function getPreviousElementSibling(num) {
+function getPreviousElementSiblings(num) {
   let element = event.target;
   let i = 0;
   while (i < num) {

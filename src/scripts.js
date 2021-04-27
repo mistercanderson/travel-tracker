@@ -122,16 +122,8 @@ function calculateDays(start, end) {
 
 function formatTripRequest() {
   const destRequest = destinationRepo.list.find(d => d.name === inputValues.name);
-  const tripRequest = {
-    id: generateTripRequestId(),
-    userID: user.id,
-    destinationID: destRequest.id,
-    travelers: Number(inputValues.travelerAmt),
-    date: finalizeInputDate(),
-    duration: calculateDays(inputValues.start, inputValues.end),
-    status: 'pending',
-    suggestedActivities: finalizeRequestActivities()
-  }
+  const tripRequest = user.planTrip(destRequest.id, Number(inputValues.travelerAmt), finalizeInputDate(), calculateDays(inputValues.start, inputValues.end), finalizeRequestActivities());
+  tripRequest.id = generateTripRequestId();
   return tripRequest
 }
 
