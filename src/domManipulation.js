@@ -18,6 +18,10 @@ const inputValues = {
   travelerAmt: null,
   activities: null,
 }
+const agentInputValues = {
+  tripId: null,
+  activities: null
+}
 
 function displayChanges() {
   plannedDest = '';
@@ -27,15 +31,12 @@ function displayChanges() {
       displayTrips();
       break;
     case 'planTrip':
-      pageInfo.innerText = 'Plan a Trip';
       displayTripPlanner();
       break;
     case 'destinations':
-      pageInfo.innerText = 'Destinations';
       displayDestinations();
       break;
     case 'admin':
-      pageInfo.innerText = 'My Profile';
       displayUserProfile();
       break;
     case 'logo':
@@ -48,13 +49,11 @@ function displayChanges() {
       }
       break;
     case 'bookNow':
-      pageInfo.innerText = "Plan a Trip";
       plannedDest = (event.target.previousElementSibling.previousElementSibling.innerText);
       displayTripPlanner();
       autoFillDestinationName();
       break;
     case 'cancelTrip':
-      pageInfo.innerText = "Plan a Trip";
       displayTripPlanner();
       autoFillDestinationName();
       break;
@@ -65,11 +64,25 @@ function displayChanges() {
       displayTripsInfo();
       displayTrips();
       break;
+    case 'approveTrip':
+      if (extractAgentInputValues()) {
+        displayTripUpdate();
+      }
+      break;
+    case 'denyTrip':
+      if (extractAgentInputValues()) {
+        displayTripDelete();
+      }
+      break;
   }
 }
 
 function displayTripsInfo() {
-  pageInfo.innerText = `My Trips ($${calcluateTotalTripsCost()})`;
+  if (user.name !== 'Agency') {
+    pageInfo.innerText = `My Trips ($${calcluateTotalTripsCost()})`;
+  } else {
+    displayAgencyInfo();
+  }
 }
 
 function displayUsername() {
@@ -83,6 +96,14 @@ function displayUsername() {
 
 function displayTrips() {
   dashboard.innerHTML = '';
+  if (user.name === 'Agency') {
+    displayPendingTrips();
+    return
+  }
+  displayAllTrips()
+}
+
+function displayAllTrips() {
   user.trips.forEach(trip => {
     let name = trip.destination.name;
     let dates = trip.returnTripDates().join(' - ');
@@ -92,13 +113,36 @@ function displayTrips() {
     let alt = trip.destination.alt;
     let duration = trip.duration;
     let cost = trip.calculateTripCost();
-    // let activities = trip.suggestedActivities.join(', ');
-    dashboard.innerHTML += renderTrips(name, dates, status, travelerCount, image, alt, duration, cost)
+    let commission;
+    if (user.name === 'Agency') {
+      commission = user.calculateTripCommission(trip);
+    }
+    dashboard.innerHTML += renderTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission)
+  })
+}
+
+function displayPendingTrips() {
+  user.pendingTrips.forEach(trip => {
+    let name = trip.destination.name;
+    let dates = trip.returnTripDates().join(' - ');
+    let status = trip.status;
+    let travelerCount = trip.travelers;
+    let image = trip.destination.image;
+    let alt = trip.destination.alt;
+    let duration = trip.duration;
+    let cost = trip.calculateTripCost();
+    let commission = user.calculateTripCommission(trip);
+    dashboard.innerHTML += renderTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission)
   })
 }
 
 function displayDestinations() {
   dashboard.innerHTML = '';
+  if (user.name === 'Agency') {
+    displayAllTrips();
+    pageInfo.innerText = `All Trips ($${user.calculateTotalTripCommission()} total commission)`
+    return
+  }
   destinationRepo.list.forEach(dest => {
     let name = dest.name;
     let image = dest.image;
@@ -110,6 +154,7 @@ function displayDestinations() {
 }
 
 function displayTripPlanner() {
+
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderTripPlanner();
 }
@@ -169,7 +214,10 @@ function displayLogin() {
   dashboard.innerHTML = renderLogin()
 }
 
-function renderTrips(name, dates, status, travelerCount, image, alt, duration, cost) {
+function renderTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission) {
+  if (user.name === 'Agency') {
+    return renderAgentTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission);
+  }
   return `
      <div class="card-wrapper" tabindex="0">
         <div class="card-image-wrapper">
@@ -205,6 +253,7 @@ function renderTrips(name, dates, status, travelerCount, image, alt, duration, c
 }
 
 function renderDestinations(name, image, alt, flightCost, lodgingCost) {
+  pageInfo.innerText = 'Destinations';
   return `
       <div class="card-wrapper">
         <div class="card-image-wrapper">
@@ -226,6 +275,10 @@ function renderDestinations(name, image, alt, flightCost, lodgingCost) {
 }
 
 function renderTripPlanner() {
+  if (user.name === 'Agency') {
+    return renderAgentApproval();
+  }
+  pageInfo.innerText = 'Plan a Trip';
   return `
     <form class="plan-trip" id="tripPlanner">
       <select name="destination" id="planDestination" required>
@@ -310,7 +363,8 @@ function calcPreviewCost(flightCost, lodgCost, people, days) {
 function renderUserProfile() {
   const highestCost = Math.max(...user.trips.map(t => t.calculateTripCost()));
   const expensiveTrip = user.trips.find(t => t.calculateTripCost() === highestCost);
-  const pending = user.trips.filter(t => t.status === 'pending')
+  const pending = user.trips.filter(t => t.status === 'pending');
+  pageInfo.innerText = 'My Profile';
   return `
     <div class="card-wrapper user-profile">
       <h2>${user.name}</h2>
@@ -358,6 +412,133 @@ function renderPOSTError() {
   `
 }
 
+function displayAgencyInfo() {
+  const navButtons = {
+    trips: document.getElementById('myTrips'),
+    plan: document.getElementById('planTrip'),
+    dest: document.getElementById('destinations'),
+  }
+  const navImages = {
+    plane: document.getElementById('planeIcon'),
+    suitcase: document.getElementById('suitcaseIcon'),
+    island: document.getElementById('islandIcon')
+  }
+  navButtons.trips.innerText = 'Pending Trips';
+  navButtons.trips.insertAdjacentElement('afterbegin', navImages.plane);
+  navButtons.plan.innerText = 'Approve/Deny Trips';
+  navButtons.plan.insertAdjacentElement('afterbegin', navImages.suitcase);
+  navButtons.dest.innerText = 'All Trips';
+  navButtons.dest.insertAdjacentElement('afterbegin', navImages.island);
+  pageInfo.innerText = `Pending Trips ($${user.calculatePendingTripCommission()} pending commission)`;
+}
+
+function renderAgentTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission) {
+  return `
+     <div class="card-wrapper" tabindex="0">
+        <div class="card-image-wrapper">
+          <img
+            src="${image}"
+            alt="${alt}">
+          <div class="card-image-overlay caps">
+            <div class="day-counter-wrapper">
+              <p class="days">Days</p>
+              <p class="day-count">${duration}</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-info-wrapper">
+          <div>
+            <h2 class="destination-name">${name}</h2>
+            <p class="trip-dates">${dates}</p>
+          </div>
+          <div class="cost-wrapper">
+            <p>Commission Earned:</p>
+            <p class="card-cost">$${commission}</p>
+          </div>
+          <div class="trip-status-wrapper">
+            <h3 class="caps smaller-font">Status:</h3>
+            <p class="lighter">${status}</p>
+          </div>
+          <div class="traveler-wrapper">
+            <h4 class="caps smaller-font">Travelers:</h4>
+            <p class="traveler-count lighter">${travelerCount}</p>
+          </div>
+        </div>
+      </div>`;
+}
+
+function renderAgentApproval() {
+  pageInfo.innerText = 'Approve/Deny Trips';
+  return `
+   <form class="plan-trip" id="tripApproval">
+      <select name="trips" id="pendingTrips" required>
+        <option value="">Select a Pending Trip (required)</option>
+        ${generatePendingTripOptions()}
+      <select>
+      <select name="activities" id="suggestActivities">
+        <option value="N/A">Suggest an Activity (optional)</option>
+        ${generateActivityOptions()}
+      <select>
+      <button type="button" id="approveTrip">Approve Trip</button>
+      <button type="button" id="denyTrip" class="bad-button">Deny Trip</button>
+    </form> 
+  `
+}
+
+function generatePendingTripOptions() {
+  const pendingTrips = user.trips.filter(t => t.status === 'pending');
+  const options = pendingTrips.map(t => `<option value="${t.id}">${t.destination.name}: User #${t.userID}</option>`);
+  return [...options]
+}
+
+function extractAgentInputValues() {
+  const inputs = {
+    tripId: document.getElementById('pendingTrips'),
+    activities: document.getElementById('suggestActivities')
+  };
+  const inputKeys = Object.keys(inputs);
+  if (inputKeys.every(key => inputs[key].value)) {
+    inputKeys.forEach(key => {
+      agentInputValues[key] = inputs[key].value;
+    })
+    return true;
+  } else {
+    alert('Please Make Sure to Include All Required Information 🤠')
+    return false;
+  }
+}
+
+function displayTripUpdate() {
+  pageInfo.innerText = 'Success'
+  dashboard.innerHTML = '';
+  dashboard.innerHTML = renderUpdateSuccess();
+}
+
+function displayTripDelete() {
+  pageInfo.innerText = 'Success'
+  dashboard.innerHTML = '';
+  dashboard.innerHTML = renderDeleteSuccess();
+}
+
+function renderUpdateSuccess() {
+  return `
+    <div class="success-wrapper">
+      <p class="trip-success">Trip has been updated successfully.</p>
+      <button id="successHome">View Pending Trips</button>
+    </div>
+  `
+}
+
+function renderDeleteSuccess() {
+  return `
+    <div class="success-wrapper">
+      <p class="trip-success">Trip has been deleted successfully.</p>
+      <button id="successHome">View Pending Trips</button>
+    </div>
+  `
+}
+
+
 export {
   displayChanges,
   displayUsername,
@@ -369,4 +550,5 @@ export {
   renderPOSTError,
   dashboard,
   pageInfo,
+  agentInputValues,
 }

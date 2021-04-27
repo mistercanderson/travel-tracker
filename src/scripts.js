@@ -12,6 +12,7 @@ import {
   displayUsername,
   displayTripsInfo,
   displayTrips,
+  agentInputValues
 } from './domManipulation'
 
 import Trip from './Trip';
@@ -20,6 +21,8 @@ import {
   postTrip,
   postMessage,
   requests,
+  updateTrip,
+  deleteTrip
 } from './apiCalls'
 
 let user;
@@ -41,12 +44,15 @@ function clickFunctions() {
       instantiateClasses();
       user = users;
       displayUsername();
+      enableNavigation();
       displayTripsInfo();
       displayTrips();
     }, 200);
   };
   displayChanges();
   sendPostRequest();
+  sendUpdateRequest();
+  sendDeleteRequest();
 }
 
 function sendPostRequest() {
@@ -60,6 +66,43 @@ function sendPostRequest() {
         user.trips.push(trip);
       }
     }, 200)
+  }
+}
+
+function sendUpdateRequest() {
+  if (event.target.id === 'approveTrip' && verifyInputValues()) {
+    const updateRequest = formatTripUpdate();
+    updateTrip(updateRequest);
+    setTimeout(() => {
+      if (postMessage) {
+        const trip = user.trips.find(t => t.id === Number(agentInputValues.tripId));
+        user.approvePendingTrip(trip);
+        user.getPendingTrips();
+      }
+    }, 500)
+  }
+}
+
+function sendDeleteRequest() {
+  if (event.target.id === 'denyTrip' && verifyInputValues()) {
+    const deleteRequest = formatTripDelete();
+    deleteTrip(deleteRequest);
+    setTimeout(() => {
+      if (postMessage) {
+        const trip = user.trips.find(t => t.id === Number(agentInputValues.tripId));
+        user.trips.splice(user.trips.indexOf(trip), 1);
+        user.getPendingTrips();
+      }
+    }, 500)
+  }
+}
+
+function verifyInputValues() {
+  const inputKeys = Object.keys(agentInputValues);
+  if (inputKeys.every(key => agentInputValues[key])) {
+    return true
+  } else {
+    return false
   }
 }
 
@@ -87,9 +130,22 @@ function formatTripRequest() {
     date: finalizeInputDate(),
     duration: calculateDays(inputValues.start, inputValues.end),
     status: 'pending',
-    suggestedActivities: finalizeSuggestedActivities()
+    suggestedActivities: finalizeRequestActivities()
   }
   return tripRequest
+}
+
+function formatTripUpdate() {
+  const updateRequest = {
+    id: Number(agentInputValues.tripId),
+    status: 'approved',
+    suggestedActivities: finalizeUpdateActivities()
+  }
+  return updateRequest
+}
+
+function formatTripDelete() {
+  return Number(agentInputValues.tripId)
 }
 
 function generateTripRequestId() {
@@ -98,11 +154,18 @@ function generateTripRequestId() {
   return highestId + 1
 }
 
-function finalizeSuggestedActivities() {
+function finalizeRequestActivities() {
   if (inputValues.activities === 'N/A') {
     return [];
   }
   return inputValues.activities.split()
+}
+
+function finalizeUpdateActivities() {
+  if (agentInputValues.activities === 'N/A') {
+    return [];
+  }
+  return agentInputValues.activities.split()
 }
 
 function finalizeInputDate() {
