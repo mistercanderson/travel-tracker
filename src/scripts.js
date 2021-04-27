@@ -85,7 +85,6 @@ function sendUpdateRequest() {
 
 function sendDeleteRequest() {
   if (event.target.id === 'denyTrip' && verifyInputValues()) {
-    console.log(agentInputValues);
     const deleteRequest = formatTripDelete();
     deleteTrip(deleteRequest);
     setTimeout(() => {

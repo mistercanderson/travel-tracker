@@ -515,13 +515,24 @@ function displayTripUpdate() {
 }
 
 function displayTripDelete() {
-  console.log('trip has been deleted');
+  pageInfo.innerText = 'Success'
+  dashboard.innerHTML = '';
+  dashboard.innerHTML = renderDeleteSuccess();
 }
 
 function renderUpdateSuccess() {
   return `
     <div class="success-wrapper">
       <p class="trip-success">Trip has been updated successfully.</p>
+      <button id="successHome">View Pending Trips</button>
+    </div>
+  `
+}
+
+function renderDeleteSuccess() {
+  return `
+    <div class="success-wrapper">
+      <p class="trip-success">Trip has been deleted successfully.</p>
       <button id="successHome">View Pending Trips</button>
     </div>
   `
