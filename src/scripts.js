@@ -122,7 +122,12 @@ function calculateDays(start, end) {
 
 function formatTripRequest() {
   const destRequest = destinationRepo.list.find(d => d.name === inputValues.name);
-  const tripRequest = user.planTrip(destRequest.id, Number(inputValues.travelerAmt), finalizeInputDate(), calculateDays(inputValues.start, inputValues.end), finalizeRequestActivities());
+  const destId = destRequest.id;
+  const travelers = Number(inputValues.travelerAmt);
+  const date = finalizeInputDate();
+  const duration = calculateDays(inputValues.start, inputValues.end);
+  const activities = finalizeRequestActivities();
+  const tripRequest = user.planTrip(destId, travelers, date, duration, activities);
   tripRequest.id = generateTripRequestId();
   return tripRequest
 }
