@@ -114,7 +114,7 @@ function formatTripRequest() {
     date: finalizeInputDate(),
     duration: calculateDays(inputValues.start, inputValues.end),
     status: 'pending',
-    suggestedActivities: finalizeSuggestedActivities()
+    suggestedActivities: finalizeRequestActivities()
   }
   return tripRequest
 }
@@ -134,7 +134,7 @@ function generateTripRequestId() {
   return highestId + 1
 }
 
-function finalizeSuggestedActivities() {
+function finalizeRequestActivities() {
   if (inputValues.activities === 'N/A') {
     return [];
   }

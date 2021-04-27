@@ -522,7 +522,7 @@ function renderUpdateSuccess() {
   return `
     <div class="success-wrapper">
       <p class="trip-success">Trip has been updated successfully.</p>
-      <button id="successHome">View All Trips</button>
+      <button id="successHome">View Pending Trips</button>
     </div>
   `
 }
