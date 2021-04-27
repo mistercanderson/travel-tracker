@@ -203,14 +203,14 @@ function userValidate() {
 function userLogin() {
   if (event.target.id === 'login' && userValidate()) {
     const paths = [`travelers${user}`, 'trips', 'destinations'];
-    assignResults(requests(paths));
+    assignGETResults(requests(paths));
     return true
   } else {
     return false
   }
 }
 
-function assignResults(results) {
+function assignGETResults(results) {
   results[0].then(data => {
     if (user) {
       travelers = data;
