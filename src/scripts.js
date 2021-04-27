@@ -249,12 +249,7 @@ export {
   calculateDays,
   formatTripRequest,
   calcluateTotalTripsCost,
-  convertTripRequest,
-  userValidate,
-  sendPostRequest,
-  enableNavigation,
   travelers,
   trips,
   destinations,
-  userLogin,
 }
