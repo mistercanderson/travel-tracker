@@ -35,11 +35,11 @@ const postTrip = trip => {
   };
   const request = fetch("http://localhost:3001/api/v1/trips", requestOptions);
   request.then(response => {
-      if (response.ok) {
-        return response.json()
-      }
-      throw new Error(response)
-    })
+    if (response.ok) {
+      return response.json()
+    }
+    throw new Error(response)
+  })
     .then(data => {
       postMessage = data.message
     })
@@ -62,11 +62,11 @@ const updateTrip = trip => {
   };
   const request = fetch("http://localhost:3001/api/v1/updateTrip", requestOptions);
   request.then(response => {
-      if (response.ok) {
-        return response.json()
-      }
-      throw new Error(response)
-    })
+    if (response.ok) {
+      return response.json()
+    }
+    throw new Error(response)
+  })
     .then(data => {
       postMessage = data.message
     })
@@ -84,11 +84,11 @@ const deleteTrip = id => {
   };
   const request = fetch(`http://localhost:3001/api/v1/trips/${id}`, requestOptions);
   request.then(response => {
-      if (response.ok) {
-        return response.json()
-      }
-      throw new Error(response)
-    })
+    if (response.ok) {
+      return response.json()
+    }
+    throw new Error(response)
+  })
     .then(data => {
       postMessage = data.message
     })

@@ -48,7 +48,7 @@ function clickFunctions() {
       displayTripsInfo();
       displayTrips();
     }, 200);
-  };
+  }
   displayChanges();
   sendPostRequest();
   sendUpdateRequest();

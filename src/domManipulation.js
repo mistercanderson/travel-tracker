@@ -26,54 +26,54 @@ const agentInputValues = {
 function displayChanges() {
   plannedDest = '';
   switch (event.target.id) {
-    case 'myTrips':
-      displayTripsInfo();
-      displayTrips();
-      break;
-    case 'planTrip':
-      displayTripPlanner();
-      break;
-    case 'destinations':
-      displayDestinations();
-      break;
-    case 'admin':
-      displayUserProfile();
-      break;
-    case 'logo':
-      displayTripsInfo();
-      displayTrips();
-      break;
-    case 'planTripButton':
-      if (extractInputValues()) {
-        displayTripPreview();
-      }
-      break;
-    case 'bookNow':
-      plannedDest = (event.target.previousElementSibling.previousElementSibling.innerText);
-      displayTripPlanner();
-      autoFillDestinationName();
-      break;
-    case 'cancelTrip':
-      displayTripPlanner();
-      autoFillDestinationName();
-      break;
-    case 'finalizeTrip':
-      displayTripSuccess();
-      break;
-    case 'successHome':
-      displayTripsInfo();
-      displayTrips();
-      break;
-    case 'approveTrip':
-      if (extractAgentInputValues()) {
-        displayTripUpdate();
-      }
-      break;
-    case 'denyTrip':
-      if (extractAgentInputValues()) {
-        displayTripDelete();
-      }
-      break;
+  case 'myTrips':
+    displayTripsInfo();
+    displayTrips();
+    break;
+  case 'planTrip':
+    displayTripPlanner();
+    break;
+  case 'destinations':
+    displayDestinations();
+    break;
+  case 'admin':
+    displayUserProfile();
+    break;
+  case 'logo':
+    displayTripsInfo();
+    displayTrips();
+    break;
+  case 'planTripButton':
+    if (extractInputValues()) {
+      displayTripPreview();
+    }
+    break;
+  case 'bookNow':
+    plannedDest = (event.target.previousElementSibling.previousElementSibling.innerText);
+    displayTripPlanner();
+    autoFillDestinationName();
+    break;
+  case 'cancelTrip':
+    displayTripPlanner();
+    autoFillDestinationName();
+    break;
+  case 'finalizeTrip':
+    displayTripSuccess();
+    break;
+  case 'successHome':
+    displayTripsInfo();
+    displayTrips();
+    break;
+  case 'approveTrip':
+    if (extractAgentInputValues()) {
+      displayTripUpdate();
+    }
+    break;
+  case 'denyTrip':
+    if (extractAgentInputValues()) {
+      displayTripDelete();
+    }
+    break;
   }
 }
 
