@@ -68,15 +68,25 @@ function sendPostRequest() {
 }
 
 function sendUpdateRequest() {
-  if (event.target.id === 'approveTrip') {
+  if (event.target.id === 'approveTrip' && verifyInputValues()) {
     const updateRequest = formatTripUpdate();
     updateTrip(updateRequest);
     setTimeout(() => {
       if (postMessage) {
         const trip = user.trips.find(t => t.id === Number(agentInputValues.tripId));
-        trip.approveTrip();
+        user.approvePendingTrip(trip);
+        user.getPendingTrips();
       }
     }, 500)
+  }
+}
+
+function verifyInputValues() {
+  const inputKeys = Object.keys(agentInputValues);
+  if (inputKeys.every(key => agentInputValues[key])) {
+    return true
+  } else {
+    return false
   }
 }
 

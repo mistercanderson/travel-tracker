@@ -96,6 +96,14 @@ function displayUsername() {
 
 function displayTrips() {
   dashboard.innerHTML = '';
+  if (user.name === 'Agency') {
+    displayPendingTrips();
+    return
+  }
+  displayAllTrips()
+}
+
+function displayAllTrips() {
   user.trips.forEach(trip => {
     let name = trip.destination.name;
     let dates = trip.returnTripDates().join(' - ');
@@ -109,13 +117,32 @@ function displayTrips() {
     if (user.name === 'Agency') {
       commission = user.calculateTripCommission(trip);
     }
-    // let activities = trip.suggestedActivities.join(', ');
+    dashboard.innerHTML += renderTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission)
+  })
+}
+
+function displayPendingTrips() {
+  user.pendingTrips.forEach(trip => {
+    let name = trip.destination.name;
+    let dates = trip.returnTripDates().join(' - ');
+    let status = trip.status;
+    let travelerCount = trip.travelers;
+    let image = trip.destination.image;
+    let alt = trip.destination.alt;
+    let duration = trip.duration;
+    let cost = trip.calculateTripCost();
+    let commission = user.calculateTripCommission(trip);
     dashboard.innerHTML += renderTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission)
   })
 }
 
 function displayDestinations() {
   dashboard.innerHTML = '';
+  if (user.name === 'Agency') {
+    displayAllTrips();
+    pageInfo.innerText = `All Trips ($${user.calculateTotalTripCommission()} total commission)`
+    return
+  }
   destinationRepo.list.forEach(dest => {
     let name = dest.name;
     let image = dest.image;
@@ -393,14 +420,16 @@ function displayAgencyInfo() {
   }
   const navImages = {
     plane: document.getElementById('planeIcon'),
-    suitcase: document.getElementById('suitcaseIcon')
+    suitcase: document.getElementById('suitcaseIcon'),
+    island: document.getElementById('islandIcon')
   }
-  navButtons.trips.innerText = 'All Trips';
+  navButtons.trips.innerText = 'Pending Trips';
   navButtons.trips.insertAdjacentElement('afterbegin', navImages.plane);
   navButtons.plan.innerText = 'Approve/Deny Trips';
   navButtons.plan.insertAdjacentElement('afterbegin', navImages.suitcase);
-  navButtons.dest.style.display = 'none';
-  pageInfo.innerText = `All Trips ($${user.calculateTotalTripCommission()} total commission)`;
+  navButtons.dest.innerText = 'All Trips';
+  navButtons.dest.insertAdjacentElement('afterbegin', navImages.island);
+  pageInfo.innerText = `Pending Trips ($${user.calculatePendingTripCommission()} pending commission)`;
 }
 
 function renderAgentTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission) {
