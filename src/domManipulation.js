@@ -89,7 +89,7 @@ function getPreviousElementSiblings(num) {
 
 function displayTripsInfo() {
   if (user.name !== 'Agency') {
-    pageInfo.innerText = `My Trips ($${calcluateTotalTripsCost()})`;
+    pageInfo.innerText = `My Trips ($${calcluateTotalTripsCost()} total)`;
   } else {
     displayAgencyInfo();
   }
