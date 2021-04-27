@@ -1,7 +1,7 @@
 import {
+  destinations,
   travelers,
   trips,
-  destinations,
   user,
 } from './scripts'
 
@@ -54,7 +54,7 @@ function generateTraveler() {
 
 export {
   instantiateClasses,
-  tripRepo,
   destinationRepo,
+  tripRepo,
   users,
 };

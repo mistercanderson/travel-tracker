@@ -23,7 +23,7 @@ import {
   requests,
   updateTrip,
   deleteTrip
-} from './apiCalls'
+} from './apiCalls';
 
 let user;
 let travelers, trips, destinations;
@@ -48,7 +48,7 @@ function clickFunctions() {
       displayTripsInfo();
       displayTrips();
     }, 200);
-  }
+  };
   displayChanges();
   sendPostRequest();
   sendUpdateRequest();
@@ -65,8 +65,8 @@ function sendPostRequest() {
         tripRepo.list.push(trip);
         user.trips.push(trip);
       }
-    }, 200)
-  }
+    }, 200);
+  };
 }
 
 function sendUpdateRequest() {
@@ -79,8 +79,8 @@ function sendUpdateRequest() {
         user.approvePendingTrip(trip);
         user.getPendingTrips();
       }
-    }, 500)
-  }
+    }, 500);
+  };
 }
 
 function sendDeleteRequest() {
@@ -93,8 +93,8 @@ function sendDeleteRequest() {
         user.trips.splice(user.trips.indexOf(trip), 1);
         user.getPendingTrips();
       }
-    }, 500)
-  }
+    }, 500);
+  };
 }
 
 function verifyInputValues() {
@@ -121,7 +121,7 @@ function calculateDays(start, end) {
 }
 
 function formatTripRequest() {
-  const destRequest = destinationRepo.list.find(d => d.name === inputValues.name)
+  const destRequest = destinationRepo.list.find(d => d.name === inputValues.name);
   const tripRequest = {
     id: generateTripRequestId(),
     userID: user.id,

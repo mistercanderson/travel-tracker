@@ -49,7 +49,7 @@ function displayChanges() {
     }
     break;
   case 'bookNow':
-    plannedDest = (event.target.previousElementSibling.previousElementSibling.innerText);
+    plannedDest = getPreviousElementSibling(2).innerText;
     displayTripPlanner();
     autoFillDestinationName();
     break;
@@ -77,6 +77,16 @@ function displayChanges() {
   }
 }
 
+function getPreviousElementSibling(num) {
+  let element = event.target;
+  let i = 0;
+  while (i < num) {
+    element = element.previousElementSibling;
+    i++;
+  };
+  return element
+}
+
 function displayTripsInfo() {
   if (user.name !== 'Agency') {
     pageInfo.innerText = `My Trips ($${calcluateTotalTripsCost()})`;
@@ -88,7 +98,7 @@ function displayTripsInfo() {
 function displayUsername() {
   const name = document.getElementById('user');
   const nameButton = document.getElementById('admin');
-  name.innerText = user.name
+  name.innerText = user.name;
   nameButton.innerText = user.name[0];
   name.classList.remove('hidden');
   nameButton.classList.remove('hidden');
@@ -99,7 +109,7 @@ function displayTrips() {
   if (user.name === 'Agency') {
     displayPendingTrips();
     return
-  }
+  };
   displayAllTrips()
 }
 
@@ -142,7 +152,7 @@ function displayDestinations() {
     displayAllTrips();
     pageInfo.innerText = `All Trips ($${user.calculateTotalTripCommission()} total commission)`
     return
-  }
+  };
   destinationRepo.list.forEach(dest => {
     let name = dest.name;
     let image = dest.image;
@@ -150,17 +160,16 @@ function displayDestinations() {
     let flightCost = dest.estimatedFlightCostPerPerson;
     let lodgingCost = dest.estimatedLodgingCostPerDay;
     dashboard.innerHTML += renderDestinations(name, image, alt, flightCost, lodgingCost)
-  })
+  });
 }
 
 function displayTripPlanner() {
-
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderTripPlanner();
 }
 
 function autoFillDestinationName() {
-  const destName = document.getElementById('planDestination')
+  const destName = document.getElementById('planDestination');
   if (plannedDest) {
     destName.value = plannedDest;
   } else if (inputValues.name) {
@@ -178,7 +187,7 @@ function extractInputValues() {
   };
   const inputKeys = Object.keys(inputs);
   if (calculateDays(inputs.start.value, inputs.end.value) < 1) {
-    alert('Please Enter a Valid Date Range 🤪')
+    alert('Please Enter a Valid Date Range 🤪');
     return false
   }
   if (inputKeys.every(key => inputs[key].value)) {
@@ -187,19 +196,19 @@ function extractInputValues() {
     })
     return true;
   } else {
-    alert('Please Make Sure to Include All Required Information 🤠')
+    alert('Please Make Sure to Include All Required Information 🤠');
     return false;
   }
 }
 
 function displayTripPreview() {
-  pageInfo.innerText = 'Trip Preview'
+  pageInfo.innerText = 'Trip Preview';
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderTripPreview();
 }
 
 function displayTripSuccess() {
-  pageInfo.innerText = 'Success'
+  pageInfo.innerText = 'Success';
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderTripSuccess();
 }
@@ -211,13 +220,13 @@ function displayUserProfile() {
 
 function displayLogin() {
   dashboard.innerHTML = '';
-  dashboard.innerHTML = renderLogin()
+  dashboard.innerHTML = renderLogin();
 }
 
 function renderTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission) {
   if (user.name === 'Agency') {
     return renderAgentTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission);
-  }
+  };
   return `
      <div class="card-wrapper" tabindex="0">
         <div class="card-image-wrapper">
@@ -277,7 +286,7 @@ function renderDestinations(name, image, alt, flightCost, lodgingCost) {
 function renderTripPlanner() {
   if (user.name === 'Agency') {
     return renderAgentApproval();
-  }
+  };
   pageInfo.innerText = 'Plan a Trip';
   return `
     <form class="plan-trip" id="tripPlanner">
