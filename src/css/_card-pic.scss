@@ -21,19 +21,6 @@
   position: absolute;
   color: $dark-font;
   padding: 1em;
-
-  button {
-    height: 5em;
-    width: 5em;
-    border-radius: 50%;
-    border: none;
-    transform: scaleX(-1);
-
-    img {
-      transform: scale(.45);
-      width: 100%;
-    }
-  }
 }
 
 .day-counter-wrapper {

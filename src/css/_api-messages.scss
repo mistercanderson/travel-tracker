@@ -1,0 +1,23 @@
+.success-wrapper {
+  height: 20em;
+  @include flex(space-around, column, center);
+
+  .trip-success {
+    color: $dark-font;
+    width: 17em;
+    height: 12em;
+    padding: 3em;
+    text-align: center;
+    background: white;
+    border-radius: $br;
+    box-shadow: $box-shadow
+  }
+
+  button {
+    @include dashButton;
+  }
+}
+
+.error-message {
+  color: $dark-font
+}
