@@ -21,7 +21,8 @@ import {
   postTrip,
   postMessage,
   requests,
-  updateTrip
+  updateTrip,
+  deleteTrip
 } from './apiCalls'
 
 let user;
@@ -51,6 +52,7 @@ function clickFunctions() {
   displayChanges();
   sendPostRequest();
   sendUpdateRequest();
+  sendDeleteRequest();
 }
 
 function sendPostRequest() {
@@ -75,6 +77,21 @@ function sendUpdateRequest() {
       if (postMessage) {
         const trip = user.trips.find(t => t.id === Number(agentInputValues.tripId));
         user.approvePendingTrip(trip);
+        user.getPendingTrips();
+      }
+    }, 500)
+  }
+}
+
+function sendDeleteRequest() {
+  if (event.target.id === 'denyTrip' && verifyInputValues()) {
+    console.log(agentInputValues);
+    const deleteRequest = formatTripDelete();
+    deleteTrip(deleteRequest);
+    setTimeout(() => {
+      if (postMessage) {
+        const trip = user.trips.find(t => t.id === Number(agentInputValues.tripId));
+        user.trips.splice(user.trips.indexOf(trip), 1);
         user.getPendingTrips();
       }
     }, 500)
@@ -126,6 +143,10 @@ function formatTripUpdate() {
     suggestedActivities: finalizeUpdateActivities()
   }
   return updateRequest
+}
+
+function formatTripDelete() {
+  return Number(agentInputValues.tripId)
 }
 
 function generateTripRequestId() {

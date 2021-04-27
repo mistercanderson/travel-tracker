@@ -29,9 +29,7 @@ function instantiateClasses() {
 }
 
 function generateDestinations() {
-  if (destinations) {
-    return destinations.map(dest => dest = new Destination(dest))
-  }
+  return destinations.map(dest => dest = new Destination(dest))
 }
 
 function generateDestinationRepo() {
@@ -39,9 +37,7 @@ function generateDestinationRepo() {
 }
 
 function generateTrips() {
-  if (trips) {
     return trips.map(trip => trip = new Trip(trip, destinationRepo.list))
-  }
 }
 
 function generateTripRepo() {
@@ -49,15 +45,11 @@ function generateTripRepo() {
 }
 
 function generateAgency() {
-  if (travelers) {
     users = new Agency(tripRepo.list);
-  }
 }
 
 function generateTraveler() {
-  if (travelers) {
     users = new Traveler(travelers, tripRepo.list);
-  }
 }
 
 export {

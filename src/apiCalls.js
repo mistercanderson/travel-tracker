@@ -44,6 +44,7 @@ const postTrip = trip => {
       postMessage = data.message
     })
     .catch(err => {
+      postMessage = '';
       displayPOSTError();
       console.log(err)
     })
@@ -76,6 +77,28 @@ const updateTrip = trip => {
     })
 }
 
+const deleteTrip = id => {
+  const requestOptions = {
+    method: 'DELETE',
+    redirect: 'follow'
+  };
+  const request = fetch(`http://localhost:3001/api/v1/trips/${id}`, requestOptions);
+  request.then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+      throw new Error(response)
+    })
+    .then(data => {
+      postMessage = data.message
+    })
+    .catch(err => {
+      postMessage = '';
+      displayPOSTError();
+      console.log(err)
+    })
+}
+
 const displayGETError = () => {
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderGETError()
@@ -91,5 +114,6 @@ export {
   postTrip,
   postMessage,
   requests,
-  updateTrip
+  updateTrip,
+  deleteTrip
 }
