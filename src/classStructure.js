@@ -1,7 +1,7 @@
 import {
+  destinations,
   travelers,
   trips,
-  destinations,
   user,
 } from './scripts'
 
@@ -37,7 +37,7 @@ function generateDestinationRepo() {
 }
 
 function generateTrips() {
-    return trips.map(trip => trip = new Trip(trip, destinationRepo.list))
+  return trips.map(trip => trip = new Trip(trip, destinationRepo.list))
 }
 
 function generateTripRepo() {
@@ -45,16 +45,16 @@ function generateTripRepo() {
 }
 
 function generateAgency() {
-    users = new Agency(tripRepo.list);
+  users = new Agency(tripRepo.list);
 }
 
 function generateTraveler() {
-    users = new Traveler(travelers, tripRepo.list);
+  users = new Traveler(travelers, tripRepo.list);
 }
 
 export {
   instantiateClasses,
-  tripRepo,
   destinationRepo,
+  tripRepo,
   users,
 };

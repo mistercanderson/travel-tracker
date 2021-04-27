@@ -23,7 +23,7 @@ import {
   requests,
   updateTrip,
   deleteTrip
-} from './apiCalls'
+} from './apiCalls';
 
 let user;
 let travelers, trips, destinations;
@@ -34,7 +34,7 @@ window.addEventListener('load', loadFunctions);
 window.addEventListener('click', clickFunctions);
 
 function loadFunctions() {
-  disableNavigation();
+  navigationSwitch();
   displayLogin();
 }
 
@@ -44,11 +44,11 @@ function clickFunctions() {
       instantiateClasses();
       user = users;
       displayUsername();
-      enableNavigation();
+      navigationSwitch(true);
       displayTripsInfo();
       displayTrips();
     }, 200);
-  };
+  }
   displayChanges();
   sendPostRequest();
   sendUpdateRequest();
@@ -65,7 +65,7 @@ function sendPostRequest() {
         tripRepo.list.push(trip);
         user.trips.push(trip);
       }
-    }, 200)
+    }, 200);
   }
 }
 
@@ -79,7 +79,7 @@ function sendUpdateRequest() {
         user.approvePendingTrip(trip);
         user.getPendingTrips();
       }
-    }, 500)
+    }, 500);
   }
 }
 
@@ -93,7 +93,7 @@ function sendDeleteRequest() {
         user.trips.splice(user.trips.indexOf(trip), 1);
         user.getPendingTrips();
       }
-    }, 500)
+    }, 500);
   }
 }
 
@@ -121,17 +121,14 @@ function calculateDays(start, end) {
 }
 
 function formatTripRequest() {
-  const destRequest = destinationRepo.list.find(d => d.name === inputValues.name)
-  const tripRequest = {
-    id: generateTripRequestId(),
-    userID: user.id,
-    destinationID: destRequest.id,
-    travelers: Number(inputValues.travelerAmt),
-    date: finalizeInputDate(),
-    duration: calculateDays(inputValues.start, inputValues.end),
-    status: 'pending',
-    suggestedActivities: finalizeRequestActivities()
-  }
+  const destRequest = destinationRepo.list.find(d => d.name === inputValues.name);
+  const destId = destRequest.id;
+  const travelers = Number(inputValues.travelerAmt);
+  const date = finalizeInputDate();
+  const duration = calculateDays(inputValues.start, inputValues.end);
+  const activities = finalizeRequestActivities();
+  const tripRequest = user.planTrip(destId, travelers, date, duration, activities);
+  tripRequest.id = generateTripRequestId();
   return tripRequest
 }
 
@@ -203,14 +200,14 @@ function userValidate() {
 function userLogin() {
   if (event.target.id === 'login' && userValidate()) {
     const paths = [`travelers${user}`, 'trips', 'destinations'];
-    assignResults(requests(paths));
+    assignGETResults(requests(paths));
     return true
   } else {
     return false
   }
 }
 
-function assignResults(results) {
+function assignGETResults(results) {
   results[0].then(data => {
     if (user) {
       travelers = data;
@@ -222,22 +219,16 @@ function assignResults(results) {
   results[2].then(data => destinations = data.destinations);
 }
 
-function disableNavigation() {
+function navigationSwitch(boolean) {
   const logo = document.querySelector('.logo');
-  const navBtns = document.querySelectorAll('.nav-btn');
   const navTabs = document.querySelectorAll('li');
-  logo.disabled = true;
-  navBtns.forEach(btn => btn.disabled = true);
-  navTabs.forEach(tab => tab.classList.add('hidden'))
-}
-
-function enableNavigation() {
-  const logo = document.querySelector('.logo');
-  const navBtns = document.querySelectorAll('.nav-btn');
-  const navTabs = document.querySelectorAll('li');
-  logo.disabled = false;
-  navBtns.forEach(btn => btn.disabled = false);
-  navTabs.forEach(tab => tab.classList.remove('hidden'))
+  if (boolean) {
+    logo.disabled = false;
+    navTabs.forEach(tab => tab.classList.remove('hidden'))
+  } else {
+    logo.disabled = true;
+    navTabs.forEach(tab => tab.classList.add('hidden'))
+  }
 }
 
 export {
@@ -249,12 +240,7 @@ export {
   calculateDays,
   formatTripRequest,
   calcluateTotalTripsCost,
-  convertTripRequest,
-  userValidate,
-  sendPostRequest,
-  enableNavigation,
   travelers,
   trips,
   destinations,
-  userLogin,
 }

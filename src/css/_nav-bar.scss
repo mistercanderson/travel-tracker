@@ -25,9 +25,7 @@ li {
 
   button {
     @include flex(center, row, center);
-    font-family: $main-font;
     color: $mid-font;
-    border: none;
     background: none;
     cursor: pointer;
 

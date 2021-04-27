@@ -14,24 +14,24 @@ class Agency {
     return trip.approveTrip();
   }
 
+  calculateTripCommission(trip) {
+    return Number((trip.calculateTripCost() * .1).toFixed(0))
+  }
+
   calculateTotalTripCommission() {
-    const tripCosts = this.trips.map(t => t.calculateTripCost());
-    const totalCosts = tripCosts.reduce((a, b) => a + b);
-    return (totalCosts * .1).toFixed(0)
+    const tripsCommiss = this.trips.map(t => this.calculateTripCommission(t));
+    const commissionSum = tripsCommiss.reduce((a, b) => a + b);
+    return commissionSum
   }
 
   calculatePendingTripCommission() {
     if (this.pendingTrips.length) {
-      const tripCosts = this.pendingTrips.map(t => t.calculateTripCost());
-      const totalCosts = tripCosts.reduce((a, b) => a + b);
-      return (totalCosts * .1).toFixed(0)
+      const tripsCommiss = this.pendingTrips.map(t => this.calculateTripCommission(t));
+      const commissionSum = tripsCommiss.reduce((a, b) => a + b);
+      return commissionSum
     } else {
       return 0
     }
-  }
-
-  calculateTripCommission(trip) {
-    return (trip.calculateTripCost() * .1).toFixed(0)
   }
 }
 

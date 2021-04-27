@@ -26,60 +26,70 @@ const agentInputValues = {
 function displayChanges() {
   plannedDest = '';
   switch (event.target.id) {
-    case 'myTrips':
-      displayTripsInfo();
-      displayTrips();
-      break;
-    case 'planTrip':
-      displayTripPlanner();
-      break;
-    case 'destinations':
-      displayDestinations();
-      break;
-    case 'admin':
-      displayUserProfile();
-      break;
-    case 'logo':
-      displayTripsInfo();
-      displayTrips();
-      break;
-    case 'planTripButton':
-      if (extractInputValues()) {
-        displayTripPreview();
-      }
-      break;
-    case 'bookNow':
-      plannedDest = (event.target.previousElementSibling.previousElementSibling.innerText);
-      displayTripPlanner();
-      autoFillDestinationName();
-      break;
-    case 'cancelTrip':
-      displayTripPlanner();
-      autoFillDestinationName();
-      break;
-    case 'finalizeTrip':
-      displayTripSuccess();
-      break;
-    case 'successHome':
-      displayTripsInfo();
-      displayTrips();
-      break;
-    case 'approveTrip':
-      if (extractAgentInputValues()) {
-        displayTripUpdate();
-      }
-      break;
-    case 'denyTrip':
-      if (extractAgentInputValues()) {
-        displayTripDelete();
-      }
-      break;
+  case 'myTrips':
+    displayTripsInfo();
+    displayTrips();
+    break;
+  case 'planTrip':
+    displayTripPlanner();
+    break;
+  case 'destinations':
+    displayDestinations();
+    break;
+  case 'admin':
+    displayUserProfile();
+    break;
+  case 'logo':
+    displayTripsInfo();
+    displayTrips();
+    break;
+  case 'planTripButton':
+    if (extractInputValues()) {
+      displayTripPreview();
+    }
+    break;
+  case 'bookNow':
+    plannedDest = getPreviousElementSiblings(2).innerText;
+    displayTripPlanner();
+    autoFillDestinationName();
+    break;
+  case 'cancelTrip':
+    displayTripPlanner();
+    autoFillDestinationName();
+    break;
+  case 'finalizeTrip':
+    displayTripSuccess();
+    break;
+  case 'successHome':
+    displayTripsInfo();
+    displayTrips();
+    break;
+  case 'approveTrip':
+    if (extractAgentInputValues()) {
+      displayTripUpdate();
+    }
+    break;
+  case 'denyTrip':
+    if (extractAgentInputValues()) {
+      displayTripDelete();
+    }
+    break;
   }
+}
+
+function getPreviousElementSiblings(num) {
+  let element = event.target;
+  let i = 0;
+  while (i < num) {
+    element = element.previousElementSibling;
+    i++;
+  }
+  return element
 }
 
 function displayTripsInfo() {
   if (user.name !== 'Agency') {
-    pageInfo.innerText = `My Trips ($${calcluateTotalTripsCost()})`;
+    pageInfo.innerText = `My Trips ($${calcluateTotalTripsCost()} total)`;
   } else {
     displayAgencyInfo();
   }
@@ -88,7 +98,7 @@ function displayTripsInfo() {
 function displayUsername() {
   const name = document.getElementById('user');
   const nameButton = document.getElementById('admin');
-  name.innerText = user.name
+  name.innerText = user.name;
   nameButton.innerText = user.name[0];
   name.classList.remove('hidden');
   nameButton.classList.remove('hidden');
@@ -150,17 +160,16 @@ function displayDestinations() {
     let flightCost = dest.estimatedFlightCostPerPerson;
     let lodgingCost = dest.estimatedLodgingCostPerDay;
     dashboard.innerHTML += renderDestinations(name, image, alt, flightCost, lodgingCost)
-  })
+  });
 }
 
 function displayTripPlanner() {
-
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderTripPlanner();
 }
 
 function autoFillDestinationName() {
-  const destName = document.getElementById('planDestination')
+  const destName = document.getElementById('planDestination');
   if (plannedDest) {
     destName.value = plannedDest;
   } else if (inputValues.name) {
@@ -178,7 +187,7 @@ function extractInputValues() {
   };
   const inputKeys = Object.keys(inputs);
   if (calculateDays(inputs.start.value, inputs.end.value) < 1) {
-    alert('Please Enter a Valid Date Range 🤪')
+    alert('Please Enter a Valid Date Range 🤪');
     return false
   }
   if (inputKeys.every(key => inputs[key].value)) {
@@ -187,19 +196,19 @@ function extractInputValues() {
     })
     return true;
   } else {
-    alert('Please Make Sure to Include All Required Information 🤠')
+    alert('Please Make Sure to Include All Required Information 🤠');
     return false;
   }
 }
 
 function displayTripPreview() {
-  pageInfo.innerText = 'Trip Preview'
+  pageInfo.innerText = 'Trip Preview';
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderTripPreview();
 }
 
 function displayTripSuccess() {
-  pageInfo.innerText = 'Success'
+  pageInfo.innerText = 'Success';
   dashboard.innerHTML = '';
   dashboard.innerHTML = renderTripSuccess();
 }
@@ -211,7 +220,7 @@ function displayUserProfile() {
 
 function displayLogin() {
   dashboard.innerHTML = '';
-  dashboard.innerHTML = renderLogin()
+  dashboard.innerHTML = renderLogin();
 }
 
 function renderTrips(name, dates, status, travelerCount, image, alt, duration, cost, commission) {

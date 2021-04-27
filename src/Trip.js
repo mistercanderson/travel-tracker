@@ -56,7 +56,7 @@ class Trip {
     let month = endDate.getUTCMonth() + 1;
     if (month.toString().length < 2) {
       month = '0' + month
-    };
+    }
     let day = endDate.getUTCDate();
     if (day.toString().length < 2) {
       day = '0' + day

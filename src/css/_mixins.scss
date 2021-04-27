@@ -7,25 +7,34 @@
 
 @mixin form {
   width: 15em;
-  border-radius: 3px;
+  border-radius: $br;
   align-self: center;
   @include flex(space-evenly, column, center);
 }
 
+@mixin formElements {
+  height: 2em;
+  font-family: $main-font;
+  font-weight: 300;
+  margin: .5em 0;
+  flex-grow: 1;
+  width: 100%;
+  border: 1px solid $dark-background;
+  border-radius: $br;
+}
+
 @mixin dashButton {
   width: 100%;
-  font-family: $main-font;
   height: 3em;
   margin-top: 3em;
   background: $good-button;
   color: $light-font;
-  border: none;
   cursor: pointer;
-  border-radius: 2px;
-  
+  border-radius: $br;
+
   &:hover {
     background: lighten($good-button, 20%);
-   }
+  }
 }
 
 @mixin transitionColor {
