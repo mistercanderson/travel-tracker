@@ -3,18 +3,19 @@ import {
   renderPOSTError,
   dashboard,
   pageInfo
-} from './domManipulation'
+} from './domManipulation';
 
-let travelers, trips, destinations;
+import {
+  enableNavigation
+} from './scripts';
 
 let postMessage;
 
-const names = ['travelers', 'trips', 'destinations'];
-
-const requests = () => {
-  const results = names.map(name => fetch(`http://localhost:3001/api/v1/${name}`)
+const requests = (paths) => {
+  const results = paths.map(path => fetch(`http://localhost:3001/api/v1/${path}`)
     .then(response => {
       if (response.ok) {
+        enableNavigation();
         return response.json()
       }
       throw new Error(response)
@@ -26,12 +27,6 @@ const requests = () => {
   );
   return results
 };
-
-const assignResults = (results) => {
-  results[0].then(data => travelers = data.travelers);
-  results[1].then(data => trips = data.trips);
-  results[2].then(data => destinations = data.destinations);
-}
 
 const postTrip = trip => {
   const tripJSON = JSON.stringify(trip);
@@ -70,13 +65,8 @@ const displayPOSTError = () => {
   dashboard.innerHTML = renderPOSTError();
 }
 
-assignResults(requests());
-
 export {
-  travelers,
-  trips,
-  destinations,
   postTrip,
   postMessage,
-  displayGETError
+  requests,
 }

@@ -2,7 +2,8 @@ import {
   travelers,
   trips,
   destinations,
-} from './apiCalls'
+  user,
+} from './scripts'
 
 import Traveler from './Traveler';
 import Destination from './Destination';
@@ -19,7 +20,11 @@ function instantiateClasses() {
   generateDestinationRepo();
   generateTrips();
   generateTripRepo();
-  generateTravelers();
+  if (user) {
+    generateTraveler();
+  } else {
+    generateTravelers();
+  }
 }
 
 function generateDestinations() {
@@ -45,6 +50,12 @@ function generateTripRepo() {
 function generateTravelers() {
   if (travelers) {
     users = travelers.map(traveler => traveler = new Traveler(traveler, tripRepo.list))
+  }
+}
+
+function generateTraveler() {
+  if (travelers) {
+    users = new Traveler(travelers, tripRepo.list);
   }
 }
 

@@ -6,8 +6,6 @@ import {
   formatInputDate,
   calculateDays,
   calcluateTotalTripsCost,
-  userValidate,
-  enableNavigation
 } from './scripts'
 
 let plannedDest;
@@ -24,14 +22,6 @@ const inputValues = {
 function displayChanges() {
   plannedDest = '';
   switch (event.target.id) {
-    case 'login':
-      if (userValidate()) {
-        enableNavigation();
-        displayUsername();
-        displayTripsInfo();
-        displayTrips();
-      }
-      break;
     case 'myTrips':
       displayTripsInfo();
       displayTrips();
@@ -96,13 +86,13 @@ function displayTrips() {
   user.trips.forEach(trip => {
     let name = trip.destination.name;
     let dates = trip.returnTripDates().join(' - ');
-    // let activities = trip.suggestedActivities.join(', ');
     let status = trip.status;
     let travelerCount = trip.travelers;
     let image = trip.destination.image;
     let alt = trip.destination.alt;
     let duration = trip.duration;
     let cost = trip.calculateTripCost();
+    // let activities = trip.suggestedActivities.join(', ');
     dashboard.innerHTML += renderTrips(name, dates, status, travelerCount, image, alt, duration, cost)
   })
 }
@@ -378,5 +368,5 @@ export {
   renderGETError,
   renderPOSTError,
   dashboard,
-  pageInfo
+  pageInfo,
 }
