@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400&display=swap" rel="stylesheet">
+  <title>TravelTracker</title>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li>
+        <button class="nav-btn caps" id="myTrips"><img id="planeIcon" tabindex="-1" class="filter-light" src="./images/plane.svg" alt="Airplane Icon">My Trips</button>
+      </li>
+      <li>
+        <button class="nav-btn caps" id="planTrip"><img id="suitcaseIcon" tabindex="-1" class="filter-light" src="./images/suitcase.svg" alt="Suitcase Icon">Plan a trip</button>
+      </li>
+      <li>
+        <button class="nav-btn caps" id="destinations"><img id="islandIcon" tabindex="-1" class="filter-light" src="./images/island.svg" alt="Island Icon">Destinations</button>
+      </li>
+    </ul>
+    <div class="logo-wrapper">
+      <div class="admin-wrapper">
+        <button id="admin" class="admin-button hidden"></button>
+        <p id="user" class="hidden"></p>
+      </div>
+      <button id="logo" class="logo" tabindex="0">TravelTracker</button>
+    </div>
+  </nav>
+  <main>
+    <h1 id="pageInfo">Login</h1>
+    <section class="dashboard">
+    </section>
+  </main>
+<script src="main.bundle.js"></script></body>
+</html>
